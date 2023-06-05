@@ -108,7 +108,7 @@ section#about .container {
   margin: 0 auto;
 }
 
-section#about .about-content {
+/* section#about .about-content {
   background-color: #fff;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
   padding: 20px;
@@ -117,7 +117,7 @@ section#about .about-content {
 
 section#about .about-content:hover {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-}
+} */
 
 section#about h2 {
   color: #333;
