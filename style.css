@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
   color: #333;
-  background-color: #f2f2f2;
+  background-color: #bcbdbc5c;
   line-height: 1.6;
 }
 
@@ -14,7 +14,7 @@ body {
 }
 
 header {
-  background-color: #333;
+  background-color: hsla(187, 83%, 36%, 0.84);
   color: white;
   padding: 20px;
   position: relative;
@@ -32,6 +32,15 @@ header:before {
 
 header .top-bar {
   text-align: right;
+  animation: slideInRight 1.5s ease;
+}
+@keyframes slideInRight {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 header .top-bar ul {
@@ -85,7 +94,6 @@ header .bottom-bar img {
   height: 150px;
   border-radius: 50%;
   display: block;
-  /* margin: 0 auto; */
   margin-bottom: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
@@ -93,14 +101,6 @@ section#about {
   background-color: #f7f7f7;
   padding: 50px;
   margin-bottom: 20px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-section#about h2 {
-  color: #333;
-  text-align: center;
-  margin-bottom: 30px;
-  font-size: 28px;
 }
 
 section#about .container {
@@ -108,46 +108,52 @@ section#about .container {
   margin: 0 auto;
 }
 
-section#about p {
-  text-align: justify;
-  line-height: 1.6;
-  color: #666;
-  font-size: 16px;
-  margin-bottom: 20px;
+section#about .about-content {
+  background-color: #fff;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  transition: box-shadow 0.3s ease;
 }
 
-section#about p:last-child {
-  margin-bottom: 0;
+section#about .about-content:hover {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-@media (max-width: 768px) {
-  section#about {
-    padding: 30px;
-  }
-  
-  section#about h2 {
-    font-size: 24px;
-  }
-  
-  section#about p {
-    font-size: 14px;
-  }
+section#about h2 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 
+@keyframes slideInDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
 
 section {
   background-color: #f9f9f9;
   padding: 50px;
   margin-bottom: 20px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
 section h2 {
   color: #333;
   text-align: center;
   margin-bottom: 30px;
+  animation: slideInDown 1s ease;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+  width: 50%; /* Adjust the width to your desired length */
+  margin-left: auto;
+  margin-right: auto;
+  
 }
+
 
 section p {
   text-align: justify;
@@ -164,6 +170,10 @@ ul.contact-list li {
   margin-bottom: 10px;
   display: flex;
   align-items: center;
+  transition: transform 0.3s ease;
+}
+ul.contact-list li:hover {
+  transform: translateX(10px);
 }
 
 ul.contact-list li i {
@@ -174,14 +184,13 @@ ul.contact-list li i {
 ul.contact-list li a {
   color: #333;
   text-decoration: none;
-} */
-
+}
 
 section#skills {
   background-color: #f9f9f9;
   padding: 50px;
   margin-bottom: 20px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
 section#skills h2 {
@@ -201,13 +210,13 @@ section#skills h2 {
   margin: 20px;
   padding: 20px;
   background-color: #fff;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
   text-align: center;
   transition: box-shadow 0.3s ease;
 }
 
 .skill:hover {
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .skill i {
@@ -299,8 +308,8 @@ section#projects h2 {
 
 
 footer {
-  background-color: #333;
-  color: #fff;
+  background-color: hsla(187, 83%, 36%, 0.84);
+  color: #161515;
   text-align: center;
   padding: 20px 0;
 }
@@ -332,11 +341,11 @@ footer .social-media li {
 }
 
 footer .social-media li a {
-  color: #fff;
+  color: #000000;
   font-size: 18px;
   text-decoration: none;
 }
 
 footer .social-media li a:hover {
-  color: #999;
+  color: #ffffff;
 }
