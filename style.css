@@ -349,3 +349,71 @@ footer .social-media li a {
 footer .social-media li a:hover {
   color: #ffffff;
 }
+
+/* General styles for small devices (mobile phones) */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 20px;
+    padding-right: 10px;
+  }
+
+  header {
+    text-align: center;
+  }
+
+  header .top-bar ul li {
+    display: block;
+    margin: 10px 0;
+  }
+
+  header .bottom-bar img {
+    width: 100px;
+    height: 100px;
+  }
+
+  h1, h3 {
+    font-size: 1.5rem;
+  }
+
+  .skills-list {
+    flex-direction: column;
+    align-items: center;
+    padding: 0; 
+  }
+
+  .skill {
+    width: 90%;
+    margin: 10px 0;
+  }
+
+  footer {
+    flex-direction: column;
+  }
+
+  .social-media {
+    margin-top: 10px;
+  }
+}
+
+/* Styles for very small screens (phones under 480px wide) */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.3rem;
+  }
+
+  h3 {
+    font-size: 1rem;
+  }
+
+  .skills-list {
+    padding: 0;
+  }
+
+  .skill ul li {
+    font-size: 12px;
+  }
+
+  footer {
+    padding: 15px 0;
+  }
+}
