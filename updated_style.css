@@ -163,22 +163,22 @@ footer {
     background-color: #f4f4f4;
     padding: 60px 0;
     text-align: center;
-}
-
-#contact h2 {
+  }
+  
+  #contact h2 {
     font-size: 36px;
     color: #333;
     margin-bottom: 20px;
-}
-
-#contact p {
+  }
+  
+  #contact p {
     font-size: 18px;
     color: #666;
     margin-bottom: 40px;
-}
-
-/* Contact List Styling */
-.contact-list {
+  }
+  
+  /* Contact List Styling */
+  .contact-list {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
@@ -186,9 +186,9 @@ footer {
     justify-content: center;
     max-width: 900px;
     margin: 0 auto;
-}
-
-.contact-list li {
+  }
+  
+  .contact-list li {
     font-size: 18px;
     color: #333;
     display: flex;
@@ -203,74 +203,68 @@ footer {
     background: #ffffff;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s, box-shadow 0.3s;
-}
-
-/* Ensure the anchor tag covers the entire list item */
-.contact-list li a {
-    color: #3498db;
-    text-decoration: none;
-    font-weight: bold;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%; /* Make sure anchor takes full height */
-    width: 100%; /* Make sure anchor takes full width */
-    transition: color 0.3s;
-}
-
-/* Hover effects */
-.contact-list li:hover {
+  }
+  
+  .contact-list li:hover {
     transform: translateY(-8px) scale(1.05);
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.contact-list li:hover a {
-    color: #ff9f43; /* Change color when hovered */
-}
-
-.contact-list li i {
+  }
+  
+  /* Icon Styling */
+  .contact-list li i {
     color: #3498db;
     font-size: 30px;
     transition: color 0.3s, transform 0.3s;
-}
-
-.contact-list li:hover i {
+  }
+  
+  .contact-list li:hover i {
     color: #ff9f43;
     transform: rotate(10deg) scale(1.2);
-}
-
-/* Animation */
-@keyframes pop-up {
+  }
+  
+  /* Link Styling */
+  .contact-list li a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+  
+  .contact-list li:hover a {
+    color: #ff9f43;
+  }
+  
+  /* Animation */
+  @keyframes pop-up {
     0% {
-        opacity: 0;
-        transform: translateY(20px);
+      opacity: 0;
+      transform: translateY(20px);
     }
     100% {
-        opacity: 1;
-        transform: translateY(0);
+      opacity: 1;
+      transform: translateY(0);
     }
-}
-
-.contact-list li {
+  }
+  
+  .contact-list li {
     animation: pop-up 0.5s ease forwards;
     opacity: 0;
-}
-
-.contact-list li:nth-child(1) { animation-delay: 0.1s; }
-.contact-list li:nth-child(2) { animation-delay: 0.2s; }
-.contact-list li:nth-child(3) { animation-delay: 0.3s; }
-.contact-list li:nth-child(4) { animation-delay: 0.4s; }
-
-/* Responsive Design */
-@media (max-width: 768px) {
+  }
+  
+  .contact-list li:nth-child(1) { animation-delay: 0.1s; }
+  .contact-list li:nth-child(2) { animation-delay: 0.2s; }
+  .contact-list li:nth-child(3) { animation-delay: 0.3s; }
+  .contact-list li:nth-child(4) { animation-delay: 0.4s; }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
     .contact-list li {
-        width: 120px;
-        height: 120px;
-        font-size: 16px;
+      width: 120px;
+      height: 120px;
+      font-size: 16px;
     }
-}
-
+  }
+  
 
 
   /* Project serction new additon */
