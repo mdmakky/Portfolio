@@ -1,65 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Additional Page - Your Website</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="updated_style.css">
-</head>
+    <title>Makky | Portfolio</title>
+    <link rel="stylesheet" href="project.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> 
+    <link rel="shortcut icon" href="photos/OIP-removebg-preview.ico" type="image/x-icon"> 
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      rel="shortcut icon"
+      href="photos/OIP-removebg-preview.ico"
+      type="image/x-icon"
+      rel="shortcut icon" href="photos/OIP-removebg-preview.ico" type="image/x-icon"> 
+    <script defer src="script.js"></script>
+  </head>
 <body>
 
+  <!-- Header (Same as Main Page) -->
   <header>
     <div class="container">
       <div class="top-bar">
-        <nav>
+        <!-- Hamburger icon for mobile view -->
+        <div class="hamburger">
+          <i class="fas fa-bars"></i>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <nav id="desktop-nav">
           <ul>
-            <li><a href="./index.html"><i class="fas fa-user"></i> Home</a></li>
+            <li><a href="./index.html"><i class="fas fa-home"></i> Home</a></li>
             <li><a href="https://github.com/mdmakky" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
           </ul>
         </nav>
       </div>
+
+      <!-- Mobile Navigation (hidden by default) -->
+      <nav id="mobile-nav">
+        <div class="close-btn">
+          <i class="fas fa-times"></i>
+        </div>
+        <ul>
+          <li><a href="./index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="https://github.com/mdmakky" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+        </ul>
+      </nav>
+
       <div class="bottom-bar">
-        <img src="photos/photo.jpg" alt="Photo">
+        <img src="./photos/photo.jpg" alt="Photo">
       </div>
       <h1>Md. Arafatuzzaman</h1>
       <h3>Web Developer | AI & ML Enthusiast | HTML, CSS, JS Expert</h3>
     </div>
   </header>
 
-  <!-- Main Content Section -->
-<main>
+  <main>
     <div class="container">
-      <h2>Page Title</h2>
-      <p>Welcome to this additional page! You can add any content here, such as more information, blog posts, or a gallery.</p>
+      <header>
+        <h2 class="page-title">Explore My Project.</h2>
+        <p class="intro-text">Discover my projects and learn more about my work.</p>
+      </header>
   
       <!-- Content Boxes Section -->
-      <div class="content-box">
-        <h3>About This Project</h3>
-        <p>This is a section where you could add details about the purpose or goals of this project.</p>
-      </div>
-      
-      <!-- 3D Project Cards Section -->
-      <div class="card-wrapper">
-        <div class="content-card">
-          <h3>Project 1</h3>
-          <p>A description of your first project.</p>
-          <a href="#project1-details" class="card-link">View Details</a>
+      <section class="content-section">
+        <div class="content-box">
+          <h3 class="content-box-title">Content Box Title</h3>
+          <p class="content-box-text">This is an example of project content. Project and it's details will be added soon...</p>
         </div>
-        <div class="content-card">
-          <h3>Project 2</h3>
-          <p>A description of your second project.</p>
-          <a href="#project2-details" class="card-link">View Details</a>
+  
+        <div class="content-box">
+          <h3 class="content-box-title">Another Interesting Section</h3>
+          <p class="content-box-text">Project and it's details will be added soon...</p>
         </div>
-        <div class="content-card">
-          <h3>Project 3</h3>
-          <p>A description of your third project.</p>
-          <a href="#project3-details" class="card-link">View Details</a>
-        </div>
-      </div>
+      </section>
     </div>
   </main>
-  
 
   <!-- Footer (Same as Main Page) -->
   <footer>

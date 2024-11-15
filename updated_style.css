@@ -12,7 +12,7 @@
   }
   
   /* Header Styling */
-  header {
+header {
     background: linear-gradient(135deg, #2c3e50, #3498db);
     padding: 20px 0;
     color: #fff;
@@ -25,41 +25,104 @@
     margin: auto;
   }
   
-  /* Top Bar - Navigation Styling */
-  .top-bar nav ul {
-    list-style: none;
+  .top-bar {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Hamburger for Mobile */
+  .hamburger {
+    display: none; /* Hidden by default on desktop */
+    cursor: pointer;
+    font-size: 30px;
+  }
+  
+  /* Desktop Navigation */
+  #desktop-nav ul {
+    display: flex;
+    list-style: none;
+    justify-content: flex-end;
     gap: 20px;
-    padding: 10px 0;
   }
   
-  .top-bar nav ul li {
-    display: inline-block;
+  #desktop-nav ul li {
+    margin: 0;
   }
   
-  .top-bar nav ul li a {
+  #desktop-nav ul li a {
     color: #fff;
-    font-size: 18px;
+    font-size: 20px;
     text-decoration: none;
+    padding: 10px;
+  }
+  
+  #desktop-nav ul li a:hover {
+    background-color: #ff9f43;
+    border-radius: 5px;
+  }
+  
+  /* Mobile Slide-in Navigation */
+  #mobile-nav {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Initially off-screen */
+    width: 250px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    transition: left 0.3s ease; /* Smooth slide-in transition */
+    z-index: 1000;
+  }
+  
+  #mobile-nav.show {
+    left: 0; /* Slide the nav in */
+  }
+  
+  #mobile-nav ul {
+    list-style: none;
+    padding: 50px 0;
+    text-align: center;
+  }
+  
+  #mobile-nav ul li {
+    margin-bottom: 30px;
+  }
+  
+  #mobile-nav ul li a {
+    color: #fff;
+    font-size: 24px;
+    text-decoration: none;
+    padding: 15px;
     display: flex;
     align-items: center;
-    gap: 5px;
-    transition: color 0.3s ease;
+    gap: 10px;
   }
   
-  .top-bar nav ul li a:hover {
-    color: #ff9f43;
+  #mobile-nav ul li a:hover {
+    background-color: #ff9f43;
   }
   
-  /* Bottom Bar - Profile Picture Styling */
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  /* Bottom-bar Styling */
   .bottom-bar {
     margin: 20px auto;
   }
   
   .bottom-bar img {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     border: 5px solid #fff;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -70,7 +133,6 @@
     transform: scale(1.05);
   }
   
-  /* Title and Subtitle Styling */
   h1 {
     font-size: 36px;
     margin: 15px 0;
@@ -84,19 +146,32 @@
     margin-bottom: 15px;
   }
   
-  /* Responsive Design */
+  /* Mobile view styles */
   @media (max-width: 768px) {
-    .top-bar nav ul {
-      flex-direction: column;
-      gap: 10px;
+    /* Hide desktop navigation on mobile */
+    #desktop-nav {
+      display: none;
     }
   
-    h1 {
-      font-size: 28px;
+    /* Show hamburger icon on mobile */
+    .hamburger {
+      display: block;
     }
   
-    h3 {
-      font-size: 18px;
+    /* Show mobile navigation when active */
+    #mobile-nav {
+      display: block;
+    }
+  }
+  
+  @media (min-width: 769px) {
+    /* Show the desktop navigation and hide mobile nav on larger screens */
+    #desktop-nav {
+      display: block;
+    }
+  
+    #mobile-nav {
+      display: none;
     }
   }
   
@@ -267,118 +342,7 @@ footer {
   
 
 
-  /* Project serction new additon */
-  /* Main Content Section Styling */
-main {
-    padding: 40px 0;
-    background-color: #f8f9fa;
-  }
   
-  /* Container */
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-  
-  /* Page Title Styling */
-  main h2 {
-    font-size: 36px;
-    color: #333;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  /* Paragraph Styling */
-  main p {
-    font-size: 18px;
-    color: #666;
-    text-align: center;
-    margin-bottom: 40px;
-  }
-  
-  /* Content Box Styling */
-  .content-box {
-    background-color: #fff;
-    padding: 20px;
-    margin: 20px 0;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  
-  .content-box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  }
-  
-  .content-box h3 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  .content-box p {
-    font-size: 16px;
-    color: #555;
-  }
-  
-  /* Card Wrapper Styling */
-  .card-wrapper {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  
-  /* Content Card Styling */
-  .content-card {
-    background: linear-gradient(135deg, #3498db, #2c3e50);
-    padding: 20px;
-    border-radius: 8px;
-    color: #fff;
-    width: calc(33.333% - 20px); /* Three cards per row with 20px gap */
-    position: relative;
-    perspective: 1000px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    transition: transform 0.5s ease;
-    text-align: center;
-  }
-  
-  .content-card:hover {
-    transform: rotateY(10deg) rotateX(-5deg) translateY(-10px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-  }
-  
-  .content-card h3 {
-    font-size: 22px;
-    margin-bottom: 10px;
-  }
-  
-  .content-card p {
-    font-size: 16px;
-  }
-  
-  .card-link {
-    color: #ff9f43;
-    font-size: 14px;
-    text-decoration: none;
-    margin-top: 10px;
-    display: inline-block;
-    transition: color 0.3s;
-  }
-  
-  .card-link:hover {
-    color: #fff;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .content-card {
-      width: 100%; /* Full-width cards on smaller screens */
-    }
-  }
-
   
   /* about me section new addition */
 
