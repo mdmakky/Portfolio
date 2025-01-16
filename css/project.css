@@ -30,7 +30,7 @@ header {
     justify-content: space-between;
     align-items: center;
   }
-  
+
   /* Hamburger for Mobile */
   .hamburger {
     display: none; /* Hidden by default on desktop */
@@ -249,7 +249,7 @@ footer {
   /* Page Title Styling */
   main h2 {
     font-size: 36px;
-    color: #333;
+    color: #ffffff;
     text-align: center;
     margin-bottom: 20px;
   }
@@ -257,7 +257,7 @@ footer {
   /* Paragraph Styling */
   main p {
     font-size: 18px;
-    color: #666;
+    color: #ffffff;
     text-align: center;
     margin-bottom: 40px;
   }
