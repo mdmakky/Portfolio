@@ -1,0 +1,19 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Md. Arafatuzzaman's Portfolio Website",
+  "main": "index.js",
+  "scripts": {
+    "build": "tailwindcss -i ./src/input.css -o ./css/tailwind.css",
+    "watch": "tailwindcss -i ./src/input.css -o ./css/tailwind.css --watch"
+  },
+  "keywords": [
+    "portfolio",
+    "tailwindcss"
+  ],
+  "author": "Md. Arafatuzzaman",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.3.6"
+  }
+} 

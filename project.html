@@ -1,95 +1,528 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Makky | Portfolio</title>
-    <link rel="stylesheet" href="./css/project.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> 
-    <link rel="shortcut icon" href="photos/OIP-removebg-preview.ico" type="image/x-icon"> 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-    />
-    <link
-      rel="shortcut icon"
-      href="photos/OIP-removebg-preview.ico"
-      type="image/x-icon"
-      rel="shortcut icon" href="photos/OIP-removebg-preview.ico" type="image/x-icon"> 
+    <title>Makky | Projects</title>
+    <link rel="stylesheet" href="./css/tailwind.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="shortcut icon" href="photos/OIP-removebg-preview.ico" type="image/x-icon">
     <script defer src="script.js"></script>
+    <style>
+      /* Fix transform hover effects for project cards */
+      .project-card:hover {
+        transform: perspective(500px) rotateY(6deg) rotateX(-3deg) translateY(-10px) !important;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+      }
+      
+      /* Glass card effect */
+      .glass-card {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+      
+      /* Gradient effects */
+      .text-gradient {
+        background: linear-gradient(to right, #1a56db, #0e9f6e);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      
+      /* Project card hover overlay */
+      .project-card .overlay {
+        opacity: 0;
+        transition: all 0.5s ease;
+      }
+      
+      .project-card:hover .overlay {
+        opacity: 1;
+      }
+      
+      /* Project card badge */
+      .badge {
+        background: linear-gradient(to right, #1a56db, #0e9f6e);
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        color: white;
+        font-size: 0.75rem;
+        font-weight: 500;
+        display: inline-block;
+      }
+      
+      /* Header with improved visual appeal */
+      .header-glow {
+        box-shadow: 0 0 15px rgba(26, 86, 219, 0.3);
+      }
+      
+      /* Animate nav items */
+      .nav-item {
+        position: relative;
+      }
+      
+      .nav-item::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(to right, #ff5a1f, #ff8c5a);
+        transition: width 0.3s ease, left 0.3s ease;
+      }
+      
+      .nav-item:hover::after {
+        width: 100%;
+        left: 0;
+      }
+      
+      /* Particles animation */
+      @keyframes float-particle {
+        0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+        50% { opacity: 1; }
+        100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+      }
+      
+      .particles span {
+        position: absolute;
+        bottom: -30px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        pointer-events: none;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        animation: float-particle 15s linear infinite;
+      }
+      
+      .particles span:nth-child(1) {
+        width: 8px;
+        height: 8px;
+        left: 10%;
+        animation-delay: 0s;
+        animation-duration: 20s;
+      }
+      
+      .particles span:nth-child(2) {
+        width: 15px;
+        height: 15px;
+        left: 20%;
+        animation-delay: 2s;
+        animation-duration: 12s;
+      }
+      
+      .particles span:nth-child(3) {
+        width: 10px;
+        height: 10px;
+        left: 40%;
+        animation-delay: 4s;
+        animation-duration: 18s;
+      }
+      
+      .particles span:nth-child(4) {
+        width: 12px;
+        height: 12px;
+        left: 60%;
+        animation-delay: 6s;
+        animation-duration: 15s;
+      }
+      
+      .particles span:nth-child(5) {
+        width: 6px;
+        height: 6px;
+        left: 80%;
+        animation-delay: 8s;
+        animation-duration: 10s;
+      }
+      
+      .particles span:nth-child(6) {
+        width: 10px;
+        height: 10px;
+        left: 90%;
+        animation-delay: 10s;
+        animation-duration: 14s;
+      }
+      
+      /* Fix overflow issues */
+      body {
+        overflow-x: hidden;
+        max-width: 100vw;
+      }
+      
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+      
+      /* Mobile menu fixes */
+      #mobile-nav {
+        height: 100vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        transition: left 0.3s ease-in-out;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+      }
+      
+      /* Improve responsive handling */
+      @media (max-width: 768px) {
+        .hero-text {
+          text-align: center;
+        }
+        
+        .particles span {
+          display: none;
+        }
+        
+        .project-card {
+          height: auto !important;
+          min-height: 320px;
+        }
+      }
+      
+      /* Fix wave separator overflow */
+      .wave-container {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+      }
+      
+      .svg-separator {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-height: 50px;
+      }
+    </style>
   </head>
-<body>
+<body class="bg-section-bg-lightest text-text-primary font-sans">
 
-  <!-- Header (Same as Main Page) -->
-  <header>
-    <div class="container">
-      <div class="top-bar">
-        <!-- Hamburger icon for mobile view -->
-        <div class="hamburger">
+  <!-- Header Section -->
+  <header class="bg-gradient-to-r from-header-gradient-start via-primary to-header-gradient-end text-white py-6 relative overflow-hidden">
+    <!-- Particles effect -->
+    <div class="particles absolute inset-0 z-0 hidden md:block">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    
+    <!-- Navigation -->
+    <div class="w-11/12 max-w-screen-xl mx-auto relative z-10">
+      <nav class="flex items-center justify-between py-4">
+        <!-- Logo -->
+        <div class="flex items-center">
+          <a href="index.html" class="text-white text-3xl font-bold hover:text-accent transition-colors duration-300 flex items-center">
+            <span class="text-accent">MA</span><span class="relative">kky<span class="absolute -top-1 -right-2 text-xs text-accent animate-pulse-slow">®</span></span>
+          </a>
+        </div>
+        
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex items-center gap-8">
+          <a href="index.html#about" class="nav-item text-white text-lg font-medium hover:text-accent transition-colors duration-300">About</a>
+          <a href="index.html#skills" class="nav-item text-white text-lg font-medium hover:text-accent transition-colors duration-300">Skills</a>
+          <a href="./project.html" class="nav-item text-white text-lg font-medium hover:text-accent transition-colors duration-300">Projects</a>
+          <a href="index.html#contact" class="nav-item text-white text-lg font-medium hover:text-accent transition-colors duration-300">Contact</a>
+          <a href="https://github.com/mdmakky" target="_blank" class="ml-4 bg-white/10 hover:bg-white/20 text-white rounded-full p-2 transition-all duration-300 hover:scale-110">
+            <i class="fab fa-github text-xl"></i>
+          </a>
+        </div>
+        
+        <!-- Hamburger menu for mobile -->
+        <div class="hamburger md:hidden cursor-pointer text-2xl">
           <i class="fas fa-bars"></i>
         </div>
-
-        <!-- Desktop Navigation -->
-        <nav id="desktop-nav">
-          <ul>
-            <li><a href="./index.html"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="https://github.com/mdmakky" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
-          </ul>
-        </nav>
-      </div>
-
-      <!-- Mobile Navigation (hidden by default) -->
-      <nav id="mobile-nav">
-        <div class="close-btn">
+      </nav>
+      
+      <!-- Mobile Navigation -->
+      <nav id="mobile-nav" class="fixed top-0 -left-full w-3/4 h-full bg-dark bg-opacity-95 flex flex-col items-center justify-start transition-all duration-500 ease-in-out z-50 md:hidden">
+        <div class="close-btn absolute top-6 right-6 text-2xl text-white cursor-pointer">
           <i class="fas fa-times"></i>
         </div>
-        <ul>
-          <li><a href="./index.html"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="https://github.com/mdmakky" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+        <div class="flex items-center justify-center w-full py-8 border-b border-white/10">
+          <a href="index.html" class="text-white text-3xl font-bold">
+            <span class="text-accent">MA</span>kky
+          </a>
+        </div>
+        <ul class="list-none pt-10 text-center w-full px-6 space-y-4">
+          <li><a href="index.html#about" class="text-white text-xl py-3 block hover:bg-white/10 rounded-lg transition duration-300">About</a></li>
+          <li><a href="index.html#skills" class="text-white text-xl py-3 block hover:bg-white/10 rounded-lg transition duration-300">Skills</a></li>
+          <li><a href="#" class="text-white text-xl py-3 block hover:bg-white/10 rounded-lg transition duration-300">Projects</a></li>
+          <li><a href="index.html#contact" class="text-white text-xl py-3 block hover:bg-white/10 rounded-lg transition duration-300">Contact</a></li>
+          <li class="pt-6">
+            <a href="https://github.com/mdmakky" target="_blank" class="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition-all duration-300">
+              <i class="fab fa-github text-xl"></i> GitHub
+            </a>
+          </li>
         </ul>
       </nav>
-
-      <div class="bottom-bar">
-        <img src="./photos/photo.jpg" alt="Photo">
+      
+      <!-- Projects Hero Section -->
+      <div class="py-16 text-center">
+        <h1 class="text-5xl md:text-6xl font-bold mb-4 animate-fadeUp">My Projects</h1>
+        <p class="text-xl text-white/80 max-w-2xl mx-auto mb-8 animate-fadeUp" style="animation-delay: 0.2s;">
+          Showcasing my skills and creativity through innovative web and AI solutions
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center animate-fadeUp" style="animation-delay: 0.4s;">
+          <a href="#featured-projects" class="btn btn-primary bg-white text-primary hover:bg-white/90 hover:scale-105 header-glow">
+            View Projects
+          </a>
+          <a href="index.html#contact" class="btn btn-outline border-white text-white hover:bg-white/20 hover:border-white">
+            Contact Me
+          </a>
+        </div>
       </div>
-      <h1>Md. Arafatuzzaman</h1>
-      <h3>Web Developer | AI & ML Enthusiast | HTML, CSS, JS Expert</h3>
+    </div>
+    <div class="absolute bottom-0 left-0 w-full overflow-hidden">
+      <svg preserveAspectRatio="none" width="100%" height="50" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" class="fill-current text-section-bg-light">
+        <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path>
+        <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="shape-fill"></path>
+        <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="shape-fill"></path>
+      </svg>
     </div>
   </header>
 
-  <main>
-    <div class="container">
-      <header>
-        <h2 class="page-title">Explore My Project.</h2>
-        <p class="intro-text">Discover my projects and learn more about my work.</p>
-      </header>
+  <main class="py-16 bg-section-bg-light">
+    <div class="w-11/12 max-w-screen-xl mx-auto">
+      <section id="featured-projects" class="text-center mb-16">
+        <h2 class="text-4xl font-bold uppercase tracking-wider mb-8 relative inline-block animate-fadeUp">
+          Explore My Portfolio
+          <span class="absolute bottom-[-5px] left-0 w-24 h-1 bg-gradient-to-r from-primary to-secondary rounded-md"></span>
+        </h2>
+        <p class="text-xl text-gray-dark mb-8 max-w-2xl mx-auto">Discover my latest projects and creations. Each project represents my passion for clean code, intuitive design, and solving real-world problems.</p>
+      </section>
   
-      <!-- Content Boxes Section -->
-      <section class="content-section">
-        <div class="content-box">
-          <h3 class="content-box-title">Content Box Title</h3>
-          <p class="content-box-text">This is an example of project content. Project and it's details will be added soon...</p>
+      <!-- Featured Projects -->
+      <section class="mb-20">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="card project-card group overflow-hidden h-[400px] p-0 rounded-xl preserve-3d">
+            <div class="relative h-full">
+              <div class="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-90 z-10"></div>
+              <div class="relative z-20 p-8 h-full flex flex-col justify-between">
+                <div>
+                  <span class="badge mb-4">Web Development</span>
+                  <h3 class="text-2xl font-bold text-white mb-3">E-commerce Platform</h3>
+                  <p class="text-white/80 mb-6">A fully responsive e-commerce website with product listings, cart functionality, and secure checkout process.</p>
+                </div>
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span class="text-xs bg-white/20 text-white px-2 py-1 rounded">React</span>
+                  <span class="text-xs bg-white/20 text-white px-2 py-1 rounded">Node.js</span>
+                  <span class="text-xs bg-white/20 text-white px-2 py-1 rounded">MongoDB</span>
+                </div>
+                <a href="#" class="btn btn-primary self-start">View Project</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card project-card group overflow-hidden h-[400px] p-0 rounded-xl preserve-3d">
+            <div class="relative h-full">
+              <div class="absolute inset-0 bg-gradient-to-r from-secondary to-primary-light opacity-90 z-10"></div>
+              <div class="relative z-20 p-8 h-full flex flex-col justify-between">
+                <div>
+                  <span class="badge mb-4">Data Science</span>
+                  <h3 class="text-2xl font-bold text-white mb-3">Sentiment Analysis Tool</h3>
+                  <p class="text-white/80 mb-6">An AI-powered sentiment analysis tool that processes text data to determine emotional tone and customer satisfaction.</p>
+                </div>
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span class="text-xs bg-white/20 text-white px-2 py-1 rounded">Python</span>
+                  <span class="text-xs bg-white/20 text-white px-2 py-1 rounded">NLTK</span>
+                  <span class="text-xs bg-white/20 text-white px-2 py-1 rounded">TensorFlow</span>
+                </div>
+                <a href="#" class="btn btn-primary self-start">View Project</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card project-card group overflow-hidden h-[400px] p-0 rounded-xl preserve-3d">
+            <div class="relative h-full">
+              <div class="absolute inset-0 bg-gradient-to-r from-accent to-primary opacity-90 z-10"></div>
+              <div class="relative z-20 p-8 h-full flex flex-col justify-between">
+                <div>
+                  <span class="badge mb-4">UI/UX Design</span>
+                  <h3 class="text-2xl font-bold text-white mb-3">Portfolio Redesign</h3>
+                  <p class="text-white/80 mb-6">A complete redesign of a professional portfolio website focusing on modern aesthetics and user experience.</p>
+                </div>
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span class="text-xs bg-white/20 text-white px-2 py-1 rounded">Figma</span>
+                  <span class="text-xs bg-white/20 text-white px-2 py-1 rounded">HTML/CSS</span>
+                  <span class="text-xs bg-white/20 text-white px-2 py-1 rounded">Tailwind CSS</span>
+                </div>
+                <a href="#" class="btn btn-primary self-start">View Project</a>
+              </div>
+            </div>
+          </div>
         </div>
-  
-        <div class="content-box">
-          <h3 class="content-box-title">Another Interesting Section</h3>
-          <p class="content-box-text">Project and it's details will be added soon...</p>
+      </section>
+      
+      <!-- Other Projects -->
+      <section class="mb-8">
+        <h3 class="text-3xl font-bold text-text-primary mb-8 text-gradient">Other Projects</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="card card-hover p-6 flex flex-col">
+            <h4 class="text-xl font-semibold mb-2">Weather Dashboard</h4>
+            <p class="text-gray-dark mb-4 flex-grow">A real-time weather dashboard that provides current conditions and forecasts for locations worldwide.</p>
+            <div class="flex justify-between items-center">
+              <div class="flex gap-2">
+                <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded">JavaScript</span>
+                <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded">API</span>
+              </div>
+              <a href="#" class="text-primary hover:text-accent"><i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+          
+          <div class="card card-hover p-6 flex flex-col">
+            <h4 class="text-xl font-semibold mb-2">Task Management App</h4>
+            <p class="text-gray-dark mb-4 flex-grow">A productivity application for organizing tasks, setting deadlines, and tracking progress.</p>
+            <div class="flex justify-between items-center">
+              <div class="flex gap-2">
+                <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded">React</span>
+                <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded">Firebase</span>
+              </div>
+              <a href="#" class="text-primary hover:text-accent"><i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+          
+          <div class="card card-hover p-6 flex flex-col">
+            <h4 class="text-xl font-semibold mb-2">Recipe Finder</h4>
+            <p class="text-gray-dark mb-4 flex-grow">An application that suggests recipes based on available ingredients in your kitchen.</p>
+            <div class="flex justify-between items-center">
+              <div class="flex gap-2">
+                <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded">JavaScript</span>
+                <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded">API</span>
+              </div>
+              <a href="#" class="text-primary hover:text-accent"><i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+          
+          <div class="card card-hover p-6 flex flex-col">
+            <h4 class="text-xl font-semibold mb-2">Student Management System</h4>
+            <p class="text-gray-dark mb-4 flex-grow">A comprehensive system for educational institutions to manage student records and academic progress.</p>
+            <div class="flex justify-between items-center">
+              <div class="flex gap-2">
+                <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded">Java</span>
+                <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded">MySQL</span>
+              </div>
+              <a href="#" class="text-primary hover:text-accent"><i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
         </div>
+      </section>
+      
+      <!-- CTA Section -->
+      <section class="bg-gradient-to-r from-primary to-secondary rounded-xl p-10 text-white text-center mt-16">
+        <h3 class="text-2xl font-bold mb-4">Interested in working together?</h3>
+        <p class="mb-6 max-w-xl mx-auto">I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision.</p>
+        <a href="index.html#contact" class="inline-block bg-white text-primary hover:bg-gray-100 px-6 py-2 rounded-md font-medium transition-all duration-300">Get In Touch</a>
       </section>
     </div>
   </main>
 
-  <!-- Footer (Same as Main Page) -->
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <p>&copy; 2024 Md. Arafatuzzaman | All rights reserved</p>
-        <ul class="social-media">
-          <li><a href="https://www.linkedin.com/in/md-amakky/" target="_blank"><i class="fab fa-linkedin"></i></a></li>
-          <li><a href="https://github.com/mdmakky" target="_blank"><i class="fab fa-github"></i></a></li>
-          <li><a href="https://www.facebook.com/md.arafatuzzaman.makky" target="_blank"><i class="fab fa-facebook"></i></a></li>
-        </ul>
+  <!-- Footer -->
+  <footer class="bg-gradient-to-r from-header-gradient-start via-primary to-header-gradient-end py-12 text-white relative">
+    <div class="absolute top-0 left-0 w-full overflow-hidden rotate-180">
+      <svg preserveAspectRatio="none" width="100%" height="50" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" class="fill-current text-section-bg-light">
+        <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path>
+        <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="shape-fill"></path>
+        <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="shape-fill"></path>
+      </svg>
+    </div>
+    
+    <div class="w-11/12 max-w-screen-xl mx-auto relative z-10">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+        <!-- About column -->
+        <div>
+          <a href="index.html" class="text-white text-3xl font-bold block mb-4">
+            <span class="text-accent">MA</span>kky
+          </a>
+          <p class="text-white/80 mb-6">
+            A passionate web developer and AI enthusiast creating modern and functional applications to solve real-world problems.
+          </p>
+          <div class="flex items-center gap-3">
+            <a href="mailto:mdamakky@gmail.com" class="bg-white/10 hover:bg-white/20 rounded-full p-2.5 transition-all duration-300 hover:scale-110" aria-label="Email">
+              <i class="fas fa-envelope text-lg"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/md-amakky/" target="_blank" class="bg-white/10 hover:bg-white/20 rounded-full p-2.5 transition-all duration-300 hover:scale-110" aria-label="LinkedIn">
+              <i class="fab fa-linkedin-in text-lg"></i>
+            </a>
+            <a href="https://github.com/mdmakky" target="_blank" class="bg-white/10 hover:bg-white/20 rounded-full p-2.5 transition-all duration-300 hover:scale-110" aria-label="GitHub">
+              <i class="fab fa-github text-lg"></i>
+            </a>
+            <a href="https://www.facebook.com/md.arafatuzzaman.makky" target="_blank" class="bg-white/10 hover:bg-white/20 rounded-full p-2.5 transition-all duration-300 hover:scale-110" aria-label="Facebook">
+              <i class="fab fa-facebook-f text-lg"></i>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Links column -->
+        <div>
+          <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+          <ul class="space-y-2">
+            <li>
+              <a href="index.html" class="text-white/80 hover:text-white transition-colors duration-300 flex items-center gap-2">
+                <i class="fas fa-chevron-right text-xs"></i> Home
+              </a>
+            </li>
+            <li>
+              <a href="index.html#about" class="text-white/80 hover:text-white transition-colors duration-300 flex items-center gap-2">
+                <i class="fas fa-chevron-right text-xs"></i> About Me
+              </a>
+            </li>
+            <li>
+              <a href="index.html#skills" class="text-white/80 hover:text-white transition-colors duration-300 flex items-center gap-2">
+                <i class="fas fa-chevron-right text-xs"></i> Skills
+              </a>
+            </li>
+            <li>
+              <a href="#featured-projects" class="text-white/80 hover:text-white transition-colors duration-300 flex items-center gap-2">
+                <i class="fas fa-chevron-right text-xs"></i> Projects
+              </a>
+            </li>
+            <li>
+              <a href="index.html#contact" class="text-white/80 hover:text-white transition-colors duration-300 flex items-center gap-2">
+                <i class="fas fa-chevron-right text-xs"></i> Contact
+              </a>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Contact column -->
+        <div>
+          <h3 class="text-xl font-semibold mb-4">Contact Info</h3>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3">
+              <i class="fas fa-envelope-open-text mt-1 text-accent"></i>
+              <span class="text-white/80">mdamakky@gmail.com</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fas fa-map-marker-alt mt-1 text-accent"></i>
+              <span class="text-white/80">Jashore University of Science and Technology, Bangladesh</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="fas fa-code-branch mt-1 text-accent"></i>
+              <span class="text-white/80">Available for freelance projects</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between">
+        <p class="text-white/70 mb-4 md:mb-0">&copy; 2024 Md. Arafatuzzaman | All rights reserved</p>
+        <div class="flex flex-wrap items-center gap-4">
+          <span class="text-white/70 text-sm">Made with</span>
+          <div class="flex items-center gap-3">
+            <span class="text-white/80 flex items-center gap-1 text-xs bg-white/10 px-2 py-1 rounded-md">
+              <i class="fab fa-html5"></i> HTML5
+            </span>
+            <span class="text-white/80 flex items-center gap-1 text-xs bg-white/10 px-2 py-1 rounded-md">
+              <i class="fab fa-css3-alt"></i> CSS3
+            </span>
+            <span class="text-white/80 flex items-center gap-1 text-xs bg-white/10 px-2 py-1 rounded-md">
+              <i class="fab fa-js"></i> JS
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   </footer>
