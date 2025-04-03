@@ -1,33 +1,36 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ["./*.{html,js}"],
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     extend: {
       colors: {
-        // Modern professional color palette
-        'primary': '#1a56db', // Bold blue
-        'primary-dark': '#0f3b8f',
-        'primary-light': '#4d83fb',
-        'secondary': '#0e9f6e', // Success green
-        'accent': '#ff5a1f', // Vibrant orange for highlights
-        'dark': '#111827', // Near black
+        'primary': 'var(--color-primary)',
+        'primary-light': 'var(--color-primary-light)',
+        'primary-dark': 'var(--color-primary-dark)',
+        'secondary': 'var(--color-secondary)',
+        'accent': 'var(--color-accent)',
+        'text-primary': 'var(--color-text-primary)',
+        'text-secondary': 'var(--color-text-secondary)',
+        'text-tertiary': 'var(--color-text-tertiary)',
+        'section-bg-lightest': 'var(--color-section-bg-lightest)',
+        'section-bg-light': 'var(--color-section-bg-light)',
+        'section-bg-lighter': 'var(--color-section-bg-lighter)',
+        'header-gradient-start': 'var(--color-header-gradient-start)',
+        'header-gradient-end': 'var(--color-header-gradient-end)',
+        'dark': 'var(--color-dark)',
         'light': '#f9fafb', // Light background
         'gray-light': '#f3f4f6',
         'gray-medium': '#9ca3af',
         'gray-dark': '#4b5563',
-        
+
         // Original colors (renamed for compatibility)
-        'header-gradient-start': '#1e3a5f', // Deeper blue
-        'header-gradient-end': '#3182ce', // Slightly more saturated blue
         'accent-orange': '#ff5a1f',
         'accent-red': '#e05252',
         'accent-red-bright': '#ef4444',
-        'text-primary': '#1f2937',
-        'text-secondary': '#4b5563',
         'text-light': '#e5e7eb',
-        'section-bg-light': '#f9fafb',
-        'section-bg-lighter': '#f3f4f6',
-        'section-bg-lightest': '#f1f5f9',
       },
       boxShadow: {
         'profile': '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
@@ -46,8 +49,11 @@ module.exports = {
         'fadeUp': 'fadeUp 1s ease-in-out',
         'slideUp': 'slideUp 1s ease-out',
         'float': 'float 3s ease-in-out infinite',
-        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'bounce-slow': 'bounce 3s infinite',
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'bounce-slow': 'bounce 2s infinite',
+        'growWidth': 'growWidth 1.5s ease-out forwards',
+        'gradient-slow': 'gradient 15s ease infinite',
+        'blob': 'blob 7s infinite',
       },
       transitionProperty: {
         'transform': 'transform',
@@ -61,7 +67,7 @@ module.exports = {
         '5': '5px',
       },
       fontFamily: {
-        'sans': ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        'sans': ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
         'display': ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       backdropBlur: {
@@ -71,7 +77,18 @@ module.exports = {
         float: {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-10px)' },
-        }
+        },
+        gradient: {
+          '0%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+          '100%': { backgroundPosition: '0% 50%' },
+        },
+        blob: {
+          '0%': { transform: 'translate(0px, 0px) scale(1)' },
+          '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+          '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+          '100%': { transform: 'translate(0px, 0px) scale(1)' },
+        },
       },
     },
   },
@@ -84,6 +101,11 @@ module.exports = {
     'animate-float',
     'animate-pulse-slow',
     'animate-bounce-slow',
+    'animate-growWidth',
+    'animate-gradient-slow',
+    'animate-blob',
+    'animation-delay-2000',
+    'animation-delay-4000',
     'opacity-0',
     'preserve-3d',
     'rotate-y-3',
@@ -92,4 +114,4 @@ module.exports = {
     'rotate-x-3',
   ],
   plugins: [],
-} 
+}
