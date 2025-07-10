@@ -3,169 +3,311 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
   useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 50;
+      setScrolled(isScrolled);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
     // Add event listener to close mobile menu when clicking outside
     const handleClickOutside = (event) => {
       const mobileNav = document.getElementById('mobile-nav');
       const hamburger = document.querySelector('.hamburger');
-
+      
       if (mobileMenuOpen && mobileNav && !mobileNav.contains(event.target) && !hamburger.contains(event.target)) {
         setMobileMenuOpen(false);
       }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
-
+    
     // Add overflow hidden to body when mobile menu is open
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
-
+    
     return () => {
+      window.removeEventListener('scroll', handleScroll);
       document.removeEventListener('mousedown', handleClickOutside);
       document.body.style.overflow = '';
     };
   }, [mobileMenuOpen]);
 
   return (
-    <header className="bg-gradient-to-r from-header-gradient-start via-primary to-header-gradient-end text-white py-6 relative overflow-hidden">
-      {/* Particles effect */}
-      <div className="particles absolute inset-0 z-0">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+    <>
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes pulse-glow {
+          0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+          50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.6); }
+        }
+        
+        @keyframes shimmer {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes fade-up {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fade-in {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        
+        @keyframes bubble-float {
+          0%, 100% { transform: translateY(0px) scale(1); }
+          50% { transform: translateY(-15px) scale(1.05); }
+        }
+        
+        .floating { animation: float 6s ease-in-out infinite; }
+        .pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+        .bubble-float { animation: bubble-float 4s ease-in-out infinite; }
+        .fade-up { animation: fade-up 0.8s ease-out forwards; }
+        .fade-in { animation: fade-in 1s ease-out forwards; }
+        
+        .glass-nav {
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(20px);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+          transition: all 0.3s ease;
+        }
+        
+        .glass-nav.scrolled {
+          background: rgba(255, 255, 255, 0.15);
+          backdrop-filter: blur(25px);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .text-shimmer {
+          background: linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4, #10b981, #3b82f6);
+          background-size: 400% 400%;
+          animation: shimmer 3s ease-in-out infinite;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+        
+        .nav-item {
+          position: relative;
+          transition: all 0.3s ease;
+        }
+        
+        .nav-item::after {
+          content: '';
+          position: absolute;
+          bottom: -5px;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+          transition: width 0.3s ease;
+        }
+        
+        .nav-item:hover::after {
+          width: 100%;
+        }
+        
+        .glass-button {
+          background: rgba(255, 255, 255, 0.15);
+          backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          transition: all 0.3s ease;
+        }
+        
+        .glass-button:hover {
+          background: rgba(255, 255, 255, 0.25);
+          transform: translateY(-2px);
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+      `}</style>
 
-      {/* Navigation */}
-      <div className="w-11/12 max-w-screen-xl mx-auto relative z-10">
-        <nav className="flex items-center justify-between py-4">
-          {/* Logo */}
-          <div className="flex items-center">
-            <Link to="/" className="text-white text-3xl font-bold hover:text-accent transition-colors duration-300 flex items-center">
-              <span className="text-accent">MA</span><span className="relative">kky<span className="absolute -top-1 -right-2 text-xs text-accent animate-pulse-slow">®</span></span>
-            </Link>
-          </div>
+      <header className="min-h-screen relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl floating"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl floating" style={{animationDelay: '2s'}}></div>
+          <div className="absolute top-3/4 left-3/4 w-64 h-64 bg-cyan-500/20 rounded-full blur-3xl floating" style={{animationDelay: '4s'}}></div>
+          <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-pink-500/15 rounded-full blur-3xl floating" style={{animationDelay: '6s'}}></div>
+        </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            <a href="#about" className="nav-item text-white text-lg font-medium hover:text-accent transition-colors duration-300">About</a>
-            <a href="#skills" className="nav-item text-white text-lg font-medium hover:text-accent transition-colors duration-300">Skills</a>
-            <Link to="/projects" className="nav-item text-white text-lg font-medium hover:text-accent transition-colors duration-300">Projects</Link>
-            <a href="#contact" className="nav-item text-white text-lg font-medium hover:text-accent transition-colors duration-300">Contact</a>
-            <a href="https://github.com/mdmakky" target="_blank" rel="noopener noreferrer" className="ml-4 bg-white/10 hover:bg-white/20 text-white rounded-full p-2 transition-all duration-300 hover:scale-110">
-              <i className="fab fa-github text-xl"></i>
-            </a>
-          </div>
+        {/* Floating Tech Bubbles - Reduced */}
+        <div className="absolute inset-0 overflow-hidden">
+          {['⚛️', '🐍', '🌐', '💻','🖥️','🖱️','⌨️'].map((emoji, i) => (
+            <div
+              key={i}
+              className="absolute text-2xl opacity-20 bubble-float"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                animationDuration: `${4 + Math.random() * 2}s`
+              }}
+            >
+              {emoji}
+            </div>
+          ))}
+        </div>
 
-          {/* Hamburger menu for mobile */}
-          <div className="hamburger md:hidden cursor-pointer text-2xl" onClick={toggleMobileMenu}>
-            <i className={`fas ${mobileMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+        {/* Navigation */}
+        <nav className={`glass-nav fixed top-0 left-0 right-0 z-50 ${scrolled ? 'scrolled' : ''}`}>
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-between py-4">
+              {/* Logo */}
+              <Link to="/" className="flex items-center group">
+                <div className="relative">
+                  <span className="text-3xl font-bold text-white group-hover:scale-105 transition-transform duration-300">
+                    <span className="text-shimmer">MA</span>
+                    <span className="text-white">kky</span>
+                    <span className="absolute -top-1 -right-2 text-xs text-blue-400 animate-pulse">®</span>
+                  </span>
+                </div>
+              </Link>
+              
+              {/* Desktop Navigation - Simplified */}
+              <div className="hidden md:flex items-center space-x-8">
+                <a href="#about" className="nav-item text-white font-medium hover:text-blue-300 transition-colors duration-300">About</a>
+                <a href="#skills" className="nav-item text-white font-medium hover:text-blue-300 transition-colors duration-300">Skills</a>
+                <Link to="/projects" className="nav-item text-white font-medium hover:text-blue-300 transition-colors duration-300">Projects</Link>
+                <a href="#contact" className="nav-item text-white font-medium hover:text-blue-300 transition-colors duration-300">Contact</a>
+              </div>
+              
+              {/* Mobile Menu Button */}
+              <button 
+                className="hamburger md:hidden glass-button rounded-lg p-3 text-white"
+                onClick={toggleMobileMenu}
+              >
+                <i className={`fas ${mobileMenuOpen ? 'fa-times' : 'fa-bars'} text-xl`}></i>
+              </button>
+            </div>
           </div>
         </nav>
 
-        {/* Mobile Navigation */}
-        <nav id="mobile-nav" className={`fixed top-0 ${mobileMenuOpen ? 'left-0' : '-left-full'} w-3/4 h-full bg-dark bg-opacity-95 flex flex-col items-center justify-start transition-all duration-500 ease-in-out z-50 md:hidden`}>
-          <div className="close-btn absolute top-6 right-6 text-2xl text-white cursor-pointer" onClick={toggleMobileMenu}>
-            <i className="fas fa-times"></i>
+        {/* Mobile Navigation - Simplified */}
+        <div 
+          id="mobile-nav" 
+          className={`fixed top-0 ${mobileMenuOpen ? 'left-0' : '-left-full'} w-80 h-full bg-slate-900/95 backdrop-blur-xl border-r border-white/20 transition-all duration-500 ease-in-out z-50 md:hidden`}
+        >
+          <div className="p-6">
+            <div className="flex items-center justify-between mb-8">
+              <Link to="/" className="text-2xl font-bold text-white" onClick={toggleMobileMenu}>
+                <span className="text-shimmer">MA</span>kky
+              </Link>
+              <button 
+                className="glass-button rounded-lg p-2 text-white"
+                onClick={toggleMobileMenu}
+              >
+                <i className="fas fa-times"></i>
+              </button>
+            </div>
+            
+            <nav className="space-y-4">
+              <a href="#about" className="block glass-button rounded-xl p-4 text-white hover:text-blue-300 transition-colors duration-300" onClick={toggleMobileMenu}>About</a>
+              <a href="#skills" className="block glass-button rounded-xl p-4 text-white hover:text-blue-300 transition-colors duration-300" onClick={toggleMobileMenu}>Skills</a>
+              <Link to="/projects" className="block glass-button rounded-xl p-4 text-white hover:text-blue-300 transition-colors duration-300" onClick={toggleMobileMenu}>Projects</Link>
+              <a href="#contact" className="block glass-button rounded-xl p-4 text-white hover:text-blue-300 transition-colors duration-300" onClick={toggleMobileMenu}>Contact</a>
+            </nav>
           </div>
-          <div className="flex items-center justify-center w-full py-8 border-b border-white/10">
-            <Link to="/" className="text-white text-3xl font-bold" onClick={toggleMobileMenu}>
-              <span className="text-accent">MA</span>kky
-            </Link>
-          </div>
-          <ul className="list-none pt-10 text-center w-full px-6 space-y-4">
-            <li><a href="#about" className="text-white text-xl py-3 block hover:bg-white/10 rounded-lg transition duration-300" onClick={toggleMobileMenu}>About</a></li>
-            <li><a href="#skills" className="text-white text-xl py-3 block hover:bg-white/10 rounded-lg transition duration-300" onClick={toggleMobileMenu}>Skills</a></li>
-            <li><Link to="/projects" className="text-white text-xl py-3 block hover:bg-white/10 rounded-lg transition duration-300" onClick={toggleMobileMenu}>Projects</Link></li>
-            <li><a href="#contact" className="text-white text-xl py-3 block hover:bg-white/10 rounded-lg transition duration-300" onClick={toggleMobileMenu}>Contact</a></li>
-            <li className="pt-6">
-              <a href="https://github.com/mdmakky" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition-all duration-300" onClick={toggleMobileMenu}>
-                <i className="fab fa-github text-xl"></i> GitHub
-              </a>
-            </li>
-          </ul>
-        </nav>
+        </div>
 
-        {/* Overlay when mobile menu is open */}
+        {/* Overlay */}
         {mobileMenuOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden" onClick={toggleMobileMenu}></div>
+          <div 
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden" 
+            onClick={toggleMobileMenu}
+          ></div>
         )}
 
-        {/* Hero Section */}
-        <div className="flex flex-col md:flex-row items-center justify-between py-16 gap-10">
-          <div className="md:w-1/2 text-left order-2 md:order-1 animate-fadeUp" style={{animationDelay: '0.2s'}}>
-            <h1 className="text-5xl md:text-6xl font-bold mb-4">
-              Hi, I'm <span className="text-accent">Arafat</span>
-            </h1>
-            <h2 className="text-2xl md:text-3xl font-light mb-6 text-white/90">
-              Web Developer & AI Enthusiast
-            </h2>
-            <p className="text-lg text-white/80 mb-8">
-              I craft responsive websites with modern technologies and work on AI-driven data science projects that solve real-world problems.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <a href="#contact" className="btn btn-primary bg-white text-primary hover:bg-white/90 hover:scale-105 header-glow"><i className="fas fa-envelope mr-2"></i> Contact Me</a>
-              <a href="#about" className="btn btn-outline border-white text-white hover:bg-white/20 hover:border-white"><i className="fas fa-user mr-2"></i> About Me</a>
-            </div>
-          </div>
-          <div className="md:w-1/2 flex justify-center order-1 md:order-2">
-            <div className="relative">
-              <div className="absolute -top-4 -left-4 w-24 h-24 rounded-full bg-accent/20 backdrop-blur-sm animate-pulse-slow"></div>
-              <div className="absolute -bottom-4 -right-4 w-32 h-32 rounded-full bg-primary/20 backdrop-blur-sm animate-pulse-slow" style={{animationDelay: '1s'}}></div>
-              <div className="relative z-10 rounded-full p-2 bg-gradient-to-r from-primary via-accent/50 to-secondary animate-fadeIn" style={{animationDelay: '0.4s'}}>
-                <img src="/photos/photo.jpg" alt="Md. Arafatuzzaman" className="w-60 h-60 md:w-72 md:h-72 rounded-full border-4 border-white object-cover shadow-2xl" onError={(e) => {
-                  e.target.src = 'https://via.placeholder.com/300?text=Makky';
-                }}/>
+        {/* Hero Section - Streamlined */}
+        <div className="container mx-auto px-4 relative z-10 pt-24">
+          <div className="min-h-screen flex items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
+              
+              {/* Content - Focused */}
+              <div className="text-center lg:text-left fade-up">
+                <div className="mb-6">
+                  {/* <span className="px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full text-blue-300 font-medium text-sm border border-blue-500/30"> */}
+                    {/* 👋 Welcome to my portfolio */}
+                  {/* </span> */}
+                </div>
+                
+                <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white leading-tight">
+                  Hi, I'm <span className="text-shimmer">Arafat</span>
+                </h1>
+                
+                <h2 className="text-2xl md:text-3xl font-light mb-6 text-white/90">
+                  Full-Stack Developer & AI Enthusiast
+                </h2>
+                
+                <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                  I craft seamless digital experiences by combining modern frontend technologies with robust backend architectures, 
+                  while leveraging AI and Machine Learning to build intelligent solutions.
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                  <a 
+                    href="#contact" 
+                    className="glass-button rounded-2xl px-8 py-4 text-white font-semibold hover:text-blue-300 transition-all duration-300 flex items-center justify-center space-x-2"
+                  >
+                    <i className="fas fa-envelope"></i>
+                    <span>Get In Touch</span>
+                  </a>
+                  <a 
+                    href="#about" 
+                    className="glass-button rounded-2xl px-8 py-4 text-white font-semibold hover:text-blue-300 transition-all duration-300 flex items-center justify-center space-x-2"
+                  >
+                    <i className="fas fa-user"></i>
+                    <span>About Me</span>
+                  </a>
+                </div>
               </div>
-              <div className="absolute -bottom-4 -right-4 bg-accent text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl animate-bounce-slow">
-                <i className="fas fa-code"></i>
+              
+              {/* Profile Image */}
+              <div className="flex justify-center lg:justify-end fade-in" style={{animationDelay: '0.3s'}}>
+                <div className="relative">
+                  {/* Decorative Elements */}
+                  <div className="absolute -top-6 -left-6 w-24 h-24 rounded-full bg-blue-500/20 backdrop-blur-sm floating"></div>
+                  <div className="absolute -bottom-6 -right-6 w-32 h-32 rounded-full bg-purple-500/20 backdrop-blur-sm floating" style={{animationDelay: '1s'}}></div>
+                  
+                  {/* Main Image Container */}
+                  <div className="relative z-10 p-2 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-3xl pulse-glow">
+                    <img 
+                      src="/photos/photo.jpg" 
+                      alt="Md. Arafatuzzaman" 
+                      className="w-64 h-64 md:w-80 md:h-80 rounded-3xl object-cover"
+                      onError={(e) => {
+                        e.target.src = 'https://via.placeholder.com/320x320/6366f1/ffffff?text=Makky';
+                      }}
+                    />
+                  </div>
+                  
+                  {/* Floating Code Icon */}
+                  <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-gradient-to-r from-green-400 to-emerald-500 rounded-2xl flex items-center justify-center text-white text-2xl floating">
+                    <i className="fas fa-code"></i>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Tech stack */}
-        <div className="py-6 px-8 bg-white/10 backdrop-blur-sm rounded-xl my-8 animate-fadeUp" style={{animationDelay: '0.8s'}}>
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
-            <p className="text-white/90 font-medium">Tech Stack:</p>
-            <div className="flex flex-wrap justify-center gap-6 md:gap-10">
-              <span className="text-white/80 hover:text-white transition-colors duration-300 flex items-center text-sm">
-                <i className="fab fa-html5 text-xl mr-2"></i> HTML5
-              </span>
-              <span className="text-white/80 hover:text-white transition-colors duration-300 flex items-center text-sm">
-                <i className="fab fa-css3-alt text-xl mr-2"></i> CSS3
-              </span>
-              <span className="text-white/80 hover:text-white transition-colors duration-300 flex items-center text-sm">
-                <i className="fab fa-js text-xl mr-2"></i> JavaScript
-              </span>
-              <span className="text-white/80 hover:text-white transition-colors duration-300 flex items-center text-sm">
-                <i className="fab fa-react text-xl mr-2"></i> React
-              </span>
-              <span className="text-white/80 hover:text-white transition-colors duration-300 flex items-center text-sm">
-                <i className="fab fa-python text-xl mr-2"></i> Python
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden">
-        <svg preserveAspectRatio="none" width="100%" height="50" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" className="fill-current text-white">
-          <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" className="shape-fill"></path>
-          <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" className="shape-fill"></path>
-          <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" className="shape-fill"></path>
-        </svg>
-      </div>
-    </header>
+      </header>
+    </>
   );
 };
 

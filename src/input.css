@@ -23,12 +23,12 @@
     --color-header-gradient-end: #0e9f6e;
     --color-dark: #111827;
     --color-card-bg: #ffffff;
-    --color-form-bg: rgba(255, 255, 255, 0.9);
+    --color-form-bg: rgba(243, 244, 246, 0.9);
     --color-white: #ffffff;
     --color-input-border: rgba(26, 86, 219, 0.5);
     --color-shadow: rgba(0, 0, 0, 0.1);
   }
-
+  
   /* Force light mode styles for dark mode */
   @media (prefers-color-scheme: dark) {
     :root {
@@ -48,48 +48,48 @@
       --color-header-gradient-end: #10b981;
       --color-dark: #030712;
       --color-card-bg: #1f2937;
-      --color-form-bg: rgba(255, 255, 255, 0.9);
+      --color-form-bg: rgba(31, 41, 55, 0.9);
       --color-white: #ffffff;
       --color-input-border: rgba(59, 130, 246, 0.5);
       --color-shadow: rgba(0, 0, 0, 0.3);
     }
-
+    
     /* Override dark mode with light backgrounds for specific components */
     .force-light {
       background-color: #ffffff !important;
       color: #1f2937 !important;
     }
-
+    
     /* Ensure text remains visible in dark mode */
     .text-dark-preserve {
       color: #1f2937 !important;
     }
-
-    /* Make sure form elements have proper styling */
+    
+    /* Make sure form elements stand out in dark mode */
     input, textarea {
-      background-color: #f3f4f6 !important;
-      color: #4b5563 !important;
+      background-color: var(--color-form-bg) !important;
+      color: var(--color-text-primary) !important;
     }
-
+    
     /* Keep white text white even in dark mode */
     .text-white {
       color: var(--color-white) !important;
     }
-
+    
     /* Ensure gradients still show up well */
     .bg-gradient-to-br {
       --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
     }
   }
-
+  
   html {
     scroll-behavior: smooth;
   }
-
+  
   body {
     @apply font-sans text-text-primary bg-section-bg-lightest;
   }
-
+  
   h1, h2, h3, h4, h5, h6 {
     @apply font-display font-semibold;
   }
@@ -99,88 +99,88 @@
   .btn {
     @apply inline-flex items-center justify-center px-6 py-3 rounded-full font-medium transition-all duration-300 transform;
   }
-
+  
   .btn-primary {
     @apply bg-primary text-white hover:bg-primary-dark;
   }
-
+  
   .btn-secondary {
     @apply bg-secondary text-white hover:bg-secondary/80;
   }
-
+  
   .btn-outline {
     @apply border-2 border-primary text-primary hover:bg-primary hover:text-white;
   }
-
+  
   .gradient-text {
     @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
   }
-
+  
   .text-gradient {
     @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
   }
-
+  
   .card {
     background-color: var(--color-card-bg);
     @apply rounded-xl shadow-content p-6 transition-all duration-300;
   }
-
+  
   .card-hover {
     @apply hover:shadow-content-hover hover:-translate-y-1;
   }
-
+  
   .skill-card {
     background-color: var(--color-card-bg);
     @apply p-8 rounded-xl shadow-md transition-all duration-300 hover:shadow-xl;
   }
-
+  
   .contact-card {
     @apply flex flex-col items-center opacity-0 animate-fadeUp;
   }
-
+  
   .project-card {
     @apply relative overflow-hidden rounded-xl shadow-card transition-all duration-500;
   }
-
+  
   .nav-link {
     @apply text-white text-xl no-underline px-2.5 py-2.5 hover:bg-accent-orange hover:rounded-md transition duration-300;
   }
-
+  
   .preserve-3d {
     transform-style: preserve-3d;
   }
-
+  
   /* Mobile menu animation */
   #mobile-nav {
     box-shadow: 5px 0 25px rgba(0, 0, 0, 0.2);
     background-color: var(--color-dark);
   }
-
+  
   /* Improved header shadow */
   .header-glow {
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
   }
-
+  
   /* Progress bar styles */
   .progress-bar {
     @apply h-2 w-full rounded-full bg-gray-200 overflow-hidden;
   }
-
+  
   .progress-fill {
     @apply h-full bg-gradient-to-r from-primary to-primary-light rounded-full;
     animation: growWidth 1.5s ease-out forwards;
   }
-
+  
   .progress-fill-secondary {
     @apply h-full bg-gradient-to-r from-secondary to-primary rounded-full;
     animation: growWidth 1.5s ease-out forwards;
   }
-
+  
   .progress-fill-accent {
     @apply h-full bg-gradient-to-r from-accent to-primary rounded-full;
     animation: growWidth 1.5s ease-out forwards;
   }
-
+  
   /* Glass effect improvements */
   .glass-card {
     @apply backdrop-blur-md border border-white/20 shadow-lg;
@@ -192,17 +192,17 @@
   .social-icon-btn {
     @apply relative flex flex-col items-center justify-center w-full h-20 rounded-xl transition-all duration-300 transform hover:scale-105 active:scale-105 overflow-hidden;
   }
-
+  
   .social-icon-bg {
     @apply absolute inset-0 opacity-50 group-hover/icon:opacity-80 group-active/icon:opacity-80 transition-opacity duration-300;
     background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
   }
-
+  
   .social-icon-inner {
     @apply relative flex items-center justify-center w-12 h-12 rounded-lg mb-1 transition-transform duration-300 group-hover/icon:scale-110 group-hover/icon:rotate-6 group-active/icon:scale-110 group-active/icon:rotate-6 shadow-lg;
     background-color: rgba(255, 255, 255, 0.2);
   }
-
+  
   .social-icon-label {
     @apply text-sm font-medium opacity-80 transition-all duration-300 group-hover/icon:opacity-100 group-active/icon:opacity-100;
   }
@@ -213,45 +213,37 @@
     @apply backdrop-blur-sm;
     background-color: rgba(255, 255, 255, 0.8);
   }
-
+  
   .rotate-y-3 {
     transform: rotateY(3deg);
   }
-
+  
   .rotate-x-2 {
     transform: rotateX(2deg);
   }
-
-  .animation-delay-2000 {
-    animation-delay: 2s;
-  }
-
-  .animation-delay-4000 {
-    animation-delay: 4s;
-  }
-
+  
   /* Fade In animation */
   .animate-fadeIn {
     animation: fadeIn 1s forwards;
   }
-
+  
   /* Scale Up animation */
   .animate-scaleUp {
     animation: scaleUp 0.6s ease-in-out forwards;
     opacity: 0;
   }
-
+  
   /* Pop Up animation */
   .animate-popUp {
     animation: popUp 0.5s ease forwards;
     opacity: 0;
   }
-
+  
   /* Fade Up animation */
   .animate-fadeUp {
     animation: fadeUp 1s ease-out forwards;
   }
-
+  
   /* Slide Up animation */
   .animate-slideUp {
     animation: slideUp 1s ease-out;

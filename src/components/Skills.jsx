@@ -1,256 +1,309 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const Skills = () => {
+  const sectionRef = useRef(null);
+  const [activeCategory, setActiveCategory] = useState('frontend');
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
+  const skillCategories = {
+    frontend: {
+      title: 'Frontend Development',
+      icon: '⚛️',
+      color: 'from-cyan-400 to-blue-500',
+      description: 'Creating responsive and interactive user interfaces',
+      skills: [
+        { name: 'React.js', icon: '⚛️', description: 'Building dynamic user interfaces' },
+        { name: 'JavaScript', icon: '🟨', description: 'Modern ES6+ development' },
+        // { name: 'TypeScript', icon: '🔷', description: 'Type-safe development' },
+        { name: 'HTML5/CSS3', icon: '🌐', description: 'Semantic markup and styling' },
+        { name: 'TailwindCSS', icon: '🎨', description: 'Utility-first CSS framework' },
+        { name: 'Responsive Design', icon: '📱', description: 'Mobile-first approach' }
+      ]
+    },
+    backend: {
+      title: 'Backend Development',
+      icon: '⚙️',
+      color: 'from-green-400 to-emerald-500',
+      description: 'Building robust server-side applications',
+      skills: [
+        { name: 'Django', icon: '🐍', description: 'Python web framework' },
+        { name: 'Python', icon: '🐍', description: 'Server-side programming' },
+        { name: 'REST APIs', icon: '🔗', description: 'RESTful web services' },
+        { name: 'PostgreSQL', icon: '🐘', description: 'Relational database management' },
+        // { name: 'MongoDB', icon: '🍃', description: 'NoSQL database solutions' },
+        // { name: 'Redis', icon: '🔴', description: 'In-memory data caching' }
+      ]
+    },
+    aiml: {
+      title: 'AI & Machine Learning',
+      icon: '🤖',
+      color: 'from-purple-400 to-pink-500',
+      description: 'Developing intelligent data-driven solutions',
+      skills: [
+        // { name: 'TensorFlow', icon: '🧠', description: 'Deep learning framework' },
+        { name: 'PyTorch', icon: '🔥', description: 'Machine learning library' },
+        { name: 'Scikit-learn', icon: '📊', description: 'Machine learning algorithms' },
+        { name: 'Pandas', icon: '🐼', description: 'Data manipulation and analysis' },
+        { name: 'NumPy', icon: '🔢', description: 'Numerical computing' },
+        // { name: 'Data Analysis', icon: '📈', description: 'Statistical analysis and insights' }
+      ]
+    },
+    tools: {
+      title: 'Tools & Technologies',
+      icon: '🛠️',
+      color: 'from-orange-400 to-red-500',
+      description: 'Essential development and productivity tools',
+      skills: [
+        { name: 'Git/GitHub', icon: '📚', description: 'Version control and collaboration' },
+        { name: 'Docker', icon: '🐳', description: 'Containerization platform' },
+        { name: 'VS Code', icon: '💻', description: 'Code editor and development' },
+        { name: 'Linux', icon: '🐧', description: 'Unix-based operating systems' },
+        // { name: 'Figma', icon: '🎨', description: 'UI/UX design and prototyping' },
+        // { name: 'Postman', icon: '📮', description: 'API testing and development' }
+      ]
+    }
+  };
+
   return (
-    <section id="skills" className="py-20 relative overflow-hidden">
-      {/* Off-white background */}
-      <div className="absolute inset-0 bg-gray-50"></div>
+    <>
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes pulse-glow {
+          0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+          50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.6); }
+        }
+        
+        @keyframes slide-up {
+          from { opacity: 0; transform: translateY(50px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fade-in-scale {
+          from { opacity: 0; transform: scale(0.8); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes shimmer {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes bubble-float {
+          0%, 100% { transform: translateY(0px) scale(1); }
+          50% { transform: translateY(-8px) scale(1.02); }
+        }
+        
+        @keyframes skill-glow {
+          0%, 100% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); }
+          50% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); }
+        }
+        
+        .animate-in { animation: slide-up 0.8s ease-out forwards; }
+        .animate-in-delay { animation: fade-in-scale 1s ease-out 0.3s forwards; }
+        .floating { animation: float 6s ease-in-out infinite; }
+        .pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+        .bubble-float { animation: bubble-float 4s ease-in-out infinite; }
+        .skill-glow { animation: skill-glow 3s ease-in-out infinite; }
+        
+        .glass-morphism {
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(25px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hover-lift {
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .hover-lift:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .text-shimmer {
+          background: linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4, #10b981, #3b82f6);
+          background-size: 400% 400%;
+          animation: shimmer 3s ease-in-out infinite;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+        
+        .category-tab {
+          transition: all 0.3s ease;
+          cursor: pointer;
+        }
+        
+        .category-tab.active {
+          background: rgba(255, 255, 255, 0.2);
+          transform: scale(1.02);
+        }
+        
+        .category-tab:hover {
+          background: rgba(255, 255, 255, 0.15);
+          transform: translateY(-2px);
+        }
+        
+        .skill-card {
+          transition: all 0.3s ease;
+        }
+        
+        .skill-card:hover {
+          transform: translateY(-5px) scale(1.02);
+          background: rgba(255, 255, 255, 0.15);
+        }
+      `}</style>
 
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Section header */}
-        <div className="text-center mb-16">
-           <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-900">
-            My <span className="text-blue-700">Skills</span>
-          </h2>
-          <div className="w-20 h-1.5 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mb-6"></div>
-          <p className="text-gray-800 max-w-2xl mx-auto">
-            I've developed a diverse set of skills to create impactful digital experiences and solve complex problems with technology and data.
-          </p>
+      <section 
+        id="skills" 
+        ref={sectionRef}
+        className="min-h-screen py-20 relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"
+      >
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl floating"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl floating" style={{animationDelay: '2s'}}></div>
+          <div className="absolute top-3/4 left-3/4 w-64 h-64 bg-cyan-500/20 rounded-full blur-3xl floating" style={{animationDelay: '4s'}}></div>
+          <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-green-500/15 rounded-full blur-3xl floating" style={{animationDelay: '6s'}}></div>
         </div>
 
-        {/* New Skills Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Skills categories sidebar */}
-          <div className="col-span-1">
-            <div className="sticky top-8">
-              <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
-                <h3 className="text-xl font-bold text-gray-900 mb-6">Skill Categories</h3>
-
-                <div className="space-y-4">
-                  <div className="bg-gradient-to-r from-primary/10 to-primary/5 p-4 rounded-xl">
-                    <div className="flex items-center mb-2">
-                      <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center mr-3">
-                        <i className="fas fa-code text-primary"></i>
-                      </div>
-                      <h4 className="font-bold text-primary">Frontend Development</h4>
-                    </div>
-                    <p className="text-sm text-gray-800 ml-13">Creating responsive and interactive user interfaces</p>
-                  </div>
-
-                  <div className="bg-gradient-to-r from-secondary/10 to-secondary/5 p-4 rounded-xl">
-                    <div className="flex items-center mb-2">
-                      <div className="w-10 h-10 rounded-xl bg-secondary/20 flex items-center justify-center mr-3">
-                        <i className="fas fa-brain text-secondary"></i>
-                      </div>
-                      <h4 className="font-bold text-secondary">Machine Learning</h4>
-                    </div>
-                    <p className="text-sm text-gray-800 ml-13">Building models that learn from data to solve problems</p>
-                  </div>
-
-                  <div className="bg-gradient-to-r from-accent/10 to-accent/5 p-4 rounded-xl">
-                    <div className="flex items-center mb-2">
-                      <div className="w-10 h-10 rounded-xl bg-accent/20 flex items-center justify-center mr-3">
-                        <i className="fas fa-tools text-accent"></i>
-                      </div>
-                      <h4 className="font-bold text-accent">Tools & Technologies</h4>
-                    </div>
-                    <p className="text-sm text-gray-800 ml-13">Leveraging modern tools to optimize development</p>
-                  </div>
-                </div>
-              </div>
+        {/* Floating Tech Bubbles - Reduced */}
+        <div className="absolute inset-0 overflow-hidden">
+          {['⚛️', '🐍', '🤖', '🛠️'].map((emoji, i) => (
+            <div
+              key={i}
+              className="absolute text-2xl opacity-20 bubble-float"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                animationDuration: `${4 + Math.random() * 2}s`
+              }}
+            >
+              {emoji}
             </div>
+          ))}
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          {/* Header */}
+          <div className="text-center mb-20 opacity-0 animate-in">
+            <div className="inline-block mb-4">
+              {/* <span className="px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full text-blue-300 font-medium text-sm border border-blue-500/30"> */}
+                {/* MY EXPERTISE */}
+              {/* </span> */}
+            </div>
+            <h2 className="text-6xl md:text-8xl font-bold mb-8 text-white">
+              My <span className="text-shimmer">Skills</span>
+            </h2>
+            <div className="w-40 h-1.5 bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 rounded-full mx-auto pulse-glow mb-8"></div>
+            <p className="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+              Comprehensive technical expertise across modern development technologies, 
+              from frontend interfaces to backend systems and AI-powered solutions.
+            </p>
           </div>
 
-          {/* Skills details */}
-          <div className="col-span-3">
-            <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100">
-              {/* Frontend Development */}
-              <div className="mb-12">
-                <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-primary to-primary/60 flex items-center justify-center mr-4 shadow-md shadow-primary/20">
-                    <i className="fas fa-code text-white text-xl"></i>
+          {/* Skills Content */}
+          <div className="max-w-7xl mx-auto">
+            {/* Category Tabs */}
+            <div className="flex flex-wrap justify-center gap-4 mb-12 opacity-0 animate-in" style={{animationDelay: '0.2s'}}>
+              {Object.entries(skillCategories).map(([key, category]) => (
+                <button
+                  key={key}
+                  onClick={() => setActiveCategory(key)}
+                  className={`category-tab glass-morphism rounded-2xl p-4 md:p-6 ${
+                    activeCategory === key ? 'active' : ''
+                  }`}
+                >
+                  <div className="flex items-center space-x-3">
+                    <div className={`w-12 h-12 bg-gradient-to-r ${category.color} rounded-xl flex items-center justify-center text-2xl`}>
+                      {category.icon}
+                    </div>
+                    <div className="text-left">
+                      <h3 className="text-white font-semibold">{category.title}</h3>
+                      <p className="text-white/60 text-sm">{category.skills.length} technologies</p>
+                    </div>
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900">Frontend Development</h3>
+                </button>
+              ))}
+            </div>
+
+            {/* Active Category Skills */}
+            <div className="opacity-0 animate-in-delay">
+              <div className="glass-morphism rounded-3xl p-8 md:p-12 hover-lift">
+                {/* Category Header */}
+                <div className="text-center mb-12">
+                  <div className={`w-20 h-20 bg-gradient-to-r ${skillCategories[activeCategory].color} rounded-3xl flex items-center justify-center mx-auto mb-6 pulse-glow text-3xl`}>
+                    {skillCategories[activeCategory].icon}
+                  </div>
+                  <h3 className="text-4xl font-bold text-white mb-4">
+                    {skillCategories[activeCategory].title}
+                  </h3>
+                  <p className="text-white/70 text-lg mb-6 max-w-2xl mx-auto">
+                    {skillCategories[activeCategory].description}
+                  </p>
+                  <div className={`w-32 h-1 bg-gradient-to-r ${skillCategories[activeCategory].color} rounded-full mx-auto`}></div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="space-y-6">
-                    <div>
-                      <div className="flex justify-between mb-2">
-                        <span className="text-gray-800 font-medium flex items-center">
-                          <i className="fab fa-html5 text-primary mr-2"></i> HTML5/CSS3
-                        </span>
-                        <span className="text-primary font-bold">90%</span>
+                {/* Skills Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {skillCategories[activeCategory].skills.map((skill, index) => (
+                    <div 
+                      key={skill.name}
+                      className="skill-card glass-morphism rounded-2xl p-6 skill-glow"
+                      style={{animationDelay: `${index * 0.1}s`}}
+                    >
+                      {/* Skill Header */}
+                      <div className="flex items-center space-x-4 mb-4">
+                        <div className={`w-14 h-14 bg-gradient-to-r ${skillCategories[activeCategory].color} rounded-xl flex items-center justify-center text-2xl`}>
+                          {skill.icon}
+                        </div>
+                        <div>
+                          <h4 className="text-white font-semibold text-lg">{skill.name}</h4>
+                          <p className="text-white/60 text-sm">{skill.description}</p>
+                        </div>
                       </div>
-                      <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                        <div className="h-full bg-gradient-to-r from-primary to-primary-light rounded-full" style={{width: '90%'}}></div>
+
+                      {/* Skill Indicator */}
+                      <div className="flex items-center justify-center mt-4">
+                        <div className={`w-full h-1 bg-gradient-to-r ${skillCategories[activeCategory].color} rounded-full opacity-60`}></div>
                       </div>
                     </div>
-
-                    <div>
-                      <div className="flex justify-between mb-2">
-                        <span className="text-gray-800 font-medium flex items-center">
-                          <i className="fab fa-js text-primary mr-2"></i> JavaScript
-                        </span>
-                        <span className="text-primary font-bold">85%</span>
-                      </div>
-                      <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                        <div className="h-full bg-gradient-to-r from-primary to-primary-light rounded-full" style={{width: '85%'}}></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-6">
-                    <div>
-                      <div className="flex justify-between mb-2">
-                        <span className="text-gray-800 font-medium flex items-center">
-                          <i className="fab fa-react text-primary mr-2"></i> React.js
-                        </span>
-                        <span className="text-primary font-bold">80%</span>
-                      </div>
-                      <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                        <div className="h-full bg-gradient-to-r from-primary to-primary-light rounded-full" style={{width: '80%'}}></div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="flex justify-between mb-2">
-                        <span className="text-gray-800 font-medium flex items-center">
-                          <i className="fas fa-mobile-alt text-primary mr-2"></i> Responsive Design
-                        </span>
-                        <span className="text-primary font-bold">90%</span>
-                      </div>
-                      <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                        <div className="h-full bg-gradient-to-r from-primary to-primary-light rounded-full" style={{width: '90%'}}></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Machine Learning */}
-              <div className="mb-12">
-                <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-secondary to-secondary/60 flex items-center justify-center mr-4 shadow-md shadow-secondary/20">
-                    <i className="fas fa-brain text-white text-xl"></i>
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900">Machine Learning & Data Science</h3>
+                  ))}
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="space-y-6">
-                    <div>
-                      <div className="flex justify-between mb-2">
-                        <span className="text-gray-800 font-medium flex items-center">
-                          <i className="fab fa-python text-secondary mr-2"></i> Python
-                        </span>
-                        <span className="text-secondary font-bold">85%</span>
-                      </div>
-                      <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                        <div className="h-full bg-gradient-to-r from-secondary to-secondary-light rounded-full" style={{width: '85%'}}></div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="flex justify-between mb-2">
-                        <span className="text-gray-800 font-medium flex items-center">
-                          <i className="fas fa-chart-bar text-secondary mr-2"></i> Data Analysis
-                        </span>
-                        <span className="text-secondary font-bold">80%</span>
-                      </div>
-                      <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                        <div className="h-full bg-gradient-to-r from-secondary to-secondary-light rounded-full" style={{width: '80%'}}></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-6">
-                    <div>
-                      <div className="flex justify-between mb-2">
-                        <span className="text-gray-800 font-medium flex items-center">
-                          <i className="fas fa-robot text-secondary mr-2"></i> ML Algorithms
-                        </span>
-                        <span className="text-secondary font-bold">75%</span>
-                      </div>
-                      <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                        <div className="h-full bg-gradient-to-r from-secondary to-secondary-light rounded-full" style={{width: '75%'}}></div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="flex justify-between mb-2">
-                        <span className="text-gray-800 font-medium flex items-center">
-                          <i className="fas fa-network-wired text-secondary mr-2"></i> Deep Learning
-                        </span>
-                        <span className="text-secondary font-bold">60%</span>
-                      </div>
-                      <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                        <div className="h-full bg-gradient-to-r from-secondary to-secondary-light rounded-full" style={{width: '60%'}}></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Tools & Technologies */}
-              <div>
-                <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-accent to-accent/60 flex items-center justify-center mr-4 shadow-md shadow-accent/20">
-                    <i className="fas fa-tools text-white text-xl"></i>
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900">Tools & Technologies</h3>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="space-y-6">
-                    <div>
-                      <div className="flex justify-between mb-2">
-                        <span className="text-gray-800 font-medium flex items-center">
-                          <i className="fab fa-git-alt text-accent mr-2"></i> Git/GitHub
-                        </span>
-                        <span className="text-accent font-bold">85%</span>
-                      </div>
-                      <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                        <div className="h-full bg-gradient-to-r from-accent to-accent-light rounded-full" style={{width: '85%'}}></div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="flex justify-between mb-2">
-                        <span className="text-gray-800 font-medium flex items-center">
-                          <i className="fas fa-database text-accent mr-2"></i> SQL/Databases
-                        </span>
-                        <span className="text-accent font-bold">70%</span>
-                      </div>
-                      <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                        <div className="h-full bg-gradient-to-r from-accent to-accent-light rounded-full" style={{width: '70%'}}></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-6">
-                    <div>
-                      <div className="flex justify-between mb-2">
-                        <span className="text-gray-800 font-medium flex items-center">
-                          <i className="fab fa-css3-alt text-accent mr-2"></i> TailwindCSS
-                        </span>
-                        <span className="text-accent font-bold">90%</span>
-                      </div>
-                      <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                        <div className="h-full bg-gradient-to-r from-accent to-accent-light rounded-full" style={{width: '90%'}}></div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="flex justify-between mb-2">
-                        <span className="text-gray-800 font-medium flex items-center">
-                          <i className="fas fa-terminal text-accent mr-2"></i> Command Line
-                        </span>
-                        <span className="text-accent font-bold">80%</span>
-                      </div>
-                      <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                        <div className="h-full bg-gradient-to-r from-accent to-accent-light rounded-full" style={{width: '80%'}}></div>
-                      </div>
+                {/* Category Summary */}
+                <div className="mt-12 text-center">
+                  <div className="glass-morphism rounded-2xl p-6 inline-block">
+                    <p className="text-white/80 mb-2">
+                      <span className="font-semibold text-white">
+                        {skillCategories[activeCategory].skills.length}
+                      </span> technologies in {skillCategories[activeCategory].title}
+                    </p>
+                    <div className="flex items-center justify-center space-x-2">
+                      <div className={`w-3 h-3 bg-gradient-to-r ${skillCategories[activeCategory].color} rounded-full animate-pulse`}></div>
+                      <span className="text-white/60 text-sm">Continuously learning and improving</span>
                     </div>
                   </div>
                 </div>
@@ -258,8 +311,8 @@ const Skills = () => {
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 

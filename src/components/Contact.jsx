@@ -1,219 +1,564 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const Contact = () => {
-  return (
-    <section id="contact" className="py-20 relative overflow-hidden">
-      {/* Off-white background */}
-      <div className="absolute inset-0 bg-gray-50"></div>
+  const sectionRef = useRef(null);
+  const formRef = useRef(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
 
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Let's <span className="text-blue-700">Connect</span></h2>
-          <div className="w-20 h-1.5 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mb-4"></div>
-          <p className="text-gray-800 max-w-xl mx-auto">Have a project in mind or want to collaborate? I'd love to hear from you!</p>
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    if (formRef.current) observer.observe(formRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+    
+    // Enhanced validation
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      setSubmitStatus('error');
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setSubmitStatus('error');
+      setIsSubmitting(false);
+      return;
+    }
+    
+    try {
+      // Using JSON submission instead of FormData for better compatibility
+      const response = await fetch('https://formspree.io/f/xovwgvga', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          subject: formData.subject.trim() || 'Contact Form Submission',
+          message: formData.message.trim()
+        })
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        });
+        
+        // Auto-hide success message after 5 seconds
+        setTimeout(() => {
+          setSubmitStatus(null);
+        }, 5000);
+      } else {
+        const errorData = await response.json();
+        console.error('Formspree error:', errorData);
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error('Network error:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    
+    // Clear error status when user starts typing
+    if (submitStatus === 'error') {
+      setSubmitStatus(null);
+    }
+  };
+
+  return (
+    <>
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-15px); }
+        }
+        
+        @keyframes pulse-glow {
+          0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+          50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.6); }
+        }
+        
+        @keyframes slide-up {
+          from { opacity: 0; transform: translateY(50px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fade-in-scale {
+          from { opacity: 0; transform: scale(0.8); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes shimmer {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          25% { transform: translateX(-5px); }
+          75% { transform: translateX(5px); }
+        }
+        
+        .animate-in { animation: slide-up 0.8s ease-out forwards; }
+        .animate-in-delay { animation: fade-in-scale 1s ease-out 0.3s forwards; }
+        .floating { animation: float 4s ease-in-out infinite; }
+        .pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+        .shake { animation: shake 0.5s ease-in-out; }
+        
+        .glass-morphism {
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(25px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hover-lift {
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .hover-lift:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .text-shimmer {
+          background: linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4, #10b981, #3b82f6);
+          background-size: 300% 300%;
+          animation: shimmer 4s ease-in-out infinite;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+        
+        .glass-input {
+          background: rgba(255, 255, 255, 0.15);
+          backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 0.25);
+          outline: none;
+          transition: all 0.3s ease;
+        }
+        
+        .glass-input:focus {
+          background: rgba(255, 255, 255, 0.2);
+          border-color: rgba(99, 102, 241, 0.6);
+          box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15), 0 10px 25px rgba(99, 102, 241, 0.1);
+        }
+        
+        .glass-input.error {
+          border-color: rgba(239, 68, 68, 0.6);
+          box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+        }
+        
+        .glass-input::placeholder {
+          color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .glass-button {
+          background: linear-gradient(135deg, rgba(99, 102, 241, 0.6), rgba(139, 92, 246, 0.6));
+          backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          position: relative;
+          overflow: hidden;
+          transition: all 0.3s ease;
+        }
+        
+        .glass-button:hover:not(:disabled) {
+          background: linear-gradient(135deg, rgba(99, 102, 241, 0.8), rgba(139, 92, 246, 0.8));
+          transform: translateY(-2px);
+          box-shadow: 0 15px 35px rgba(99, 102, 241, 0.3);
+        }
+        
+        .glass-button:disabled {
+          opacity: 0.7;
+          cursor: not-allowed;
+        }
+        
+        .glass-button::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+          transition: left 0.5s;
+        }
+        
+        .glass-button:hover:not(:disabled)::before {
+          left: 100%;
+        }
+        
+        .social-glass {
+          background: rgba(255, 255, 255, 0.15);
+          backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .social-glass:hover {
+          background: rgba(255, 255, 255, 0.25);
+          transform: translateY(-5px) scale(1.05);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .success-message {
+          background: rgba(34, 197, 94, 0.2);
+          border: 1px solid rgba(34, 197, 94, 0.4);
+          backdrop-filter: blur(20px);
+          animation: slide-up 0.5s ease-out;
+        }
+
+        .error-message {
+          background: rgba(239, 68, 68, 0.2);
+          border: 1px solid rgba(239, 68, 68, 0.4);
+          backdrop-filter: blur(20px);
+          animation: slide-up 0.5s ease-out;
+        }
+
+        .feedback-message {
+          margin-bottom: 1.5rem;
+          padding: 1rem;
+          border-radius: 1rem;
+          text-align: center;
+          font-weight: 500;
+        }
+
+        .loading-dots {
+          display: inline-block;
+        }
+
+        .loading-dots::after {
+          content: '';
+          animation: loading-dots 1.5s infinite;
+        }
+
+        @keyframes loading-dots {
+          0%, 20% { content: ''; }
+          40% { content: '.'; }
+          60% { content: '..'; }
+          80%, 100% { content: '...'; }
+        }
+      `}</style>
+
+      <section 
+        id="contact" 
+        ref={sectionRef}
+        className="min-h-screen py-20 relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"
+      >
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl floating"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl floating" style={{animationDelay: '2s'}}></div>
+          <div className="absolute top-3/4 left-3/4 w-64 h-64 bg-cyan-500/20 rounded-full blur-3xl floating" style={{animationDelay: '4s'}}></div>
         </div>
 
-        <div className="max-w-6xl mx-auto flex flex-col lg:flex-row rounded-3xl shadow-xl overflow-hidden">
-          {/* Left side - contact info */}
-          <div className="lg:w-2/5 bg-gradient-to-br from-primary to-secondary p-10 text-white relative overflow-hidden group">
-            {/* Animated background shapes */}
-            <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20">
-              <div className="absolute top-10 left-10 w-32 h-32 rounded-full border border-white/40 animate-pulse-slow"></div>
-              <div className="absolute bottom-40 right-10 w-24 h-24 rounded-full border border-white/30 animate-bounce-slow"></div>
-              <div className="absolute bottom-20 left-20 w-16 h-16 rounded-full bg-white/10 animate-pulse-slow" style={{animationDelay: '1s'}}></div>
-              <div className="absolute top-40 right-20 w-12 h-12 rounded-full bg-white/20 animate-bounce-slow" style={{animationDelay: '0.5s'}}></div>
-              <div className="absolute top-1/2 left-1/4 w-8 h-8 rounded-full bg-white/10 animate-pulse-slow" style={{animationDelay: '1.5s'}}></div>
+        {/* Particle Effect */}
+        <div className="absolute inset-0 overflow-hidden">
+          {[...Array(20)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-2 h-2 bg-white/20 rounded-full animate-pulse"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                animationDuration: `${2 + Math.random() * 2}s`
+              }}
+            />
+          ))}
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          {/* Header */}
+          <div className="text-center mb-16 opacity-0 animate-in">
+            <div className="inline-block mb-4">
+              {/* <span className="px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full text-blue-300 font-medium text-sm border border-blue-500/30"> */}
+                {/* GET IN TOUCH */}
+              {/* </span> */}
             </div>
+            <h2 className="text-5xl md:text-7xl font-bold mb-6 text-white">
+              Let's <span className="text-shimmer">Connect</span>
+            </h2>
+            <div className="w-32 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-full mx-auto pulse-glow mb-6"></div>
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+              Ready to bring your ideas to life? Let's collaborate and create something amazing together.
+            </p>
+          </div>
 
-            <div className="h-full flex flex-col justify-between relative z-10">
-              <div>
-                <h3 className="text-2xl font-bold mb-6 flex items-center">
-                  <span className="mr-3 relative">
-                    <span className="absolute inset-0 rounded-lg bg-white/20 blur-lg transform scale-150 opacity-0 group-hover:opacity-100 transition-all duration-700"></span>
-                    Contact Information
-                  </span>
-                </h3>
-                <p className="mb-10 opacity-90 transform transition-all duration-500 hover:translate-x-1">Feel free to reach out any time. I'm open to opportunities and collaboration.</p>
-
-                {/* Contact details */}
-                <div className="space-y-8">
-                  <div className="flex items-start transform transition-all duration-500 hover:translate-x-2">
-                    <div className="w-12 h-12 rounded-lg bg-white/20 flex items-center justify-center mr-4 flex-shrink-0 shadow-lg shadow-primary/20 group-hover:shadow-primary/40 transition-all duration-500">
-                      <i className="fas fa-map-marker-alt text-lg"></i>
+          {/* Main Content */}
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              
+              {/* Contact Info Side */}
+              <div className="opacity-0 animate-in" style={{animationDelay: '0.2s'}}>
+                <div className="glass-morphism rounded-3xl p-8 md:p-12 hover-lift h-full">
+                  {/* Contact Header */}
+                  <div className="text-center mb-10">
+                    <div className="w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-3xl flex items-center justify-center pulse-glow mx-auto mb-6">
+                      <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                      </svg>
                     </div>
-                    <div>
-                      <h4 className="text-lg font-medium mb-1">Location</h4>
-                      <p className="opacity-80">Jashore, Bangladesh</p>
-                      <p className="opacity-80">Available for remote work worldwide</p>
-                    </div>
+                    <h3 className="text-3xl font-bold text-white mb-3">Get In Touch</h3>
+                    <p className="text-white/70">Let's discuss your next project</p>
                   </div>
 
-                  <div className="flex items-start transform transition-all duration-500 hover:translate-x-2">
-                    <div className="w-12 h-12 rounded-lg bg-white/20 flex items-center justify-center mr-4 flex-shrink-0 shadow-lg shadow-primary/20 group-hover:shadow-primary/40 transition-all duration-500">
-                      <i className="fas fa-share-alt text-lg"></i>
+                  {/* Contact Details */}
+                  <div className="space-y-8 mb-12">
+                    <div className="flex items-start group">
+                      <div className="w-14 h-14 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                        <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h4 className="text-xl font-semibold text-white mb-2">Location</h4>
+                        <p className="text-gray-300">Jashore, Bangladesh</p>
+                        <p className="text-gray-400 text-sm">Available for remote work worldwide</p>
+                      </div>
                     </div>
-                    <div className="w-full">
-                      <h4 className="text-lg font-medium mb-3">Social Profiles</h4>
-                      <div className="grid grid-cols-2 gap-4 mt-1">
-                        <a href="https://github.com/mdmakky" target="_blank" rel="noopener noreferrer"
-                           className="social-icon-btn group/icon touch-manipulation">
-                          <span className="social-icon-bg"></span>
-                          <span className="social-icon-inner">
-                            <i className="fab fa-github text-xl"></i>
-                          </span>
-                          <span className="social-icon-label">GitHub</span>
-                        </a>
-                        <a href="https://linkedin.com/in/mdmakky" target="_blank" rel="noopener noreferrer"
-                           className="social-icon-btn group/icon touch-manipulation">
-                          <span className="social-icon-bg"></span>
-                          <span className="social-icon-inner">
-                            <i className="fab fa-linkedin-in text-xl"></i>
-                          </span>
-                          <span className="social-icon-label">LinkedIn</span>
-                        </a>
-                        <a href="https://www.facebook.com/md.arafatuzzaman.makky" target="_blank" rel="noopener noreferrer"
-                           className="social-icon-btn group/icon touch-manipulation">
-                          <span className="social-icon-bg"></span>
-                          <span className="social-icon-inner">
-                            <i className="fab fa-facebook-f text-xl"></i>
-                          </span>
-                          <span className="social-icon-label">Facebook</span>
-                        </a>
-                        <a href="#"
-                           className="social-icon-btn group/icon touch-manipulation">
-                          <span className="social-icon-bg"></span>
-                          <span className="social-icon-inner">
-                            <i className="fab fa-twitter text-xl"></i>
-                          </span>
-                          <span className="social-icon-label">Twitter</span>
-                        </a>
+
+                    <div className="flex items-start group">
+                      <div className="w-14 h-14 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                        <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                          <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h4 className="text-xl font-semibold text-white mb-2">Email</h4>
+                        <p className="text-gray-300">makky.cse@example.com</p>
+                        <p className="text-gray-400 text-sm">Response within 24 hours</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start group">
+                      <div className="w-14 h-14 bg-gradient-to-r from-green-500 to-teal-500 rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                        <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h4 className="text-xl font-semibold text-white mb-2">Availability</h4>
+                        <p className="text-gray-300">Saturday - Thursday, 10 AM - 8 PM</p>
+                        <p className="text-gray-400 text-sm">GMT+6 Timezone</p>
                       </div>
                     </div>
                   </div>
+
+                  {/* Social Links */}
+                  <div>
+                    <h4 className="text-xl font-semibold text-white mb-6 text-center">Connect With Me</h4>
+                    <div className="grid grid-cols-2 gap-4">
+                      {[
+                        { name: 'GitHub', icon: 'fab fa-github', url: 'https://github.com/mdmakky' },
+                        { name: 'LinkedIn', icon: 'fab fa-linkedin-in', url: 'https://linkedin.com/in/md-amakky' },
+                        { name: 'Facebook', icon: 'fab fa-facebook-f', url: 'https://www.facebook.com/md.arafatuzzaman.makky' },
+                        { name: 'Email', icon: 'fas fa-envelope', url: 'mailto:makky.cse@example.com' }
+                      ].map((social, index) => (
+                        <a
+                          key={index}
+                          href={social.url}
+                          target={social.url.startsWith('http') ? '_blank' : '_self'}
+                          rel={social.url.startsWith('http') ? 'noopener noreferrer' : ''}
+                          className="social-glass rounded-2xl p-4 text-center text-white group"
+                        >
+                          <i className={`${social.icon} text-2xl mb-2 block group-hover:scale-110 transition-transform duration-300`}></i>
+                          <span className="text-sm font-medium">{social.name}</span>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* Decorative element */}
-              <div className="relative mt-10 hidden md:block">
-                <div className="absolute bottom-0 right-0 w-40 h-40 border border-white/20 rounded-full animate-pulse-slow" style={{animationDelay: '2s'}}></div>
-                <div className="absolute bottom-5 right-5 w-20 h-20 border border-white/30 rounded-full animate-pulse-slow" style={{animationDelay: '1s'}}></div>
+              {/* Contact Form Side */}
+              <div ref={formRef} className="opacity-0 animate-in-delay">
+                <div className="glass-morphism rounded-3xl p-8 md:p-12 hover-lift h-full">
+                  <div className="mb-8">
+                    <div className="text-center mb-6">
+                      <div className="w-20 h-20 bg-gradient-to-r from-indigo-400 to-purple-500 rounded-3xl flex items-center justify-center pulse-glow mx-auto mb-6">
+                        <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <h3 className="text-3xl font-bold text-white mb-3">
+                        Send Me a <span className="text-shimmer">Message</span>
+                      </h3>
+                      <p className="text-white/70">Share your thoughts or questions below</p>
+                    </div>
+                  </div>
+
+                  {/* Enhanced Status Messages */}
+                  {submitStatus === 'success' && (
+                    <div className="success-message feedback-message">
+                      <div className="flex items-center justify-center mb-3">
+                        <svg className="w-8 h-8 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                        </svg>
+                        <span className="text-green-300 font-bold text-lg">✅ Message Sent Successfully!</span>
+                      </div>
+                      <p className="text-green-200 text-sm mb-2">Your message has been delivered to my inbox.</p>
+                      <p className="text-green-200 text-sm">I'll get back to you within 24 hours. Thank you for reaching out!</p>
+                    </div>
+                  )}
+
+                  {submitStatus === 'error' && (
+                    <div className="error-message feedback-message">
+                      <div className="flex items-center justify-center mb-3">
+                        <svg className="w-8 h-8 text-red-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                        </svg>
+                        <span className="text-red-300 font-bold text-lg">❌ Failed to Send Message</span>
+                      </div>
+                      <p className="text-red-200 text-sm mb-2">Please check your input and try again.</p>
+                      <p className="text-red-200 text-sm">Or contact me directly at arafat@example.com</p>
+                    </div>
+                  )}
+
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    {/* Name & Email Row */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="relative group">
+                        <label className="block text-white/90 text-sm font-medium mb-2">
+                          Full Name <span className="text-red-400">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleInputChange}
+                          className={`glass-input w-full px-4 py-4 rounded-2xl text-white placeholder-white/60 ${
+                            submitStatus === 'error' && !formData.name.trim() ? 'error shake' : ''
+                          }`}
+                          placeholder="Your name..."
+                          required
+                        />
+                      </div>
+
+                      <div className="relative group">
+                        <label className="block text-white/90 text-sm font-medium mb-2">
+                          Email Address <span className="text-red-400">*</span>
+                        </label>
+                        <input
+                          type="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          className={`glass-input w-full px-4 py-4 rounded-2xl text-white placeholder-white/60 ${
+                            submitStatus === 'error' && !formData.email.trim() ? 'error shake' : ''
+                          }`}
+                          placeholder="your.email@domain.com"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    {/* Subject */}
+                    <div className="relative group">
+                      <label className="block text-white/90 text-sm font-medium mb-2">Subject</label>
+                      <input
+                        type="text"
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleInputChange}
+                        className="glass-input w-full px-4 py-4 rounded-2xl text-white placeholder-white/60"
+                        placeholder="What's this about?"
+                      />
+                    </div>
+
+                    {/* Message */}
+                    <div className="relative group">
+                      <label className="block text-white/90 text-sm font-medium mb-2">
+                        Message <span className="text-red-400">*</span>
+                      </label>
+                      <textarea
+                        name="message"
+                        value={formData.message}
+                        onChange={handleInputChange}
+                        rows="6"
+                        className={`glass-input w-full px-4 py-4 rounded-2xl text-white placeholder-white/60 resize-none ${
+                          submitStatus === 'error' && !formData.message.trim() ? 'error shake' : ''
+                        }`}
+                        placeholder="Tell me about your project, goals, and how I can help..."
+                        required
+                      />
+                    </div>
+
+                    {/* Submit Button */}
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="glass-button w-full py-4 px-8 rounded-2xl text-white font-semibold text-lg group"
+                    >
+                      <span className="relative z-10 flex items-center justify-center">
+                        {isSubmitting ? (
+                          <>
+                            <svg className="animate-spin -ml-1 mr-3 h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            <span className="loading-dots">Sending Message</span>
+                          </>
+                        ) : (
+                          <>
+                            Send Message
+                            <svg className="ml-3 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                            </svg>
+                          </>
+                        )}
+                      </span>
+                    </button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
-
-          {/* Right side - contact form */}
-          <div className="lg:w-3/5 bg-gray-50 p-10">
-            <h3 className="text-2xl font-bold mb-3 text-gray-900">Send Me a Message</h3>
-            <p className="text-gray-800 mb-6">I'll get back to you as soon as possible</p>
-
-            <form className="space-y-4 flex flex-col md:h-[410px]">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Name Field */}
-                <div className="form-field relative">
-                  <input
-                    type="text"
-                    id="name"
-                    className="peer h-14 w-full rounded-md bg-gray-100 px-4 pt-4 outline-none transition-all focus:border-2 focus:border-primary/50 valid:border-2 valid:border-green-400/50"
-                    placeholder=" "
-                    required
-                  />
-                  <label
-                    htmlFor="name"
-                    className="absolute left-4 top-1 text-xs text-gray-600 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs peer-valid:top-1 peer-valid:text-xs"
-                  >
-                    Full Name
-                  </label>
-                  <div className="absolute right-4 top-4 text-gray-500">
-                    <i className="fas fa-user"></i>
-                  </div>
-                  <div className="absolute -bottom-1 left-2 right-2 h-1 scale-x-0 rounded-full bg-gradient-to-r from-primary to-secondary transition-transform duration-300 peer-focus:scale-x-100"></div>
-                </div>
-
-                {/* Email Field */}
-                <div className="form-field relative">
-                  <input
-                    type="email"
-                    id="email"
-                    className="peer h-14 w-full rounded-md bg-gray-100 px-4 pt-4 outline-none transition-all focus:border-2 focus:border-primary/50 valid:border-2 valid:border-green-400/50"
-                    placeholder=" "
-                    required
-                  />
-                  <label
-                    htmlFor="email"
-                    className="absolute left-4 top-1 text-xs text-gray-600 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs peer-valid:top-1 peer-valid:text-xs"
-                  >
-                    Email Address
-                  </label>
-                  <div className="absolute right-4 top-4 text-gray-500">
-                    <i className="fas fa-envelope"></i>
-                  </div>
-                  <div className="absolute -bottom-1 left-2 right-2 h-1 scale-x-0 rounded-full bg-gradient-to-r from-primary to-secondary transition-transform duration-300 peer-focus:scale-x-100"></div>
-                </div>
-              </div>
-
-              {/* Subject Field */}
-              <div className="form-field relative">
-                <input
-                  type="text"
-                  id="subject"
-                  className="peer h-14 w-full rounded-md bg-gray-100 px-4 pt-4 outline-none transition-all focus:border-2 focus:border-primary/50"
-                  placeholder=" "
-                />
-                <label
-                  htmlFor="subject"
-                  className="absolute left-4 top-1 text-xs text-gray-600 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs"
-                >
-                  Subject
-                </label>
-                <div className="absolute right-4 top-4 text-gray-500">
-                  <i className="fas fa-tag"></i>
-                </div>
-                <div className="absolute -bottom-1 left-2 right-2 h-1 scale-x-0 rounded-full bg-gradient-to-r from-primary to-secondary transition-transform duration-300 peer-focus:scale-x-100"></div>
-              </div>
-
-              {/* Message Field */}
-              <div className="form-field relative">
-                <textarea
-                  id="message"
-                  rows="4"
-                  className="peer w-full h-[100px] md:h-[120px] rounded-md bg-gray-100 px-4 pt-6 outline-none transition-all resize-none focus:border-2 focus:border-primary/50 valid:border-2 valid:border-green-400/50"
-                  placeholder=" "
-                  required
-                ></textarea>
-                <label
-                  htmlFor="message"
-                  className="absolute left-4 top-1 text-xs text-gray-600 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs peer-valid:top-1 peer-valid:text-xs"
-                >
-                  Message
-                </label>
-                <div className="absolute right-4 top-4 text-gray-500">
-                  <i className="fas fa-comment-alt"></i>
-                </div>
-                <div className="absolute -bottom-1 left-2 right-2 h-1 scale-x-0 rounded-full bg-gradient-to-r from-primary to-secondary transition-transform duration-300 peer-focus:scale-x-100"></div>
-              </div>
-
-              {/* Submit Button */}
-              <div className="group mt-2">
-                <button
-                  type="submit"
-                  className="w-full md:w-auto relative inline-flex items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-primary via-primary-light to-secondary px-8 py-3 font-medium text-white transition-all duration-300 ease-out hover:scale-[1.01] hover:shadow-xl active:scale-[0.98]"
-                >
-                  <span className="absolute bottom-0 right-0 -mb-8 -mr-8 h-20 w-20 rounded-full bg-white opacity-10 transition-all duration-300 ease-out group-hover:scale-150"></span>
-                  <span className="absolute inset-0 h-full w-full scale-0 rounded-xl backdrop-blur-xl transition-all duration-500 ease-out group-hover:scale-100 group-hover:bg-white/10"></span>
-                  <span className="relative flex items-center">
-                    Send Message
-                    <svg xmlns="http://www.w3.org/2000/svg" className="ml-2 h-5 w-5 transition-transform duration-300 ease-out group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                    </svg>
-                  </span>
-                </button>
-              </div>
-            </form>
-          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 

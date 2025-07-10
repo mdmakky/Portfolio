@@ -1,87 +1,283 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const About = () => {
-  return (
-    <section id="about" className="py-20 relative overflow-hidden">
-      {/* Off-white background */}
-      <div className="absolute inset-0 bg-gray-50"></div>
+  const sectionRef = useRef(null);
+  const cardRef = useRef(null);
 
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Section header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
-            About <span className="text-blue-700">Me</span>
-          </h2>
-          <div className="w-20 h-1.5 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-full mx-auto mb-6"></div>
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    if (cardRef.current) observer.observe(cardRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <>
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        @keyframes pulse-glow {
+          0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+          50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.6); }
+        }
+        
+        @keyframes slide-up {
+          from { opacity: 0; transform: translateY(50px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fade-in-scale {
+          from { opacity: 0; transform: scale(0.8); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes orbit {
+          0% { transform: rotate(0deg) translateX(50px) rotate(0deg); }
+          100% { transform: rotate(360deg) translateX(50px) rotate(-360deg); }
+        }
+        
+        .animate-in { animation: slide-up 0.8s ease-out forwards; }
+        .animate-in-delay { animation: fade-in-scale 1s ease-out 0.3s forwards; }
+        .floating { animation: float 6s ease-in-out infinite; }
+        .pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+        .orbit { animation: orbit 20s linear infinite; }
+        
+        .glass-morphism {
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .hover-lift {
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .hover-lift:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .text-shimmer {
+          background: linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4, #10b981, #3b82f6);
+          background-size: 300% 300%;
+          animation: shimmer 4s ease-in-out infinite;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+        
+        @keyframes shimmer {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        
+        .card-hover {
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .card-hover:hover {
+          transform: translateY(-5px) scale(1.02);
+        }
+      `}</style>
+
+      <section 
+        id="about" 
+        ref={sectionRef}
+        className="min-h-screen py-20 relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"
+      >
+        {/* Enhanced Animated Background Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl floating"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl floating" style={{animationDelay: '2s'}}></div>
+          <div className="absolute top-3/4 left-3/4 w-64 h-64 bg-cyan-500/20 rounded-full blur-3xl floating" style={{animationDelay: '4s'}}></div>
+          <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-green-500/15 rounded-full blur-3xl floating" style={{animationDelay: '6s'}}></div>
         </div>
 
-        {/* About content */}
-        <div className="max-w-4xl mx-auto">
-          {/* Main content - Redesigned "Who I Am" card */}
-          <div className="relative mb-12">
-            {/* Simple, elegant card */}
-            <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
-              {/* Content container with simple padding */}
-              <div className="p-8">
-                {/* Title with icon */}
-                <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold text-gray-800 mb-2">Who I Am</h3>
-                  <div className="w-16 h-1 bg-blue-500 mx-auto"></div>
+        {/* Enhanced Particle Effect */}
+        <div className="absolute inset-0 overflow-hidden">
+          {[...Array(25)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-2 h-2 bg-white/20 rounded-full animate-pulse"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                animationDuration: `${2 + Math.random() * 2}s`
+              }}
+            />
+          ))}
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          {/* Header */}
+          <div className="text-center mb-16 opacity-0 animate-in">
+            <div className="inline-block mb-4">
+              {/* <span className="px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full text-blue-300 font-medium text-sm border border-blue-500/30"> */}
+                {/* MY STORY */}
+              {/* </span> */}
+            </div>
+            <h2 className="text-5xl md:text-7xl font-bold mb-6 text-white">
+              About <span className="text-shimmer">Me</span>
+            </h2>
+            <div className="w-32 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-full mx-auto pulse-glow"></div>
+          </div>
+
+          {/* Main Content */}
+          <div className="max-w-6xl mx-auto">
+            {/* Hero Card */}
+            <div 
+              ref={cardRef}
+              className="relative mb-16 opacity-0 animate-in-delay"
+            >
+              <div className="glass-morphism rounded-3xl p-8 md:p-12 hover-lift">
+                {/* Floating Icon with Orbiting Elements */}
+                <div className="flex justify-center mb-8">
+                  <div className="relative">
+                    <div className="w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center pulse-glow floating">
+                      <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    {/* Orbiting tech icons */}
+                    <div className="absolute inset-0 orbit">
+                      <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-xs">⚛️</div>
+                    </div>
+                    <div className="absolute inset-0 orbit" style={{animationDelay: '10s'}}>
+                      <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-xs">🐍</div>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="text-center">
-                  <p className="text-lg text-gray-900 leading-relaxed mb-6 max-w-3xl mx-auto">
-                    I am <span className="font-bold text-blue-700">Md. Arafatuzzaman</span>, a Computer Science student at Jashore University of Science and Technology,
-                    specializing in web development and data science. With expertise in HTML, CSS, and JavaScript,
-                    I build responsive websites that enhance user experience and business functionality.
-                  </p>
-                  <p className="text-lg text-gray-900 leading-relaxed mb-10 max-w-3xl mx-auto">
-                    Beyond web development, I'm diving deep into Artificial Intelligence and Machine Learning
-                    to apply data-driven solutions to complex challenges.
-                  </p>
+                {/* Content */}
+                <div className="text-center text-white">
+                  <h3 className="text-3xl md:text-4xl font-bold mb-6 text-blue-300">
+                    My Journey
+                  </h3>
+                  
+                  <div className="space-y-4 text-base md:text-lg leading-relaxed text-gray-200 max-w-2xl mx-auto">
+                    <p>
+                      Hi, I'm <span className="font-bold text-blue-400">Md. Arafatuzzaman</span>. 
+                      I'm a Computer Science student at Jashore University of Science and Technology.
+                    </p>
+                    <p>
+                      I enjoy building websites and apps using <span className="font-semibold text-green-400">React</span> and <span className="font-semibold text-blue-400">Django</span>.
+                    </p>
+                    <p>
+                      I like to use technology to solve problems and make things easier for people.
+                    </p>
+                  </div>
+                </div>
+                </div>
                 </div>
 
-                {/* Info boxes with gradient borders */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 border-t border-gray-200 pt-8">
-                  <div className="bg-gray-50 rounded-lg p-5">
-                    <div className="flex items-center mb-3">
-                      <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
-                        <i className="fas fa-graduation-cap text-blue-600"></i>
+                {/* Enhanced Info Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+              {[
+                {
+                  icon: "🎓",
+                  title: "Education",
+                  content: "Computer Science",
+                  subtitle: "Jashore University of Science and Technology",
+                  gradient: "from-blue-500 to-cyan-500",
+                  delay: "0.1s"
+                },
+                {
+                  icon: "📍",
+                  title: "Location",
+                  content: "Jashore, Bangladesh",
+                  subtitle: "Remote Available",
+                  gradient: "from-cyan-500 to-teal-500",
+                  delay: "0.2s"
+                },
+                {
+                  icon: "💻",
+                  title: "Specialization",
+                  content: "Full-Stack Development",
+                  subtitle: "React & Django",
+                  gradient: "from-green-500 to-emerald-500",
+                  delay: "0.3s"
+                },
+                {
+                  icon: "🚀",
+                  title: "Passion",
+                  content: "AI & Innovation",
+                  subtitle: "Future-focused",
+                  gradient: "from-purple-500 to-pink-500",
+                  delay: "0.4s"
+                }
+              ].map((item, index) => (
+                <div 
+                  key={index}
+                  className="opacity-0 animate-in card-hover"
+                  style={{animationDelay: item.delay}}
+                >
+                  <div className="glass-morphism rounded-2xl p-6 h-full">
+                    <div className="text-center">
+                      <div className={`w-16 h-16 bg-gradient-to-r ${item.gradient} rounded-xl flex items-center justify-center mx-auto mb-4 text-2xl pulse-glow`}>
+                        {item.icon}
                       </div>
-                      <h4 className="text-sm font-bold text-gray-900">Education</h4>
+                      <h4 className="text-lg font-bold text-white mb-2">{item.title}</h4>
+                      <p className="text-gray-300 font-medium mb-1">{item.content}</p>
+                      <p className="text-gray-400 text-sm">{item.subtitle}</p>
                     </div>
-                    <p className="text-gray-800 font-medium">Jashore University of Science and Technology</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Philosophy & Goals Section */}
+            <div className="opacity-0 animate-in" style={{animationDelay: '0.6s'}}>
+              <div className="glass-morphism rounded-2xl p-8">
+                <h4 className="text-3xl font-bold text-white mb-8 text-center">
+                  <span className="text-shimmer">My Philosophy</span>
+                </h4>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  {/* Philosophy */}
+                  <div className="text-center">
+                    <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                      <span className="text-2xl">💡</span>
+                    </div>
+                    <h5 className="text-xl font-semibold text-orange-400 mb-4">Innovation First</h5>
+                    <p className="text-white/80 leading-relaxed">
+                      I believe in pushing the boundaries of what's possible with technology. 
+                      Every project is an opportunity to learn, innovate, and create something that makes a difference.
+                    </p>
                   </div>
 
-                  <div className="bg-gray-50 rounded-lg p-5">
-                    <div className="flex items-center mb-3">
-                      <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
-                        <i className="fas fa-map-marker-alt text-blue-600"></i>
-                      </div>
-                      <h4 className="text-sm font-bold text-gray-900">Location</h4>
+                  {/* Goals */}
+                  <div className="text-center">
+                    <div className="w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                      <span className="text-2xl">🎯</span>
                     </div>
-                    <p className="text-gray-800 font-medium">Jashore, Bangladesh</p>
-                  </div>
-
-                  <div className="bg-gray-50 rounded-lg p-5">
-                    <div className="flex items-center mb-3">
-                      <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
-                        <i className="fas fa-laptop-code text-blue-600"></i>
-                      </div>
-                      <h4 className="text-sm font-bold text-gray-900">Focus</h4>
-                    </div>
-                    <p className="text-gray-800 font-medium">Web Development & Data Science</p>
+                    <h5 className="text-xl font-semibold text-indigo-400 mb-4">Future Goals</h5>
+                    <p className="text-white/80 leading-relaxed">
+                      To become a leading full-stack developer who specializes in AI-powered applications, 
+                      contributing to projects that shape the future of technology and society.
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-          {/* Additional sections (e.g., What I know, Goals) */}
-          {/* Update colors similarly */}
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 

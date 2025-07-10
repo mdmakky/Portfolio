@@ -25,7 +25,7 @@ export default {
         'gray-light': '#f3f4f6',
         'gray-medium': '#9ca3af',
         'gray-dark': '#4b5563',
-
+        
         // Original colors (renamed for compatibility)
         'accent-orange': '#ff5a1f',
         'accent-red': '#e05252',
@@ -52,8 +52,6 @@ export default {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'bounce-slow': 'bounce 2s infinite',
         'growWidth': 'growWidth 1.5s ease-out forwards',
-        'gradient-slow': 'gradient 15s ease infinite',
-        'blob': 'blob 7s infinite',
       },
       transitionProperty: {
         'transform': 'transform',
@@ -77,18 +75,7 @@ export default {
         float: {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-10px)' },
-        },
-        gradient: {
-          '0%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
-          '100%': { backgroundPosition: '0% 50%' },
-        },
-        blob: {
-          '0%': { transform: 'translate(0px, 0px) scale(1)' },
-          '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-          '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-          '100%': { transform: 'translate(0px, 0px) scale(1)' },
-        },
+        }
       },
     },
   },
@@ -102,10 +89,6 @@ export default {
     'animate-pulse-slow',
     'animate-bounce-slow',
     'animate-growWidth',
-    'animate-gradient-slow',
-    'animate-blob',
-    'animation-delay-2000',
-    'animation-delay-4000',
     'opacity-0',
     'preserve-3d',
     'rotate-y-3',
@@ -114,4 +97,4 @@ export default {
     'rotate-x-3',
   ],
   plugins: [],
-}
+} 
