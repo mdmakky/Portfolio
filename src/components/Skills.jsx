@@ -206,19 +206,14 @@ const Skills = () => {
           ))}
         </div>
 
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-12 xl:px-16 relative z-10">
           {/* Header */}
-          <div className="text-center mb-20 opacity-0 animate-in">
-            <div className="inline-block mb-4">
-              {/* <span className="px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full text-blue-300 font-medium text-sm border border-blue-500/30"> */}
-                {/* MY EXPERTISE */}
-              {/* </span> */}
-            </div>
-            <h2 className="text-6xl md:text-8xl font-bold mb-8 text-white">
+          <div className="text-center mb-12 sm:mb-16 lg:mb-20 opacity-0 animate-in">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-6 sm:mb-8 text-white">
               My <span className="text-shimmer">Skills</span>
             </h2>
-            <div className="w-40 h-1.5 bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 rounded-full mx-auto pulse-glow mb-8"></div>
-            <p className="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+            <div className="w-32 sm:w-40 h-1 sm:h-1.5 bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 rounded-full mx-auto pulse-glow mb-6 sm:mb-8"></div>
+            <p className="text-base sm:text-lg lg:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed px-4">
               Comprehensive technical expertise across modern development technologies, 
               from frontend interfaces to backend systems and AI-powered solutions.
             </p>
@@ -227,22 +222,22 @@ const Skills = () => {
           {/* Skills Content */}
           <div className="max-w-7xl mx-auto">
             {/* Category Tabs */}
-            <div className="flex flex-wrap justify-center gap-4 mb-12 opacity-0 animate-in" style={{animationDelay: '0.2s'}}>
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-8 sm:mb-12 opacity-0 animate-in" style={{animationDelay: '0.2s'}}>
               {Object.entries(skillCategories).map(([key, category]) => (
                 <button
                   key={key}
                   onClick={() => setActiveCategory(key)}
-                  className={`category-tab glass-morphism rounded-2xl p-4 md:p-6 ${
+                  className={`category-tab glass-morphism rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 ${
                     activeCategory === key ? 'active' : ''
                   }`}
                 >
-                  <div className="flex items-center space-x-3">
-                    <div className={`w-12 h-12 bg-gradient-to-r ${category.color} rounded-xl flex items-center justify-center text-2xl`}>
+                  <div className="flex items-center space-x-2 sm:space-x-3">
+                    <div className={`w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r ${category.color} rounded-lg sm:rounded-xl flex items-center justify-center text-xl sm:text-2xl`}>
                       {category.icon}
                     </div>
-                    <div className="text-left">
-                      <h3 className="text-white font-semibold">{category.title}</h3>
-                      <p className="text-white/60 text-sm">{category.skills.length} technologies</p>
+                    <div className="text-left hidden sm:block">
+                      <h3 className="text-white font-semibold text-sm sm:text-base">{category.title}</h3>
+                      <p className="text-white/60 text-xs sm:text-sm">{category.skills.length} technologies</p>
                     </div>
                   </div>
                 </button>
@@ -251,42 +246,42 @@ const Skills = () => {
 
             {/* Active Category Skills */}
             <div className="opacity-0 animate-in-delay">
-              <div className="glass-morphism rounded-3xl p-8 md:p-12 hover-lift">
+              <div className="glass-morphism rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 hover-lift">
                 {/* Category Header */}
-                <div className="text-center mb-12">
-                  <div className={`w-20 h-20 bg-gradient-to-r ${skillCategories[activeCategory].color} rounded-3xl flex items-center justify-center mx-auto mb-6 pulse-glow text-3xl`}>
+                <div className="text-center mb-8 sm:mb-12">
+                  <div className={`w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r ${skillCategories[activeCategory].color} rounded-2xl sm:rounded-3xl flex items-center justify-center mx-auto mb-4 sm:mb-6 pulse-glow text-2xl sm:text-3xl`}>
                     {skillCategories[activeCategory].icon}
                   </div>
-                  <h3 className="text-4xl font-bold text-white mb-4">
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
                     {skillCategories[activeCategory].title}
                   </h3>
-                  <p className="text-white/70 text-lg mb-6 max-w-2xl mx-auto">
+                  <p className="text-sm sm:text-base md:text-lg text-white/70 mb-4 sm:mb-6 max-w-2xl mx-auto px-4">
                     {skillCategories[activeCategory].description}
                   </p>
-                  <div className={`w-32 h-1 bg-gradient-to-r ${skillCategories[activeCategory].color} rounded-full mx-auto`}></div>
+                  <div className={`w-24 sm:w-32 h-1 bg-gradient-to-r ${skillCategories[activeCategory].color} rounded-full mx-auto`}></div>
                 </div>
 
                 {/* Skills Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                   {skillCategories[activeCategory].skills.map((skill, index) => (
                     <div 
                       key={skill.name}
-                      className="skill-card glass-morphism rounded-2xl p-6 skill-glow"
+                      className="skill-card glass-morphism rounded-xl sm:rounded-2xl p-4 sm:p-6 skill-glow"
                       style={{animationDelay: `${index * 0.1}s`}}
                     >
                       {/* Skill Header */}
-                      <div className="flex items-center space-x-4 mb-4">
-                        <div className={`w-14 h-14 bg-gradient-to-r ${skillCategories[activeCategory].color} rounded-xl flex items-center justify-center text-2xl`}>
+                      <div className="flex items-center space-x-3 sm:space-x-4 mb-3 sm:mb-4">
+                        <div className={`w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r ${skillCategories[activeCategory].color} rounded-lg sm:rounded-xl flex items-center justify-center text-xl sm:text-2xl flex-shrink-0`}>
                           {skill.icon}
                         </div>
-                        <div>
-                          <h4 className="text-white font-semibold text-lg">{skill.name}</h4>
-                          <p className="text-white/60 text-sm">{skill.description}</p>
+                        <div className="min-w-0">
+                          <h4 className="text-white font-semibold text-base sm:text-lg truncate">{skill.name}</h4>
+                          <p className="text-white/60 text-xs sm:text-sm line-clamp-2">{skill.description}</p>
                         </div>
                       </div>
 
                       {/* Skill Indicator */}
-                      <div className="flex items-center justify-center mt-4">
+                      <div className="flex items-center justify-center mt-3 sm:mt-4">
                         <div className={`w-full h-1 bg-gradient-to-r ${skillCategories[activeCategory].color} rounded-full opacity-60`}></div>
                       </div>
                     </div>
@@ -294,16 +289,16 @@ const Skills = () => {
                 </div>
 
                 {/* Category Summary */}
-                <div className="mt-12 text-center">
-                  <div className="glass-morphism rounded-2xl p-6 inline-block">
-                    <p className="text-white/80 mb-2">
+                <div className="mt-8 sm:mt-12 text-center">
+                  <div className="glass-morphism rounded-xl sm:rounded-2xl p-4 sm:p-6 inline-block">
+                    <p className="text-sm sm:text-base text-white/80 mb-2">
                       <span className="font-semibold text-white">
                         {skillCategories[activeCategory].skills.length}
                       </span> technologies in {skillCategories[activeCategory].title}
                     </p>
                     <div className="flex items-center justify-center space-x-2">
-                      <div className={`w-3 h-3 bg-gradient-to-r ${skillCategories[activeCategory].color} rounded-full animate-pulse`}></div>
-                      <span className="text-white/60 text-sm">Continuously learning and improving</span>
+                      <div className={`w-2 h-2 sm:w-3 sm:h-3 bg-gradient-to-r ${skillCategories[activeCategory].color} rounded-full animate-pulse`}></div>
+                      <span className="text-white/60 text-xs sm:text-sm">Continuously learning and improving</span>
                     </div>
                   </div>
                 </div>

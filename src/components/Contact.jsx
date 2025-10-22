@@ -308,89 +308,84 @@ const Contact = () => {
           ))}
         </div>
 
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-12 xl:px-16 relative z-10">
           {/* Header */}
-          <div className="text-center mb-16 opacity-0 animate-in">
-            <div className="inline-block mb-4">
-              {/* <span className="px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full text-blue-300 font-medium text-sm border border-blue-500/30"> */}
-                {/* GET IN TOUCH */}
-              {/* </span> */}
-            </div>
-            <h2 className="text-5xl md:text-7xl font-bold mb-6 text-white">
+          <div className="text-center mb-12 sm:mb-16 opacity-0 animate-in">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 text-white">
               Let's <span className="text-shimmer">Connect</span>
             </h2>
-            <div className="w-32 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-full mx-auto pulse-glow mb-6"></div>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+            <div className="w-24 sm:w-32 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-full mx-auto pulse-glow mb-4 sm:mb-6"></div>
+            <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto px-4">
               Ready to bring your ideas to life? Let's collaborate and create something amazing together.
             </p>
           </div>
 
           {/* Main Content */}
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12">
               
               {/* Contact Info Side */}
               <div className="opacity-0 animate-in" style={{animationDelay: '0.2s'}}>
-                <div className="glass-morphism rounded-3xl p-8 md:p-12 hover-lift h-full">
+                <div className="glass-morphism rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 hover-lift h-full">
                   {/* Contact Header */}
-                  <div className="text-center mb-10">
-                    <div className="w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-3xl flex items-center justify-center pulse-glow mx-auto mb-6">
-                      <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <div className="text-center mb-8 sm:mb-10">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl sm:rounded-3xl flex items-center justify-center pulse-glow mx-auto mb-4 sm:mb-6">
+                      <svg className="w-8 h-8 sm:w-10 sm:h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                         <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                       </svg>
                     </div>
-                    <h3 className="text-3xl font-bold text-white mb-3">Get In Touch</h3>
-                    <p className="text-white/70">Let's discuss your next project</p>
+                    <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2 sm:mb-3">Get In Touch</h3>
+                    <p className="text-sm sm:text-base text-white/70">Let's discuss your next project</p>
                   </div>
 
                   {/* Contact Details */}
-                  <div className="space-y-8 mb-12">
+                  <div className="space-y-6 sm:space-y-8 mb-8 sm:mb-12">
                     <div className="flex items-start group">
-                      <div className="w-14 h-14 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
-                        <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl flex items-center justify-center mr-3 sm:mr-4 group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+                        <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                         </svg>
                       </div>
                       <div>
-                        <h4 className="text-xl font-semibold text-white mb-2">Location</h4>
-                        <p className="text-gray-300">Jashore, Bangladesh</p>
-                        <p className="text-gray-400 text-sm">Available for remote work worldwide</p>
+                        <h4 className="text-lg sm:text-xl font-semibold text-white mb-1 sm:mb-2">Location</h4>
+                        <p className="text-sm sm:text-base text-gray-300">Jashore, Bangladesh</p>
+                        <p className="text-xs sm:text-sm text-gray-400">Available for remote work worldwide</p>
                       </div>
                     </div>
 
                     <div className="flex items-start group">
-                      <div className="w-14 h-14 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
-                        <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mr-3 sm:mr-4 group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+                        <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
                           <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                           <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                         </svg>
                       </div>
                       <div>
-                        <h4 className="text-xl font-semibold text-white mb-2">Email</h4>
-                        <p className="text-gray-300">makky.cse@example.com</p>
-                        <p className="text-gray-400 text-sm">Response within 24 hours</p>
+                        <h4 className="text-lg sm:text-xl font-semibold text-white mb-1 sm:mb-2">Email</h4>
+                        <p className="text-sm sm:text-base text-gray-300 break-all">makky.cse@example.com</p>
+                        <p className="text-xs sm:text-sm text-gray-400">Response within 24 hours</p>
                       </div>
                     </div>
 
                     <div className="flex items-start group">
-                      <div className="w-14 h-14 bg-gradient-to-r from-green-500 to-teal-500 rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
-                        <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r from-green-500 to-teal-500 rounded-xl flex items-center justify-center mr-3 sm:mr-4 group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+                        <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
                         </svg>
                       </div>
                       <div>
-                        <h4 className="text-xl font-semibold text-white mb-2">Availability</h4>
-                        <p className="text-gray-300">Saturday - Thursday, 10 AM - 8 PM</p>
-                        <p className="text-gray-400 text-sm">GMT+6 Timezone</p>
+                        <h4 className="text-lg sm:text-xl font-semibold text-white mb-1 sm:mb-2">Availability</h4>
+                        <p className="text-sm sm:text-base text-gray-300">Saturday - Thursday, 10 AM - 8 PM</p>
+                        <p className="text-xs sm:text-sm text-gray-400">GMT+6 Timezone</p>
                       </div>
                     </div>
                   </div>
 
                   {/* Social Links */}
                   <div>
-                    <h4 className="text-xl font-semibold text-white mb-6 text-center">Connect With Me</h4>
-                    <div className="grid grid-cols-2 gap-4">
+                    <h4 className="text-lg sm:text-xl font-semibold text-white mb-4 sm:mb-6 text-center">Connect With Me</h4>
+                    <div className="grid grid-cols-2 gap-3 sm:gap-4">
                       {[
                         { name: 'GitHub', icon: 'fab fa-github', url: 'https://github.com/mdmakky' },
                         { name: 'LinkedIn', icon: 'fab fa-linkedin-in', url: 'https://linkedin.com/in/md-amakky' },
@@ -402,10 +397,10 @@ const Contact = () => {
                           href={social.url}
                           target={social.url.startsWith('http') ? '_blank' : '_self'}
                           rel={social.url.startsWith('http') ? 'noopener noreferrer' : ''}
-                          className="social-glass rounded-2xl p-4 text-center text-white group"
+                          className="social-glass rounded-xl sm:rounded-2xl p-3 sm:p-4 text-center text-white group"
                         >
-                          <i className={`${social.icon} text-2xl mb-2 block group-hover:scale-110 transition-transform duration-300`}></i>
-                          <span className="text-sm font-medium">{social.name}</span>
+                          <i className={`${social.icon} text-xl sm:text-2xl mb-2 block group-hover:scale-110 transition-transform duration-300`}></i>
+                          <span className="text-xs sm:text-sm font-medium">{social.name}</span>
                         </a>
                       ))}
                     </div>
@@ -415,18 +410,18 @@ const Contact = () => {
 
               {/* Contact Form Side */}
               <div ref={formRef} className="opacity-0 animate-in-delay">
-                <div className="glass-morphism rounded-3xl p-8 md:p-12 hover-lift h-full">
-                  <div className="mb-8">
-                    <div className="text-center mb-6">
-                      <div className="w-20 h-20 bg-gradient-to-r from-indigo-400 to-purple-500 rounded-3xl flex items-center justify-center pulse-glow mx-auto mb-6">
-                        <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <div className="glass-morphism rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 hover-lift h-full">
+                  <div className="mb-6 sm:mb-8">
+                    <div className="text-center mb-4 sm:mb-6">
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-indigo-400 to-purple-500 rounded-2xl sm:rounded-3xl flex items-center justify-center pulse-glow mx-auto mb-4 sm:mb-6">
+                        <svg className="w-8 h-8 sm:w-10 sm:h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z" clipRule="evenodd" />
                         </svg>
                       </div>
-                      <h3 className="text-3xl font-bold text-white mb-3">
+                      <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2 sm:mb-3">
                         Send Me a <span className="text-shimmer">Message</span>
                       </h3>
-                      <p className="text-white/70">Share your thoughts or questions below</p>
+                      <p className="text-sm sm:text-base text-white/70">Share your thoughts or questions below</p>
                     </div>
                   </div>
 
@@ -457,11 +452,11 @@ const Contact = () => {
                     </div>
                   )}
 
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                     {/* Name & Email Row */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                       <div className="relative group">
-                        <label className="block text-white/90 text-sm font-medium mb-2">
+                        <label className="block text-white/90 text-xs sm:text-sm font-medium mb-2">
                           Full Name <span className="text-red-400">*</span>
                         </label>
                         <input
@@ -469,7 +464,7 @@ const Contact = () => {
                           name="name"
                           value={formData.name}
                           onChange={handleInputChange}
-                          className={`glass-input w-full px-4 py-4 rounded-2xl text-white placeholder-white/60 ${
+                          className={`glass-input w-full px-3 py-3 sm:px-4 sm:py-4 rounded-xl sm:rounded-2xl text-sm sm:text-base text-white placeholder-white/60 ${
                             submitStatus === 'error' && !formData.name.trim() ? 'error shake' : ''
                           }`}
                           placeholder="Your name..."
@@ -478,7 +473,7 @@ const Contact = () => {
                       </div>
 
                       <div className="relative group">
-                        <label className="block text-white/90 text-sm font-medium mb-2">
+                        <label className="block text-white/90 text-xs sm:text-sm font-medium mb-2">
                           Email Address <span className="text-red-400">*</span>
                         </label>
                         <input
@@ -486,7 +481,7 @@ const Contact = () => {
                           name="email"
                           value={formData.email}
                           onChange={handleInputChange}
-                          className={`glass-input w-full px-4 py-4 rounded-2xl text-white placeholder-white/60 ${
+                          className={`glass-input w-full px-3 py-3 sm:px-4 sm:py-4 rounded-xl sm:rounded-2xl text-sm sm:text-base text-white placeholder-white/60 ${
                             submitStatus === 'error' && !formData.email.trim() ? 'error shake' : ''
                           }`}
                           placeholder="your.email@domain.com"
@@ -497,20 +492,20 @@ const Contact = () => {
 
                     {/* Subject */}
                     <div className="relative group">
-                      <label className="block text-white/90 text-sm font-medium mb-2">Subject</label>
+                      <label className="block text-white/90 text-xs sm:text-sm font-medium mb-2">Subject</label>
                       <input
                         type="text"
                         name="subject"
                         value={formData.subject}
                         onChange={handleInputChange}
-                        className="glass-input w-full px-4 py-4 rounded-2xl text-white placeholder-white/60"
+                        className="glass-input w-full px-3 py-3 sm:px-4 sm:py-4 rounded-xl sm:rounded-2xl text-sm sm:text-base text-white placeholder-white/60"
                         placeholder="What's this about?"
                       />
                     </div>
 
                     {/* Message */}
                     <div className="relative group">
-                      <label className="block text-white/90 text-sm font-medium mb-2">
+                      <label className="block text-white/90 text-xs sm:text-sm font-medium mb-2">
                         Message <span className="text-red-400">*</span>
                       </label>
                       <textarea
@@ -518,7 +513,7 @@ const Contact = () => {
                         value={formData.message}
                         onChange={handleInputChange}
                         rows="6"
-                        className={`glass-input w-full px-4 py-4 rounded-2xl text-white placeholder-white/60 resize-none ${
+                        className={`glass-input w-full px-3 py-3 sm:px-4 sm:py-4 rounded-xl sm:rounded-2xl text-sm sm:text-base text-white placeholder-white/60 resize-none ${
                           submitStatus === 'error' && !formData.message.trim() ? 'error shake' : ''
                         }`}
                         placeholder="Tell me about your project, goals, and how I can help..."
@@ -530,12 +525,12 @@ const Contact = () => {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="glass-button w-full py-4 px-8 rounded-2xl text-white font-semibold text-lg group"
+                      className="glass-button w-full py-3 px-6 sm:py-4 sm:px-8 rounded-xl sm:rounded-2xl text-white font-semibold text-base sm:text-lg group"
                     >
                       <span className="relative z-10 flex items-center justify-center">
                         {isSubmitting ? (
                           <>
-                            <svg className="animate-spin -ml-1 mr-3 h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <svg className="animate-spin -ml-1 mr-3 h-5 w-5 sm:h-6 sm:w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                             </svg>
@@ -544,7 +539,7 @@ const Contact = () => {
                         ) : (
                           <>
                             Send Message
-                            <svg className="ml-3 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20">
+                            <svg className="ml-2 sm:ml-3 w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20">
                               <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                             </svg>
                           </>

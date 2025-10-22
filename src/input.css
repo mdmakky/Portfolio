@@ -29,6 +29,30 @@
     --color-shadow: rgba(0, 0, 0, 0.1);
   }
   
+  /* Smooth Scroll Behavior */
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+  
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: linear-gradient(180deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #3b82f6, #8b5cf6);
+    border-radius: 5px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #60a5fa, #a78bfa);
+  }
+  
   /* Force light mode styles for dark mode */
   @media (prefers-color-scheme: dark) {
     :root {
