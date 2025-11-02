@@ -7,7 +7,7 @@
 /* Custom Styling */
 @layer base {
   :root {
-    color-scheme: light;
+    color-scheme: light only;
     --color-primary: #1a56db;
     --color-primary-light: #3b82f6;
     --color-primary-dark: #1e40af;
@@ -27,6 +27,11 @@
     --color-white: #ffffff;
     --color-input-border: rgba(26, 86, 219, 0.5);
     --color-shadow: rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Prevent dark reader and other extensions from affecting the site */
+  html {
+    color-scheme: light only !important;
   }
   
   /* Smooth Scroll Behavior */

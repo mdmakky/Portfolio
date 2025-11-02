@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light only">
+  <meta name="darkreader-lock">
   <title>Makky | Portfolio</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="shortcut icon" href="photos/OIP-removebg-preview.ico" type="image/x-icon">
@@ -11,6 +13,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    /* Prevent dark mode from browser extensions */
+    html {
+      color-scheme: light only !important;
+    }
+    
+    html, body {
+      background-color: #0f172a !important;
+    }
+    
     /* Glass card effect */
     .glass-card {
       background: rgba(255, 255, 255, 0.8);

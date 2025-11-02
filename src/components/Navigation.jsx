@@ -117,6 +117,14 @@ const Navigation = () => {
                   <Link to="/#skills" className="nav-item text-white font-medium hover:text-blue-300 transition-colors duration-300">Skills</Link>
                   <Link to="/projects" className="nav-item active text-white font-medium hover:text-blue-300 transition-colors duration-300">Projects</Link>
                   <Link to="/#contact" className="nav-item text-white font-medium hover:text-blue-300 transition-colors duration-300">Contact</Link>
+                  <a 
+                    href="/Arafat_CV.pdf" 
+                    download 
+                    className="glass-button rounded-lg px-4 py-2 text-white font-medium flex items-center gap-2"
+                  >
+                    <i className="fas fa-download"></i>
+                    Download CV
+                  </a>
                 </>
               ) : (
                 <>
@@ -124,6 +132,14 @@ const Navigation = () => {
                   <a href="#skills" className="nav-item text-white font-medium hover:text-blue-300 transition-colors duration-300">Skills</a>
                   <a href="#projects" className="nav-item text-white font-medium hover:text-blue-300 transition-colors duration-300">Projects</a>
                   <a href="#contact" className="nav-item text-white font-medium hover:text-blue-300 transition-colors duration-300">Contact</a>
+                  <a 
+                    href="/Arafat_CV.pdf" 
+                    download 
+                    className="glass-button rounded-lg px-4 py-2 text-white font-medium flex items-center gap-2"
+                  >
+                    <i className="fas fa-download"></i>
+                    Download CV
+                  </a>
                 </>
               )}
             </div>
@@ -175,6 +191,14 @@ const Navigation = () => {
                 <Link to="/#contact" className="block glass-button rounded-xl p-4 text-white hover:text-blue-300 transition-colors duration-300" onClick={toggleMobileMenu}>
                   <i className="fas fa-envelope mr-2"></i> Contact
                 </Link>
+                <a 
+                  href="/Arafat_CV.pdf" 
+                  download 
+                  className="block glass-button rounded-xl p-4 text-white bg-gradient-to-r from-blue-500/30 to-purple-500/30 hover:from-blue-500/40 hover:to-purple-500/40 transition-all duration-300"
+                  onClick={toggleMobileMenu}
+                >
+                  <i className="fas fa-download mr-2"></i> Download CV
+                </a>
               </>
             ) : (
               <>
@@ -189,6 +213,14 @@ const Navigation = () => {
                 </a>
                 <a href="#contact" className="block glass-button rounded-xl p-4 text-white hover:text-blue-300 transition-colors duration-300" onClick={toggleMobileMenu}>
                   <i className="fas fa-envelope mr-2"></i> Contact
+                </a>
+                <a 
+                  href="/Arafat_CV.pdf" 
+                  download 
+                  className="block glass-button rounded-xl p-4 text-white bg-gradient-to-r from-blue-500/30 to-purple-500/30 hover:from-blue-500/40 hover:to-purple-500/40 transition-all duration-300"
+                  onClick={toggleMobileMenu}
+                >
+                  <i className="fas fa-download mr-2"></i> Download CV
                 </a>
               </>
             )}

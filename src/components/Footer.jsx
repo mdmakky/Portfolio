@@ -207,9 +207,6 @@ const Footer = () => {
                 <p className="text-white/70 mb-2">
                   &copy; {currentYear} <span className="text-white font-medium">Md. Arafatuzzaman</span> | All rights reserved
                 </p>
-                <p className="text-white/60 text-sm">
-                  Crafted with ❤️ and modern web technologies
-                </p>
               </div>
               
               {/* Scroll to Top Button */}
