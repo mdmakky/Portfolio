@@ -138,7 +138,7 @@ const Header = () => {
                   {/* Main Image Container */}
                   <div className="relative z-10 p-2 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-3xl pulse-glow">
                     <img 
-                      src="/photos/photo.jpg" 
+                      src="/photo.jpg" 
                       alt="Md. Arafatuzzaman - Full-Stack Developer" 
                       className="w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-3xl object-cover"
                       loading="eager"
