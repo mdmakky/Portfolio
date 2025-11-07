@@ -105,3 +105,8 @@ yarn-error.log*
 
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
+
+# Large image files for projects (store locally, upload to CDN separately)
+assets/images/projects/**/*.png
+assets/images/projects/**/*.jpg
+assets/images/projects/**/*.jpeg
