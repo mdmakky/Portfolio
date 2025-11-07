@@ -110,6 +110,7 @@ scrollTopBtn.addEventListener('click', () => {
 function updateActiveNavLink() {
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     
     let current = '';
     
@@ -128,6 +129,12 @@ function updateActiveNavLink() {
             link.classList.add('text-primary');
         }
     });
+    
+    // Update mobile menu button style based on active section
+    if (mobileMenuBtn) {
+        mobileMenuBtn.classList.remove('section-home', 'section-about', 'section-journey', 'section-skills', 'section-projects', 'section-contact');
+        mobileMenuBtn.classList.add(`section-${current}`);
+    }
 }
 
 // Smooth Scrolling for Anchor Links
