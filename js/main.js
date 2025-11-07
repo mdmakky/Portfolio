@@ -390,10 +390,78 @@ document.querySelectorAll('img').forEach(img => {
 });
 
 // ========================================
+// PROFILE IMAGE TO NAVBAR ANIMATION
+// ========================================
+
+function initProfileImageAnimation() {
+    const logo = document.querySelector('.logo-brand');
+    
+    if (!logo) return;
+    
+    // Get the logo text span
+    const logoText = logo.querySelector('span:first-child');
+    
+    // Create profile image element
+    const profileImgElement = document.createElement('img');
+    profileImgElement.src = 'assets/images/profile/main.png';
+    profileImgElement.alt = 'Arafat';
+    profileImgElement.className = 'w-10 h-10 rounded-full border-2 border-primary/50 object-cover hidden';
+    
+    // Insert profile image before the logo text
+    logoText.parentElement.insertBefore(profileImgElement, logoText);
+    
+    // Animation on scroll
+    window.addEventListener('scroll', () => {
+        const homeSection = document.querySelector('#home');
+        
+        if (!homeSection) return;
+        
+        // Get the bottom position of home section
+        const homeSectionBottom = homeSection.offsetTop + homeSection.offsetHeight;
+        const currentScroll = window.scrollY;
+        
+        // Show profile image only when scrolled PAST the home section
+        if (currentScroll > homeSectionBottom - 100) {
+            // Show profile image
+            profileImgElement.classList.remove('hidden');
+            profileImgElement.classList.add('block', 'opacity-100', 'transition-opacity', 'duration-300');
+            
+            // Hide logo text
+            logoText.classList.add('hidden');
+        } else {
+            // Hide profile image
+            profileImgElement.classList.add('hidden');
+            profileImgElement.classList.remove('block', 'opacity-100');
+            
+            // Show logo text
+            logoText.classList.remove('hidden');
+        }
+    });
+}
+
+// ========================================
+// RESUME DOWNLOAD FUNCTIONALITY
+// ========================================
+
+function initResumeDownload() {
+    const resumeLinks = document.querySelectorAll('a[href*="resume"]');
+    
+    resumeLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            // Allow normal download behavior
+            // The download attribute will handle the file download
+            console.log('Resume download initiated');
+        });
+    });
+}
+
+// ========================================
 // IMAGE CAROUSEL FUNCTIONALITY
 // ========================================
 
 // Initialize all carousels on page load
 document.addEventListener('DOMContentLoaded', function() {
     initCarousels();
+    initProfileImageAnimation();
+    initResumeDownload();
 });

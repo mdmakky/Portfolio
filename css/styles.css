@@ -2,6 +2,53 @@
    NAVBAR ENHANCEMENTS ONLY
    ================================ */
 
+/* Custom animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOutUp {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+.animate-fadeInDown {
+    animation: fadeInDown 0.4s ease-out forwards;
+}
+
+.animate-fadeOutUp {
+    animation: fadeOutUp 0.4s ease-out forwards;
+}
+
+/* Profile image in navbar styling */
+.profile-navbar-img {
+    margin-left: auto;
+    margin-right: 2rem;
+    pointer-events: auto;
+}
+
+.profile-navbar-img img {
+    transition: all 0.3s ease;
+}
+
+.profile-navbar-img:hover img {
+    transform: scale(1.1);
+    border-color: #10b981 !important;
+}
+
 /* Prevent horizontal scrolling on mobile - More targeted approach */
 html {
     overflow-x: hidden;
