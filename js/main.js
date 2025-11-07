@@ -18,7 +18,7 @@ AOS.init({
 // Initialize EmailJS with config
 (function() {
     emailjs.init(config.emailjs.publicKey);
-    console.log('EmailJS initialized');
+    console.log('EmailJS initialized with public key:', config.emailjs.publicKey);
 })();
 
 // ================================
@@ -149,6 +149,71 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// ================================
+// STYLISH TOAST NOTIFICATION SYSTEM
+// ================================
+function showToast(message, type = 'success', duration = 4000) {
+    // Remove existing toast if any
+    const existingToast = document.querySelector('.toast-notification');
+    if (existingToast) existingToast.remove();
+    
+    // Create toast container
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    
+    // Determine colors and icon based on type
+    let bgColor, borderColor, icon, titleText;
+    if (type === 'success') {
+        bgColor = 'from-green-500/20 to-emerald-500/20';
+        borderColor = 'border-green-500/40';
+        icon = 'fas fa-check-circle';
+        titleText = '✨ Success!';
+    } else if (type === 'error') {
+        bgColor = 'from-red-500/20 to-pink-500/20';
+        borderColor = 'border-red-500/40';
+        icon = 'fas fa-exclamation-circle';
+        titleText = '⚠️ Error!';
+    } else {
+        bgColor = 'from-blue-500/20 to-cyan-500/20';
+        borderColor = 'border-blue-500/40';
+        icon = 'fas fa-info-circle';
+        titleText = 'ℹ️ Info';
+    }
+    
+    toast.innerHTML = `
+        <div class="fixed top-6 right-6 z-50 animate-fade-in-down">
+            <div class="bg-gradient-to-br ${bgColor} backdrop-blur-xl border ${borderColor} rounded-2xl px-6 py-4 shadow-2xl shadow-black/30 max-w-md">
+                <div class="flex items-start gap-4">
+                    <!-- Icon -->
+                    <div class="flex-shrink-0">
+                        <i class="${icon} text-2xl ${type === 'success' ? 'text-green-400' : type === 'error' ? 'text-red-400' : 'text-blue-400'} animate-pulse"></i>
+                    </div>
+                    
+                    <!-- Content -->
+                    <div class="flex-1">
+                        <h3 class="font-bold text-white mb-1">${titleText}</h3>
+                        <p class="text-sm text-gray-200 leading-relaxed">${message}</p>
+                    </div>
+                    
+                    <!-- Close Button -->
+                    <button onclick="this.closest('.toast-notification').remove()" class="flex-shrink-0 text-gray-400 hover:text-white transition-colors">
+                        <i class="fas fa-times text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(toast);
+    
+    // Auto remove after duration
+    if (duration > 0) {
+        setTimeout(() => {
+            toast.remove();
+        }, duration);
+    }
+}
+
 // Contact Form Submission with EmailJS
 const contactForm = document.getElementById('contact-form');
 
@@ -163,13 +228,23 @@ contactForm.addEventListener('submit', (e) => {
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Sending...';
     
-    // Prepare template parameters
+    // Get form values
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const subject = document.getElementById('subject').value;
+    const message = document.getElementById('message').value;
+    
+    // Prepare template parameters for EmailJS
     const templateParams = {
-        from_name: document.getElementById('name').value,
-        from_email: document.getElementById('email').value,
-        subject: document.getElementById('subject').value,
-        message: document.getElementById('message').value
+        from_name: name,
+        from_email: email,
+        subject: subject,
+        message: message,
+        to_email: 'makky.cse@gmail.com'
     };
+    
+    console.log('EmailJS Config:', config.emailjs);
+    console.log('Sending email with params:', templateParams);
     
     // Send email using EmailJS
     emailjs.send(config.emailjs.serviceId, config.emailjs.templateId, templateParams)
@@ -184,8 +259,8 @@ contactForm.addEventListener('submit', (e) => {
             // Reset form
             contactForm.reset();
             
-            // Show alert
-            alert('✅ Thank you! Your message has been sent successfully. I\'ll get back to you soon!');
+            // Show stylish toast notification
+            showToast('Thank you! Your message has been sent successfully. I\'ll get back to you soon!', 'success', 5000);
             
             // Reset button after 3 seconds
             setTimeout(() => {
@@ -196,14 +271,16 @@ contactForm.addEventListener('submit', (e) => {
             }, 3000);
         }, function(error) {
             console.log('FAILED...', error);
+            console.error('Full error details:', error);
             
             // Show error message
             submitBtn.innerHTML = '<i class="fas fa-times mr-2"></i> Failed to Send';
             submitBtn.classList.remove('from-primary', 'to-secondary');
             submitBtn.classList.add('bg-red-500');
             
-            // Show alert
-            alert('❌ Oops! Something went wrong. Please try again or email me directly at hello@mushfiqnehal.dev');
+            // Show stylish toast notification with error
+            const errorMsg = error.text || error.message || 'Unknown error. Please try again or email me directly at makky.cse@gmail.com';
+            showToast(errorMsg, 'error', 5000);
             
             // Reset button after 3 seconds
             setTimeout(() => {

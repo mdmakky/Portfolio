@@ -21,10 +21,10 @@ export const config = {
         fallback: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><rect width='400' height='400' fill='%23a855f7'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='white' font-size='48'>Arafat</text></svg>"
     },
     
-    // EmailJS Configuration (update with your keys)
+    // EmailJS Configuration
     emailjs: {
-        publicKey: 'CxGRWNGYEUOGNmUy5',
-        serviceId: 'your_service_id',
-        templateId: 'your_template_id'
+        publicKey: 'C9MAK05OfDEeY9Pf8',
+        serviceId: 'service_kl2aid9',
+        templateId: 'template_2n8qkdb'
     }
 };
