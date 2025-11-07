@@ -1,165 +1,1065 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth dark">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="color-scheme" content="light only">
-  <meta name="darkreader-lock">
-  <title>Makky | Portfolio</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <link rel="shortcut icon" href="photos/OIP-removebg-preview.ico" type="image/x-icon">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    /* Prevent dark mode from browser extensions */
-    html {
-      color-scheme: light only !important;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of Md. Arafatuzzaman - CSE Undergraduate, Full-Stack Developer, and Machine Learning Enthusiast">
+    <title>Arafat | Portfolio</title>
     
-    html, body {
-      background-color: #0f172a !important;
-    }
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     
-    /* Glass card effect */
-    .glass-card {
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-    }
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     
-    /* Gradient effects */
-    .text-gradient {
-      background: linear-gradient(to right, #1a56db, #0e9f6e);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    /* Fix transform hover effects */
-    .about-content:hover {
-      transform: perspective(500px) rotateY(10deg) rotateX(5deg) !important;
-      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2) !important;
-    }
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    .skill:hover {
-      transform: perspective(500px) rotateY(5deg) rotateX(5deg) !important;
-    }
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
-    /* Progress bar animation */
-    @keyframes growWidth {
-      from { width: 0; }
-      to { width: var(--width); }
-    }
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     
-    .progress-bar {
-      height: 8px;
-      background-color: #e5e7eb;
-      border-radius: 4px;
-      overflow: hidden;
-    }
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/styles.css">
     
-    .progress-fill {
-      height: 100%;
-      animation: growWidth 1.5s ease-out forwards;
-      background: linear-gradient(to right, #1a56db, #0e9f6e);
-    }
-    
-    /* Header with improved visual appeal */
-    .header-glow {
-      box-shadow: 0 0 15px rgba(26, 86, 219, 0.3);
-    }
-    
-    /* Animate nav items */
-    .nav-item {
-      position: relative;
-    }
-    
-    .nav-item::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 50%;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(to right, #ff5a1f, #ff8c5a);
-      transition: width 0.3s ease, left 0.3s ease;
-    }
-    
-    .nav-item:hover::after {
-      width: 100%;
-      left: 0;
-    }
-    
-    /* Particles animation */
-    @keyframes float-particle {
-      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-      50% { opacity: 1; }
-      100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
-    }
-    
-    .particles span {
-      position: absolute;
-      bottom: -30px;
-      background: rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      pointer-events: none;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-      animation: float-particle 15s linear infinite;
-    }
-    
-    .particles span:nth-child(1) {
-      width: 8px;
-      height: 8px;
-      left: 10%;
-      animation-delay: 0s;
-      animation-duration: 20s;
-    }
-    
-    .particles span:nth-child(2) {
-      width: 15px;
-      height: 15px;
-      left: 20%;
-      animation-delay: 2s;
-      animation-duration: 12s;
-    }
-    
-    .particles span:nth-child(3) {
-      width: 10px;
-      height: 10px;
-      left: 40%;
-      animation-delay: 4s;
-      animation-duration: 18s;
-    }
-    
-    .particles span:nth-child(4) {
-      width: 12px;
-      height: 12px;
-      left: 60%;
-      animation-delay: 6s;
-      animation-duration: 15s;
-    }
-    
-    .particles span:nth-child(5) {
-      width: 6px;
-      height: 6px;
-      left: 80%;
-      animation-delay: 8s;
-      animation-duration: 10s;
-    }
-    
-    .particles span:nth-child(6) {
-      width: 10px;
-      height: 10px;
-      left: 90%;
-      animation-delay: 10s;
-      animation-duration: 14s;
-    }
-  </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#10b981',      // Grass Green
+                        secondary: '#059669',    // Deep Green
+                        accent: '#34d399',       // Light Green
+                        dark: '#0a0a0a',         // Deep black
+                        'dark-light': '#111111', // Off-black
+                        'dark-lighter': '#1a1a1a', // Slightly lighter black
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'poppins': ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
-  <div id="root"></div>
-  <script type="module" src="/src/main.jsx"></script>
+<body class="font-inter bg-white dark:bg-dark text-gray-900 dark:text-white transition-colors duration-300">
+
+    <!-- Header / Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/70 dark:bg-dark/70 backdrop-blur-xl border-b border-gray-200/20 dark:border-white/10 shadow-lg shadow-black/5">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <a href="#home" class="text-xl font-bold font-poppins">
+                    <span class="text-gray-900 dark:text-white">Arafat</span>
+                    <span class="text-primary">.</span>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <ul class="hidden md:flex space-x-8 items-center">
+                    <li><a href="#home" class="nav-link text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors">Home</a></li>
+                    <li><a href="#about" class="nav-link text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors">About</a></li>
+                    <li><a href="#journey" class="nav-link text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors">Journey</a></li>
+                    <li><a href="#skills" class="nav-link text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors">Skills</a></li>
+                    <li><a href="#projects" class="nav-link text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors">Projects</a></li>
+                    <li><a href="#contact" class="nav-link text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors">Contact</a></li>
+                </ul>
+                
+                <!-- Mobile Menu -->
+                <div class="flex items-center">
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn" class="md:hidden p-2">
+                        <i class="fas fa-bars text-2xl text-gray-300"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Navigation -->
+            <ul id="mobile-menu" class="hidden md:hidden mt-4 space-y-2 pb-4">
+                <li><a href="#home" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-primary transition-colors">Home</a></li>
+                <li><a href="#about" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-primary transition-colors">About</a></li>
+                <li><a href="#journey" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-primary transition-colors">Journey</a></li>
+                <li><a href="#skills" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-primary transition-colors">Skills</a></li>
+                <li><a href="#projects" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-primary transition-colors">Projects</a></li>
+                <li><a href="#contact" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-primary transition-colors">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="h-screen flex items-center bg-dark relative overflow-hidden">
+        <!-- Nebula/Glow Background Elements -->
+        <div class="absolute top-0 left-0 w-full h-full">
+            <div class="absolute top-20 -left-20 w-96 h-96 bg-primary/20 rounded-full blur-[120px] animate-pulse"></div>
+            <div class="absolute bottom-20 -right-20 w-[500px] h-[500px] bg-secondary/20 rounded-full blur-[120px] animate-pulse" style="animation-delay: 1s;"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent/10 rounded-full blur-[100px]"></div>
+        </div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+                <!-- Left: Text Content -->
+                <div data-aos="fade-right">
+                    <div class="inline-block mb-4">
+                        <span class="text-sm font-medium text-primary bg-primary/10 px-4 py-2 rounded-full border border-primary/30 backdrop-blur-sm shadow-lg shadow-primary/20">
+                            ✨ Available for opportunities
+                        </span>
+                    </div>
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold font-poppins mb-6 leading-tight">
+                        <span class="text-white">Hi, I'm </span>
+                        <span class="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+                            Arafat
+                        </span>
+                    </h1>
+                    <h2 class="text-2xl md:text-3xl font-bold text-primary mb-4">Full Stack Developer</h2>
+                    <p class="text-lg md:text-xl text-gray-400 mb-8 leading-relaxed max-w-xl">
+                        Crafting modern, responsive, and user-friendly websites with passion and precision.
+                    </p>
+                    
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-wrap gap-4 mb-8">
+                        <a href="assets/resume.pdf" download="Arafat_Resume.pdf" class="btn-premium group px-8 py-4 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white rounded-xl font-semibold transition-all shadow-lg shadow-primary/50 hover:shadow-2xl hover:shadow-primary/60 hover:-translate-y-2 hover:scale-105 flex items-center gap-2">
+                            <span>Download Resume</span>
+                            <i class="fas fa-download group-hover:translate-y-1 transition-transform"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Social Links -->
+                    <div class="flex gap-4">
+                        <a href="https://github.com/mdmakky" target="_blank" class="w-14 h-14 flex items-center justify-center rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 text-gray-300 hover:border-primary hover:text-white hover:bg-primary/20 transition-all hover:scale-110 shadow-lg">
+                            <i class="fab fa-github text-2xl"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/md-amakky" target="_blank" class="w-14 h-14 flex items-center justify-center rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 text-gray-300 hover:border-blue-500 hover:text-white hover:bg-blue-500/20 transition-all hover:scale-110 shadow-lg">
+                            <i class="fab fa-linkedin-in text-2xl"></i>
+                        </a>
+                        <a href="https://facebook.com/md.arafatuzzaman.makky" target="_blank" class="w-14 h-14 flex items-center justify-center rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 text-gray-300 hover:border-blue-400 hover:text-white hover:bg-blue-400/20 transition-all hover:scale-110 shadow-lg">
+                            <i class="fab fa-facebook text-2xl"></i>
+                        </a>
+                        <a href="https://instagram.com/" target="_blank" class="w-14 h-14 flex items-center justify-center rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 text-gray-300 hover:border-pink-500 hover:text-white hover:bg-pink-500/20 transition-all hover:scale-110 shadow-lg">
+                            <i class="fab fa-instagram text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Right: Image with Decorative Elements -->
+                <div data-aos="fade-left" class="flex justify-center md:justify-end">
+                    <div class="relative">
+                        <!-- Simple glow effect -->
+                        <div class="absolute -inset-4 bg-primary/20 rounded-full blur-3xl"></div>
+                        
+                        <!-- Image container with simple border -->
+                        <div class="relative w-80 h-80 md:w-96 md:h-96 rounded-full overflow-hidden border-2 border-gray-700 hover:border-primary transition-all duration-300">
+                            <img src="assets/images/profile/main.png" alt="Arafat" class="w-full h-full object-cover" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22><rect width=%22400%22 height=%22400%22 fill=%22%23a855f7%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2248%22>Arafat</text></svg>';">
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-dark-light scroll-mt-16 relative z-20">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-bold font-poppins mb-4 text-white">
+                        About Me
+                    </h2>
+                    <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <!-- Left: Image -->
+                    <div data-aos="fade-right" class="flex justify-center">
+                        <div class="relative w-80 h-80 rounded-3xl overflow-hidden border-4 border-primary/30 shadow-2xl">
+                            <img src="assets/images/profile/about.jpg" alt="Arafat" class="w-full h-full object-cover" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22><rect width=%22400%22 height=%22400%22 fill=%22%23a855f7%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2248%22>Arafat</text></svg>';">
+                        </div>
+                    </div>
+                    
+                    <!-- Right: Content -->
+                    <div data-aos="fade-left">
+                        <h3 class="text-2xl md:text-3xl font-bold mb-4 text-white">
+                            I'm <span class="text-primary">Md. Arafatuzzaman</span>
+                        </h3>
+                        <p class="text-lg text-gray-400 mb-6 leading-relaxed">
+                            Computer Science student at <span class="text-primary font-semibold">JUST</span> with a strong passion for building scalable, enterprise-grade applications. I specialize in <span class="text-primary font-semibold">full-stack development</span> and exploring the intersection of AI and software engineering.
+                        </p>
+                        <p class="text-gray-400 mb-8 leading-relaxed">
+                            I create robust solutions using <span class="text-secondary font-semibold">React</span>, <span class="text-secondary font-semibold">Django</span>, <span class="text-secondary font-semibold">Node.js</span>, and modern web technologies. Currently diving deep into <span class="text-accent font-semibold">Machine Learning</span> and <span class="text-accent font-semibold">AI</span>, building intelligent applications that solve real-world problems.
+                        </p>
+                        
+                        <!-- Feature Boxes -->
+                        <div class="grid grid-cols-1 gap-4 mb-8">
+                            <div class="flex items-start gap-4 p-4 bg-dark-lighter rounded-xl border border-gray-800 hover:border-primary/50 transition-all">
+                                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-laptop-code text-primary text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white mb-1">Web Application Development</h4>
+                                    <p class="text-sm text-gray-400">Full-stack development with React, Django, and modern JavaScript frameworks</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4 p-4 bg-dark-lighter rounded-xl border border-gray-800 hover:border-primary/50 transition-all">
+                                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-secondary/20 to-accent/20 flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-brain text-secondary text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white mb-1">Machine Learning & AI</h4>
+                                    <p class="text-sm text-gray-400">Building intelligent applications with TensorFlow, PyTorch, and modern AI frameworks</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4 p-4 bg-dark-lighter rounded-xl border border-gray-800 hover:border-primary/50 transition-all">
+                                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-accent/20 to-primary/20 flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-code text-accent text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white mb-1">Problem Solving</h4>
+                                    <p class="text-sm text-gray-400">Strong problem-solving skills with DSA and algorithmic thinking</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-16 bg-white dark:bg-dark">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-8" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold font-poppins mb-4 text-gray-900 dark:text-white">
+                    Education
+                </h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="max-w-3xl mx-auto grid md:grid-cols-3 gap-4" data-aos="fade-up" data-aos-delay="100">
+                <!-- Education Card 1 -->
+                <div class="p-5 bg-white dark:bg-dark-lighter rounded-xl border border-gray-200 dark:border-gray-800">
+                    <div class="text-center">
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-1">B.Sc. CSE</h3>
+                        <p class="text-xs text-gray-600 dark:text-gray-400 mb-2">Jashore University of Science and Technology</p>
+                        <div class="flex items-center justify-center gap-2 text-xs">
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded font-medium">2026</span>
+                            <span class="px-2 py-1 bg-primary/10 text-primary dark:text-primary rounded font-bold">3.17 CGPA</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Education Card 2 -->
+                <div class="p-5 bg-white dark:bg-dark-lighter rounded-xl border border-gray-200 dark:border-gray-800">
+                    <div class="text-center">
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-1">HSC</h3>
+                        <p class="text-xs text-gray-600 dark:text-gray-400 mb-2">Satkhira Govt. College</p>
+                        <div class="flex items-center justify-center gap-2 text-xs">
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded font-medium">2020</span>
+                            <span class="px-2 py-1 bg-primary/10 text-primary dark:text-primary rounded font-bold">GPA 5.00</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Education Card 3 -->
+                <div class="p-5 bg-white dark:bg-dark-lighter rounded-xl border border-gray-200 dark:border-gray-800">
+                    <div class="text-center">
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-1">SSC</h3>
+                        <p class="text-xs text-gray-600 dark:text-gray-400 mb-2">Satkhira PN School and College</p>
+                        <div class="flex items-center justify-center gap-2 text-xs">
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded font-medium">2018</span>
+                            <span class="px-2 py-1 bg-primary/10 text-primary dark:text-primary rounded font-bold">GPA 5.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- My Journey Section -->
+    <section id="journey" class="py-24 bg-white dark:bg-dark">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold font-poppins mb-4 text-gray-900 dark:text-white">
+                    My Journey
+                </h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mb-4"></div>
+                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    From curiosity to expertise - here's how my passion for technology evolved
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <!-- Timeline -->
+                <div class="relative">
+                    <!-- Timeline Line -->
+                    <div class="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-secondary to-accent" data-aos="fade-up"></div>
+                    
+                    <!-- Timeline Items -->
+                    <!-- Item 1 -->
+                    <div class="relative mb-12 md:mb-16" data-aos="fade-right">
+                        <div class="flex items-start gap-6 md:gap-0">
+                            <div class="absolute left-8 md:left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg z-10">
+                                <i class="fas fa-graduation-cap text-white text-2xl"></i>
+                            </div>
+                            <div class="ml-24 md:ml-0 md:w-1/2 md:pr-12 md:text-right">
+                                <div class="bg-white dark:bg-dark-lighter p-6 rounded-xl border border-gray-100 dark:border-gray-800 hover:border-primary dark:hover:border-primary transition-all hover:shadow-lg">
+                                    <span class="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-bold mb-3">2022</span>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Started University Journey</h3>
+                                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                                        Began B.Sc. in Computer Science and Engineering at Jashore University of Science and Technology, diving deep into the world of programming and algorithms.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 2 -->
+                    <div class="relative mb-12 md:mb-16" data-aos="fade-left">
+                        <div class="flex items-start gap-6 md:gap-0">
+                            <div class="absolute left-8 md:left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-gradient-to-br from-secondary to-accent flex items-center justify-center shadow-lg z-10">
+                                <i class="fas fa-code text-white text-2xl"></i>
+                            </div>
+                            <div class="ml-24 md:ml-0 md:w-1/2 md:pl-12 md:ml-auto">
+                                <div class="bg-white dark:bg-dark-lighter p-6 rounded-xl border border-gray-100 dark:border-gray-800 hover:border-secondary dark:hover:border-secondary transition-all hover:shadow-lg">
+                                    <span class="inline-block px-3 py-1 bg-secondary/10 text-secondary rounded-full text-xs font-bold mb-3">2023</span>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Started Development Journey</h3>
+                                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                                        Fell in love with web development and software engineering. Started learning full-stack development with Python, Django, and React, building real-world projects.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 3 -->
+                    <div class="relative mb-12 md:mb-16" data-aos="fade-right">
+                        <div class="flex items-start gap-6 md:gap-0">
+                            <div class="absolute left-8 md:left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-gradient-to-br from-accent to-primary flex items-center justify-center shadow-lg z-10">
+                                <i class="fas fa-brain text-white text-2xl"></i>
+                            </div>
+                            <div class="ml-24 md:ml-0 md:w-1/2 md:pr-12 md:text-right">
+                                <div class="bg-white dark:bg-dark-lighter p-6 rounded-xl border border-gray-100 dark:border-gray-800 hover:border-accent dark:hover:border-accent transition-all hover:shadow-lg">
+                                    <span class="inline-block px-3 py-1 bg-accent/10 text-accent rounded-full text-xs font-bold mb-3">2024</span>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Machine Learning Journey</h3>
+                                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                                        Completed 80-hour ML certification and started research on NLP. Explored PyTorch, LangChain, and AI systems including RAG architectures for sentiment analysis.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 4 -->
+                    <div class="relative mb-12 md:mb-16" data-aos="fade-left">
+                        <div class="flex items-start gap-6 md:gap-0">
+                            <div class="absolute left-8 md:left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg z-10">
+                                <i class="fas fa-trophy text-white text-2xl"></i>
+                            </div>
+                            <div class="ml-24 md:ml-0 md:w-1/2 md:pl-12 md:ml-auto">
+                                <div class="bg-white dark:bg-dark-lighter p-6 rounded-xl border border-gray-100 dark:border-gray-800 hover:border-primary dark:hover:border-primary transition-all hover:shadow-lg">
+                                    <span class="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-bold mb-3">2025</span>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Exploration & Competition</h3>
+                                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                                        Participated in hackathons, datathons, and CTF competitions for hands-on learning and skill exploration. Achieved finalist position at INNOVATEX Hackathon and ranked 56/200 at Datathon KUET.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 5 - Present/Future -->
+                    <div class="relative" data-aos="fade-up">
+                        <div class="flex items-start gap-6 md:gap-0">
+                            <div class="absolute left-8 md:left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-gradient-to-br from-secondary to-accent flex items-center justify-center shadow-lg animate-pulse z-10">
+                                <i class="fas fa-rocket text-white text-2xl"></i>
+                            </div>
+                            <div class="ml-24 md:ml-0 md:w-1/2 md:pr-12 md:text-right">
+                                <div class="bg-gradient-to-br from-primary/5 to-secondary/5 dark:from-primary/10 dark:to-secondary/10 p-6 rounded-xl border-2 border-primary/30 dark:border-primary/40">
+                                    <span class="inline-block px-3 py-1 bg-gradient-to-r from-primary to-secondary text-white rounded-full text-xs font-bold mb-3">Present & Beyond</span>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">The Journey Continues...</h3>
+                                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                                        Currently exploring advanced AI architectures and building scalable enterprise applications. Excited for what's next in technology and innovation!
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 bg-gray-50 dark:bg-dark-light">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold font-poppins mb-4 text-gray-900 dark:text-white">
+                    Skills & Expertise
+                </h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="max-w-5xl mx-auto space-y-6">
+                <!-- Web Development -->
+                <div class="group skill-category p-8 bg-white dark:bg-dark-lighter rounded-xl border border-gray-200 dark:border-gray-800 hover:border-primary transition-all duration-300" data-aos="fade-up">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                            <i class="fas fa-code text-primary text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Web Development</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <!-- Backend -->
+                        <div>
+                            <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-2 uppercase tracking-wider">Backend & Frameworks</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-badge hover:scale-105 hover:shadow-md cursor-default">Django</span>
+                                <span class="skill-badge hover:scale-105 hover:shadow-md cursor-default">FastAPI</span>
+                                <span class="skill-badge hover:scale-105 hover:shadow-md cursor-default">Python</span>
+                                <span class="skill-badge hover:scale-105 hover:shadow-md cursor-default">REST API</span>
+                            </div>
+                        </div>
+                        <!-- Frontend -->
+                        <div>
+                            <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-2 uppercase tracking-wider">Frontend & UI</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-badge hover:scale-105 hover:shadow-md cursor-default">React.js</span>
+                                <span class="skill-badge hover:scale-105 hover:shadow-md cursor-default">JavaScript (ES6+)</span>
+                                <span class="skill-badge hover:scale-105 hover:shadow-md cursor-default">HTML5</span>
+                                <span class="skill-badge hover:scale-105 hover:shadow-md cursor-default">CSS3</span>
+                                <span class="skill-badge hover:scale-105 hover:shadow-md cursor-default">TailwindCSS</span>
+                                <span class="skill-badge hover:scale-105 hover:shadow-md cursor-default">Bootstrap</span>
+                                <span class="skill-badge hover:scale-105 hover:shadow-md cursor-default">EJS</span>
+                            </div>
+                        </div>
+                        <!-- Database -->
+                        <div>
+                            <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-2 uppercase tracking-wider">Databases</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-badge hover:scale-105 hover:shadow-md cursor-default">PostgreSQL</span>
+                                <span class="skill-badge hover:scale-105 hover:shadow-md cursor-default">SQLite</span>
+                                <span class="skill-badge hover:scale-105 hover:shadow-md cursor-default">ChromaDB (Vector DB)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Machine Learning -->
+                <div class="group skill-category p-8 bg-white dark:bg-dark-lighter rounded-xl border border-gray-200 dark:border-gray-800 hover:border-primary transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                            <i class="fas fa-brain text-primary text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Machine Learning & AI</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <!-- ML Frameworks -->
+                        <div>
+                            <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-2 uppercase tracking-wider">Frameworks & Libraries</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-badge hover:scale-105 hover:shadow-md cursor-default">LangChain</span>
+                                <span class="skill-badge hover:scale-105 hover:shadow-md cursor-default">Google Gemini AI</span>
+                                <span class="skill-badge hover:scale-105 hover:shadow-md cursor-default">RAG Systems</span>
+                                <span class="skill-badge hover:scale-105 hover:shadow-md cursor-default">PyTorch</span>
+                            </div>
+                        </div>
+                        <!-- IoT & Hardware -->
+                        <div>
+                            <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-2 uppercase tracking-wider">IoT & Hardware</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-badge hover:scale-105 hover:shadow-md cursor-default">Raspberry Pi</span>
+                                <span class="skill-badge hover:scale-105 hover:shadow-md cursor-default">Computer Vision</span>
+                                <span class="skill-badge hover:scale-105 hover:shadow-md cursor-default">Sensor Integration</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tools & Platforms -->
+                <div class="group skill-category p-8 bg-white dark:bg-dark-lighter rounded-xl border border-gray-200 dark:border-gray-800 hover:border-primary transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                            <i class="fas fa-tools text-primary text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Tools & Platforms</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-badge hover:scale-105 hover:shadow-md cursor-default">Git</span>
+                        <span class="skill-badge hover:scale-105 hover:shadow-md cursor-default">GitHub</span>
+                        <span class="skill-badge hover:scale-105 hover:shadow-md cursor-default">Vite</span>
+                        <span class="skill-badge hover:scale-105 hover:shadow-md cursor-default">Linux</span>
+                        <span class="skill-badge hover:scale-105 hover:shadow-md cursor-default">Docker</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 bg-white dark:bg-dark">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold font-poppins mb-4 text-gray-900 dark:text-white">
+                    Featured Projects
+                </h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <!-- Project 1: Share-Reads -->
+                <div class="project-card bg-white dark:bg-dark-lighter rounded-2xl border border-gray-100 dark:border-gray-800 overflow-hidden hover:border-primary dark:hover:border-primary transition-all group" data-aos="fade-up">
+                    <!-- Image Carousel -->
+                    <div class="relative h-64 overflow-hidden bg-gray-100 dark:bg-gray-900">
+                        <div class="carousel-container h-full">
+                            <img src="assets/images/projects/share-reads/screenshot-1.png" alt="Share-Reads Screenshot 1" class="carousel-image w-full h-full object-cover">
+                            <img src="assets/images/projects/share-reads/screenshot-2.png" alt="Share-Reads Screenshot 2" class="carousel-image w-full h-full object-cover hidden">
+                            <img src="assets/images/projects/share-reads/screenshot-3.png" alt="Share-Reads Screenshot 3" class="carousel-image w-full h-full object-cover hidden">
+                            <img src="assets/images/projects/share-reads/screenshot-4.png" alt="Share-Reads Screenshot 4" class="carousel-image w-full h-full object-cover hidden">
+                        </div>
+                        <!-- Carousel Controls -->
+                        <button class="carousel-btn carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 dark:bg-gray-800/90 hover:bg-white dark:hover:bg-gray-700 text-gray-900 dark:text-white w-9 h-9 rounded-full opacity-0 group-hover:opacity-100 transition-all shadow-lg flex items-center justify-center">
+                            <i class="fas fa-chevron-left text-sm"></i>
+                        </button>
+                        <button class="carousel-btn carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 dark:bg-gray-800/90 hover:bg-white dark:hover:bg-gray-700 text-gray-900 dark:text-white w-9 h-9 rounded-full opacity-0 group-hover:opacity-100 transition-all shadow-lg flex items-center justify-center">
+                            <i class="fas fa-chevron-right text-sm"></i>
+                        </button>
+                        <!-- Dots Indicator -->
+                        <div class="carousel-dots absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+                            <span class="dot w-2 h-2 rounded-full bg-white cursor-pointer active shadow-sm"></span>
+                            <span class="dot w-2 h-2 rounded-full bg-white/50 cursor-pointer shadow-sm"></span>
+                            <span class="dot w-2 h-2 rounded-full bg-white/50 cursor-pointer shadow-sm"></span>
+                            <span class="dot w-2 h-2 rounded-full bg-white/50 cursor-pointer shadow-sm"></span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Share-Reads</h3>
+                            <span class="px-3 py-1 bg-gradient-to-r from-primary to-secondary text-white rounded-full text-xs font-bold flex items-center gap-1.5">
+                                <i class="fas fa-users text-xs"></i>
+                                Team Project
+                            </span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">EJS</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Bootstrap</span>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+                            Book-sharing platform for uploading, managing, borrowing, and reviewing books. Features include user authentication, book management, and review system.
+                        </p>
+                        <div class="flex gap-4">
+                            <a href="https://share-reads.web.app" target="_blank" class="flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors">
+                                <i class="fas fa-external-link-alt"></i>
+                                <span>Live Demo</span>
+                            </a>
+                            <a href="https://github.com/mdmakky/Share-Reads-WebAPP" target="_blank" class="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-primary font-medium transition-colors">
+                                <i class="fab fa-github"></i>
+                                <span>Code</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Bangla Essence -->
+                <div class="project-card bg-white dark:bg-dark-lighter rounded-2xl border border-gray-100 dark:border-gray-800 overflow-hidden hover:border-primary dark:hover:border-primary transition-all group" data-aos="fade-up" data-aos-delay="100">
+                    <!-- Image Carousel -->
+                    <div class="relative h-64 overflow-hidden bg-gray-100 dark:bg-gray-900">
+                        <div class="carousel-container h-full">
+                            <img src="assets/images/projects/bangla-essence/screenshot-1.png" alt="Bangla Essence Screenshot 1" class="carousel-image w-full h-full object-cover">
+                            <img src="assets/images/projects/bangla-essence/screenshot-2.png" alt="Bangla Essence Screenshot 2" class="carousel-image w-full h-full object-cover hidden">
+                            <img src="assets/images/projects/bangla-essence/screenshot-3.png" alt="Bangla Essence Screenshot 3" class="carousel-image w-full h-full object-cover hidden">
+                            <img src="assets/images/projects/bangla-essence/screenshot-4.png" alt="Bangla Essence Screenshot 4" class="carousel-image w-full h-full object-cover hidden">
+                        </div>
+                        <!-- Carousel Controls -->
+                        <button class="carousel-btn carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 dark:bg-gray-800/90 hover:bg-white dark:hover:bg-gray-700 text-gray-900 dark:text-white w-9 h-9 rounded-full opacity-0 group-hover:opacity-100 transition-all shadow-lg flex items-center justify-center">
+                            <i class="fas fa-chevron-left text-sm"></i>
+                        </button>
+                        <button class="carousel-btn carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 dark:bg-gray-800/90 hover:bg-white dark:hover:bg-gray-700 text-gray-900 dark:text-white w-9 h-9 rounded-full opacity-0 group-hover:opacity-100 transition-all shadow-lg flex items-center justify-center">
+                            <i class="fas fa-chevron-right text-sm"></i>
+                        </button>
+                        <!-- Dots Indicator -->
+                        <div class="carousel-dots absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+                            <span class="dot w-2 h-2 rounded-full bg-white cursor-pointer active shadow-sm"></span>
+                            <span class="dot w-2 h-2 rounded-full bg-white/50 cursor-pointer shadow-sm"></span>
+                            <span class="dot w-2 h-2 rounded-full bg-white/50 cursor-pointer shadow-sm"></span>
+                            <span class="dot w-2 h-2 rounded-full bg-white/50 cursor-pointer shadow-sm"></span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Bangla Essence</h3>
+                            <span class="px-3 py-1 bg-gradient-to-r from-primary to-secondary text-white rounded-full text-xs font-bold flex items-center gap-1.5">
+                                <i class="fas fa-users text-xs"></i>
+                                Team Project
+                            </span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Vite</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">Express.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">Redux</span>
+                            <span class="tech-tag">Tailwind</span>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+                            Full-stack MERN e-commerce site for Bangladeshi handcrafted products. Features include product catalog, cart management, and secure checkout.
+                        </p>
+                        <div class="flex gap-4">
+                            <a href="https://github.com/mdmakky/Bangla-Essence---From-our-root-to-your-home-Mern-Stack-Ecommerce-" target="_blank" class="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-primary font-medium transition-colors">
+                                <i class="fab fa-github"></i>
+                                <span>View Code</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Facebook-Cleaner -->
+                <div class="project-card bg-white dark:bg-dark-lighter rounded-2xl border border-gray-100 dark:border-gray-800 overflow-hidden hover:border-primary dark:hover:border-primary transition-all group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="relative h-64 overflow-hidden bg-gradient-to-br from-emerald-600 to-teal-400 flex items-center justify-center">
+                        <i class="fab fa-facebook text-white text-8xl opacity-20"></i>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fab fa-facebook text-white text-6xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Facebook-Cleaner</h3>
+                            <span class="px-3 py-1 bg-gradient-to-r from-primary to-secondary text-white rounded-full text-xs font-bold flex items-center gap-1.5">
+                                <i class="fas fa-users text-xs"></i>
+                                Team Project
+                            </span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Browser Extension</span>
+                            <span class="tech-tag">Automation</span>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+                            A JavaScript tool to efficiently clean up Facebook accounts. Automate post removal and data management with ease.
+                        </p>
+                        <div class="flex gap-4">
+                            <a href="https://github.com/mdmakky/Facebook-Cleaner" target="_blank" class="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-primary font-medium transition-colors">
+                                <i class="fab fa-github"></i>
+                                <span>View Code</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 4: CatcherX -->
+                <div class="project-card bg-white dark:bg-dark-lighter rounded-2xl border border-gray-100 dark:border-gray-800 overflow-hidden hover:border-primary dark:hover:border-primary transition-all group" data-aos="fade-up" data-aos-delay="300">
+                    <div class="relative h-64 overflow-hidden bg-gradient-to-br from-emerald-600 to-green-400 flex items-center justify-center">
+                        <i class="fas fa-database text-white text-8xl opacity-20"></i>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fas fa-database text-white text-6xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">CatcherX</h3>
+                            <span class="px-3 py-1 bg-gradient-to-r from-primary to-secondary text-white rounded-full text-xs font-bold flex items-center gap-1.5">
+                                <i class="fas fa-users text-xs"></i>
+                                Team Project
+                            </span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Automation</span>
+                            <span class="tech-tag">Data Management</span>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+                            Python automation tool for data catching and management with modern best practices. Efficient and reliable data handling solution.
+                        </p>
+                        <div class="flex gap-4">
+                            <a href="https://github.com/mdmakky/CatcherX" target="_blank" class="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-primary font-medium transition-colors">
+                                <i class="fab fa-github"></i>
+                                <span>View Code</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5: Fakhim AI -->
+                <div class="project-card bg-white dark:bg-dark-lighter rounded-2xl border border-gray-100 dark:border-gray-800 overflow-hidden hover:border-primary dark:hover:border-primary transition-all group" data-aos="fade-up" data-aos-delay="300">
+                    <div class="relative h-64 overflow-hidden bg-gradient-to-br from-purple-600 to-pink-500 flex items-center justify-center">
+                        <i class="fas fa-robot text-white text-8xl opacity-20"></i>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fas fa-robot text-white text-6xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Fakhim AI</h3>
+                            <span class="px-3 py-1 bg-gradient-to-r from-primary to-secondary text-white rounded-full text-xs font-bold flex items-center gap-1.5">
+                                <i class="fas fa-users text-xs"></i>
+                                Team Project
+                            </span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Streamlit</span>
+                            <span class="tech-tag">Google Gemini</span>
+                            <span class="tech-tag">AI</span>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+                            🔥 Ultimate Savage AI Assistant - Hilariously sarcastic chatbot built with Google Gemini. Experience AI with attitude!
+                        </p>
+                        <div class="flex gap-4">
+                            <a href="https://github.com/mdmakky/Fakhim" target="_blank" class="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-primary font-medium transition-colors">
+                                <i class="fab fa-github"></i>
+                                <span>View Code</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5: PetNest -->
+                <div class="project-card bg-white dark:bg-dark-lighter rounded-2xl border border-gray-100 dark:border-gray-800 overflow-hidden hover:border-primary dark:hover:border-primary transition-all group" data-aos="fade-up" data-aos-delay="400">
+                    <div class="relative h-64 overflow-hidden bg-gradient-to-br from-orange-600 to-amber-400 flex items-center justify-center">
+                        <i class="fas fa-paw text-white text-8xl opacity-20"></i>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fas fa-paw text-white text-6xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">PetNest</h3>
+                            <span class="px-3 py-1 bg-gradient-to-r from-primary to-secondary text-white rounded-full text-xs font-bold flex items-center gap-1.5">
+                                <i class="fas fa-users text-xs"></i>
+                                Team Project
+                            </span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+                            Complete pet adoption platform connecting users with pets and veterinarians. Features adoption listings, vet connections, and pet care resources.
+                        </p>
+                        <div class="flex gap-4">
+                            <a href="https://github.com/mdmakky/PetNest" target="_blank" class="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-primary font-medium transition-colors">
+                                <i class="fab fa-github"></i>
+                                <span>View Code</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications & Achievements Section -->
+    <section id="achievements" class="py-24 bg-gray-50 dark:bg-dark-light">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold font-poppins mb-4 text-gray-900 dark:text-white">
+                    Achievements & Publications
+                </h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="max-w-5xl mx-auto space-y-6">
+                <!-- Achievements Grid -->
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="achievement-card group p-6 bg-white dark:bg-dark-lighter rounded-2xl border border-gray-200 dark:border-gray-800 hover:border-yellow-500 dark:hover:border-yellow-500 transition-all duration-300" data-aos="fade-up">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center flex-shrink-0 mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                                <i class="fas fa-trophy text-white text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg text-gray-900 dark:text-white mb-2">Hackathon Finalist</h4>
+                                <p class="text-sm font-semibold text-yellow-600 dark:text-yellow-500 mb-1">INNOVATEX 2025</p>
+                                <p class="text-xs text-gray-600 dark:text-gray-400">BUBT IT Club</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="achievement-card group p-6 bg-white dark:bg-dark-lighter rounded-2xl border border-gray-200 dark:border-gray-800 hover:border-blue-500 dark:hover:border-blue-500 transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center flex-shrink-0 mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                                <i class="fas fa-chart-bar text-white text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg text-gray-900 dark:text-white mb-2">Top 56 of 200</h4>
+                                <p class="text-sm font-semibold text-blue-600 dark:text-blue-400 mb-1">Datathon KUET</p>
+                                <p class="text-xs text-gray-600 dark:text-gray-400">Data Analysis Competition</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="achievement-card group p-6 bg-white dark:bg-dark-lighter rounded-2xl border border-gray-200 dark:border-gray-800 hover:border-purple-500 dark:hover:border-purple-500 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center flex-shrink-0 mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                                <i class="fas fa-robot text-white text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg text-gray-900 dark:text-white mb-2">Robo Society</h4>
+                                <p class="text-sm font-semibold text-purple-600 dark:text-purple-400 mb-1">Active Member</p>
+                                <p class="text-xs text-gray-600 dark:text-gray-400">JUST Robotics Club</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Certifications -->
+                <div class="p-8 bg-white dark:bg-dark-lighter rounded-2xl border border-gray-100 dark:border-gray-800" data-aos="fade-up">
+                    <h3 class="text-xl font-bold mb-6 text-gray-900 dark:text-white flex items-center gap-2">
+                        <i class="fas fa-certificate text-primary"></i>
+                        Certifications
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3 pb-4 border-b border-gray-100 dark:border-gray-800 last:border-0">
+                            <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                            <div>
+                                <p class="font-medium text-gray-900 dark:text-white">Python with Machine Learning (80 hrs)</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">JUST, under EDGE Project, ICT Division</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-dark-light">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold font-poppins mb-4 text-white">
+                    Get In Touch
+                </h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mb-4"></div>
+                <p class="text-gray-300 max-w-2xl mx-auto">
+                    Have a project in mind or want to collaborate? Feel free to reach out!
+                </p>
+            </div>
+            
+            <div class="max-w-6xl mx-auto grid md:grid-cols-5 gap-8">
+                <!-- Left Side - Connect & Social -->
+                <div class="md:col-span-2 space-y-6" data-aos="fade-right">
+                    <div class="bg-gradient-to-br from-primary/5 to-secondary/5 dark:from-primary/10 dark:to-secondary/10 p-8 rounded-2xl border border-primary/20 dark:border-primary/30">
+                        <h3 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white flex items-center gap-2">
+                            <i class="fas fa-comments text-primary"></i>
+                            Let's Connect
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+                            I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+                        </p>
+                        
+                        <!-- Social Links -->
+                        <div class="space-y-3">
+                            <a href="mailto:makky.cse@gmail.com" class="group flex items-center gap-4 p-4 bg-white dark:bg-dark-lighter rounded-xl border border-gray-100 dark:border-gray-800 hover:border-red-500 dark:hover:border-red-500 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-red-500/10">
+                                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500/10 to-red-600/10 flex items-center justify-center group-hover:scale-110 transition-transform group-hover:bg-red-500/20">
+                                    <i class="fas fa-envelope text-red-500 text-xl"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-xs text-gray-500 dark:text-gray-500 mb-0.5">Email</p>
+                                    <p class="font-semibold text-gray-900 dark:text-white text-sm group-hover:text-red-500 transition-colors">makky.cse@gmail.com</p>
+                                </div>
+                                <i class="fas fa-arrow-right text-gray-400 group-hover:text-red-500 group-hover:translate-x-1 transition-all"></i>
+                            </a>
+                            
+                            <a href="https://www.linkedin.com/in/md-amakky" target="_blank" class="group flex items-center gap-4 p-4 bg-white dark:bg-dark-lighter rounded-xl border border-gray-100 dark:border-gray-800 hover:border-blue-600 dark:hover:border-blue-600 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-600/10">
+                                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-600/10 to-blue-700/10 flex items-center justify-center group-hover:scale-110 transition-transform group-hover:bg-blue-600/20">
+                                    <i class="fab fa-linkedin-in text-blue-600 text-xl"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-xs text-gray-500 dark:text-gray-500 mb-0.5">LinkedIn</p>
+                                    <p class="font-semibold text-gray-900 dark:text-white text-sm group-hover:text-blue-600 transition-colors">Md. Arafatuzzaman</p>
+                                </div>
+                                <i class="fas fa-arrow-right text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all"></i>
+                            </a>
+                            
+                            <a href="https://facebook.com/md.arafatuzzaman.makky" target="_blank" class="group flex items-center gap-4 p-4 bg-white dark:bg-dark-lighter rounded-xl border border-gray-100 dark:border-gray-800 hover:border-blue-500 dark:hover:border-blue-500 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/10">
+                                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/10 to-blue-600/10 flex items-center justify-center group-hover:scale-110 transition-transform group-hover:bg-blue-500/20">
+                                    <i class="fab fa-facebook-f text-blue-500 text-xl"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-xs text-gray-500 dark:text-gray-500 mb-0.5">Facebook</p>
+                                    <p class="font-semibold text-gray-900 dark:text-white text-sm group-hover:text-blue-500 transition-colors">Md. Arafatuzzaman</p>
+                                </div>
+                                <i class="fas fa-arrow-right text-gray-400 group-hover:text-blue-500 group-hover:translate-x-1 transition-all"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Side - Send Message Form -->
+                <div class="md:col-span-3" data-aos="fade-left">
+                    <div class="bg-white dark:bg-dark-lighter p-8 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-lg">
+                        <h3 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white flex items-center gap-2">
+                            <i class="fas fa-paper-plane text-primary"></i>
+                            Send Me a Message
+                        </h3>
+                        <form id="contact-form" class="space-y-6">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="name" class="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">Your Name</label>
+                                    <input type="text" id="name" name="name" required placeholder="Sarah Johnson" class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-dark text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">Your Email</label>
+                                    <input type="email" id="email" name="email" required placeholder="sarah@example.com" class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-dark text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="subject" class="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">Subject</label>
+                                <input type="text" id="subject" name="subject" required placeholder="Web Development Project" class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-dark text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">Your Message</label>
+                                <textarea id="message" name="message" rows="6" required placeholder="Hi! I'd love to discuss a project with you..." class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-dark text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all resize-none"></textarea>
+                            </div>
+                            <button type="submit" class="w-full px-8 py-4 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white rounded-xl font-semibold transition-all shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-1 flex items-center justify-center gap-2 group">
+                                <span>Send Message</span>
+                                <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="py-16 bg-dark">
+        <div class="container mx-auto px-6">
+            <div class="max-w-5xl mx-auto">
+                <div class="grid md:grid-cols-4 gap-6">
+                    <!-- Stat 1 -->
+                    <div class="p-6 bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl border border-primary/30 text-center group hover:border-primary transition-all" data-aos="fade-up">
+                        <div class="text-3xl md:text-4xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform">6+</div>
+                        <p class="text-gray-400">Featured Projects</p>
+                    </div>
+                    <!-- Stat 2 -->
+                    <div class="p-6 bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl border border-primary/30 text-center group hover:border-primary transition-all" data-aos="fade-up" data-aos-delay="100">
+                        <div class="text-3xl md:text-4xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform">15+</div>
+                        <p class="text-gray-400">Tech Skills</p>
+                    </div>
+                    <!-- Stat 3 -->
+                    <div class="p-6 bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl border border-primary/30 text-center group hover:border-primary transition-all" data-aos="fade-up" data-aos-delay="200">
+                        <div class="text-3xl md:text-4xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform">3+</div>
+                        <p class="text-gray-400">Years Learning</p>
+                    </div>
+                    <!-- Stat 4 -->
+                    <div class="p-6 bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl border border-primary/30 text-center group hover:border-primary transition-all" data-aos="fade-up" data-aos-delay="300">
+                        <div class="text-3xl md:text-4xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform">2+</div>
+                        <p class="text-gray-400">Competitions</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 bg-dark">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-gradient-to-r from-primary/20 to-accent/20 border-2 border-primary/40 rounded-2xl p-8 md:p-12 text-center group hover:border-primary transition-all" data-aos="zoom-in">
+                    <h2 class="text-3xl md:text-4xl font-bold font-poppins mb-4 text-white">
+                        Ready to Work Together?
+                    </h2>
+                    <p class="text-lg text-gray-300 mb-8">
+                        I'm always interested in hearing about new projects and opportunities. Let's build something amazing together!
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="#contact" class="px-8 py-4 bg-gradient-to-r from-primary to-accent text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-primary/50 transition-all hover:-translate-y-1">
+                            Get in Touch
+                        </a>
+                        <a href="assets/resume.pdf" download="Arafat_Resume.pdf" class="px-8 py-4 bg-white/10 text-white border-2 border-primary/40 rounded-xl font-semibold hover:bg-primary/10 transition-all hover:border-primary">
+                            Download Resume
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark border-t border-primary/20 py-16">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-3 gap-12 mb-12">
+                    <!-- Brand -->
+                    <div>
+                        <h3 class="text-2xl font-bold font-poppins mb-4">
+                            <span class="text-white">Arafat</span>
+                            <span class="text-primary">.</span>
+                        </h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            Full-stack developer passionate about creating innovative solutions and learning new technologies.
+                        </p>
+                    </div>
+                    
+                    <!-- Quick Links -->
+                    <div>
+                        <h4 class="text-white font-bold mb-4">Quick Links</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#home" class="text-gray-400 hover:text-primary transition-colors">Home</a></li>
+                            <li><a href="#about" class="text-gray-400 hover:text-primary transition-colors">About</a></li>
+                            <li><a href="#skills" class="text-gray-400 hover:text-primary transition-colors">Skills</a></li>
+                            <li><a href="#projects" class="text-gray-400 hover:text-primary transition-colors">Projects</a></li>
+                            <li><a href="#contact" class="text-gray-400 hover:text-primary transition-colors">Contact</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Social Links -->
+                    <div>
+                        <h4 class="text-white font-bold mb-4">Connect</h4>
+                        <div class="flex gap-3 mb-4">
+                            <a href="https://github.com/mdmakky" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-xl bg-white/5 border border-primary/20 text-gray-300 hover:border-primary hover:text-white hover:bg-primary/20 transition-all">
+                                <i class="fab fa-github text-xl"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/md-amakky" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-xl bg-white/5 border border-primary/20 text-gray-300 hover:border-primary hover:text-white hover:bg-primary/20 transition-all">
+                                <i class="fab fa-linkedin-in text-xl"></i>
+                            </a>
+                            <a href="https://facebook.com/md.arafatuzzaman.makky" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-xl bg-white/5 border border-primary/20 text-gray-300 hover:border-primary hover:text-white hover:bg-primary/20 transition-all">
+                                <i class="fab fa-facebook text-xl"></i>
+                            </a>
+                            <a href="https://instagram.com/" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-xl bg-white/5 border border-primary/20 text-gray-300 hover:border-primary hover:text-white hover:bg-primary/20 transition-all">
+                                <i class="fab fa-instagram text-xl"></i>
+                            </a>
+                        </div>
+                        <p class="text-gray-400 text-sm">
+                            <i class="fas fa-envelope mr-2"></i>
+                            makky.cse@gmail.com
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Copyright -->
+                <div class="border-t border-primary/20 pt-8 text-center">
+                    <p class="text-gray-500 text-sm">
+                        © All rights reserved • Designed & Built by <span class="font-semibold text-primary">Md. Arafatuzzaman</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-top" class="fixed bottom-8 right-8 w-12 h-12 bg-primary hover:bg-primary/90 text-white rounded-full shadow-lg opacity-0 invisible transition-all hover:scale-110 z-40">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>
