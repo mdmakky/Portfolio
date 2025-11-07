@@ -21,12 +21,49 @@ AOS.init({
     console.log('EmailJS initialized');
 })();
 
-// Mobile Menu Toggle
+// ================================
+// SCROLL PROGRESS BAR
+// ================================
+function updateScrollProgress() {
+    const scrollProgress = document.querySelector('.scroll-progress');
+    if (!scrollProgress) return;
+    
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrollPercent = (scrollTop / docHeight) * 100;
+    
+    scrollProgress.style.width = scrollPercent + '%';
+}
+
+// ================================
+// NAVBAR SCROLL EFFECT
+// ================================
+const header = document.querySelector('header');
+let lastScrollTop = 0;
+
+function updateHeaderScroll() {
+    const scrollTop = window.scrollY;
+    
+    if (scrollTop > 50) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+    
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+}
+
+// ================================
+// MOBILE MENU TOGGLE
+// ================================
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
 
 mobileMenuBtn.addEventListener('click', () => {
     mobileMenu.classList.toggle('hidden');
+    const icon = mobileMenuBtn.querySelector('i');
+    icon.classList.toggle('fa-bars');
+    icon.classList.toggle('fa-times');
 });
 
 // Close mobile menu when clicking on a link
@@ -34,10 +71,15 @@ const mobileMenuLinks = mobileMenu.querySelectorAll('a');
 mobileMenuLinks.forEach(link => {
     link.addEventListener('click', () => {
         mobileMenu.classList.add('hidden');
+        const icon = mobileMenuBtn.querySelector('i');
+        icon.classList.add('fa-bars');
+        icon.classList.remove('fa-times');
     });
 });
 
-// Scroll to Top Button
+// ================================
+// SCROLL TO TOP BUTTON
+// ================================
 const scrollTopBtn = document.getElementById('scroll-top');
 
 window.addEventListener('scroll', () => {
@@ -49,6 +91,12 @@ window.addEventListener('scroll', () => {
     
     // Update active nav link
     updateActiveNavLink();
+    
+    // Update scroll progress
+    updateScrollProgress();
+    
+    // Update header scroll state
+    updateHeaderScroll();
 });
 
 scrollTopBtn.addEventListener('click', () => {
@@ -224,21 +272,7 @@ document.addEventListener('mousemove', (e) => {
     mouseY = e.clientY;
 });
 
-// Navbar background on scroll
-const header = document.querySelector('header');
-let lastScroll = 0;
-
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll > 100) {
-        header.classList.add('scrolled');
-    } else {
-        header.classList.remove('scrolled');
-    }
-    
-    lastScroll = currentScroll;
-});
+// Navbar background on scroll - REMOVED (handled in updateHeaderScroll above)
 
 // Add counter animation for statistics (if you want to add stats later)
 function animateCounter(element, target, duration = 2000) {
