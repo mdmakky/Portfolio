@@ -401,11 +401,21 @@ function initProfileImageAnimation() {
     // Get the logo text span
     const logoText = logo.querySelector('span:first-child');
     
-    // Create profile image element
+    // Create profile image element with better error handling
     const profileImgElement = document.createElement('img');
     profileImgElement.src = 'assets/images/profile/main.png';
     profileImgElement.alt = 'Arafat';
     profileImgElement.className = 'w-10 h-10 rounded-full border-2 border-primary/50 object-cover hidden';
+    
+    // Add error handler
+    profileImgElement.onerror = function() {
+        console.warn('Profile image failed to load, trying alternative path...');
+        this.src = '/assets/images/profile/main.png';
+        this.onerror = function() {
+            console.error('Profile image not found at any path');
+            this.style.display = 'none';
+        };
+    };
     
     // Insert profile image before the logo text
     logoText.parentElement.insertBefore(profileImgElement, logoText);
