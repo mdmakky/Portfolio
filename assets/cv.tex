@@ -24,6 +24,7 @@
 \usepackage{graphicx}
 \usepackage{tikz}
 \usepackage{xcolor}
+\usepackage{tcolorbox}
 \usetikzlibrary{shadows.blur,positioning}
 
 \renewcommand{\familydefault}{\sfdefault}
@@ -95,23 +96,12 @@
 
 \begin{document}
 
-%----------COMPACT HEADER----------
-\begin{tikzpicture}[remember picture,overlay]
-    % Dark header background
-    \fill[headerDark] (current page.north west) rectangle ([yshift=-3.2cm]current page.north east);
-    % Accent line
-    \fill[accentGold] ([yshift=-3.2cm]current page.north west) rectangle ([yshift=-3.3cm]current page.north east);
-    % Decorative elements
-    \fill[primaryBlue,opacity=0.1] ([xshift=-2cm,yshift=-0.8cm]current page.north east) circle (2.5cm);
-    \fill[accentGold,opacity=0.08] ([xshift=2cm,yshift=-2.5cm]current page.north west) circle (2cm);
-\end{tikzpicture}
-
-\vspace{12pt}
-
-\begin{center}
-    % Compact profile photo
+%----------MODERN HEADER----------
+\begin{tcolorbox}[colback=blue!5, colframe=white, width=\linewidth, arc=10pt, boxrule=0pt, left=0pt, right=0pt, top=0pt, bottom=0pt]
+\begin{minipage}{0.3\textwidth}
+    \hspace{0.5cm}
     \begin{tikzpicture}
-        \fill[black!20] (0.06,-0.06) circle (1.1cm);
+        \fill[black!10] (0.06,-0.06) circle (1.1cm);
         \fill[white] (0,0) circle (1.08cm);
         \begin{scope}
             \clip (0,0) circle (0.95cm);
@@ -119,37 +109,28 @@
         \end{scope}
         \draw[line width=2pt, accentGold] (0,0) circle (1.03cm);
     \end{tikzpicture}
-    
-    \vspace{6pt}
-\end{center}
+\end{minipage}
+\hfill
+\begin{minipage}{0.65\textwidth}
+    {\Huge\bfseries\color{headerDark} MD. ARAFATUZZAMAN} \\
+    \vspace{2pt}
+    {\large\color{primaryBlue}\textit{Developer | IoT Enthusiast | AI/ML Explorer}}
+\end{minipage}
 
-% Compact name section
-\vspace{-12pt}
+\vspace{8pt}
+\color{accentGold}\rule{\linewidth}{1.5pt}
+\vspace{6pt}
 \begin{center}
-    {\LARGE\bfseries\color{headerDark} MD. ARAFATUZZAMAN} \\ 
-    \vspace{3pt}
-    {\normalsize\color{primaryBlue}\textit{Developer | IoT Enthusiast | AI/ML Explorer}} \\ 
-    \vspace{8pt}
-    
-    % Compact contact info
-    \begin{tikzpicture}
-        \fill[white,rounded corners=6pt] (-7,-0.65) rectangle (7,0.65);
-        \node[align=center] at (0,0) {
-            \footnotesize
-            \begin{tabular}{c@{\hspace{1cm}}c@{\hspace{1cm}}c@{\hspace{1cm}}c}
-                \textcolor{primaryBlue}{\large\faIcon{phone}} & 
-                \textcolor{primaryBlue}{\large\faIcon{envelope}} & 
-                \textcolor{primaryBlue}{\large\faIcon{linkedin}} & 
-                \textcolor{primaryBlue}{\large\faIcon{github}} \\[3pt]
-                \href{tel:+8801522100079}{\color{darkText}\textbf{+8801522100079}} & 
-                \href{mailto:makky.cse@gmail.com}{\color{darkText}\textbf{makky.cse@gmail.com}} & 
-                \href{https://linkedin.com/in/md-amakky}{\color{darkText}\textbf{md-amakky}} & 
-                \href{https://github.com/mdmakky}{\color{darkText}\textbf{mdmakky}}
-            \end{tabular}
-        };
-    \end{tikzpicture}
-    \vspace{4pt}
+    \footnotesize
+    \begin{tabular}{@{}c@{\hspace{1cm}}c@{\hspace{1cm}}c@{\hspace{1cm}}c@{}}
+        \textcolor{primaryBlue}{\faIcon{phone}} \href{tel:+8801522100079}{\color{darkText}\textbf{+8801522100079}} &
+        \textcolor{primaryBlue}{\faIcon{envelope}} \href{mailto:makky.cse@gmail.com}{\color{darkText}\textbf{makky.cse@gmail.com}} &
+        \textcolor{primaryBlue}{\faIcon{linkedin}} \href{https://linkedin.com/in/md-amakky}{\color{darkText}\textbf{md-amakky}} &
+        \textcolor{primaryBlue}{\faIcon{github}} \href{https://github.com/mdmakky}{\color{darkText}\textbf{mdmakky}}
+    \end{tabular}
 \end{center}
+\vspace{12pt}
+\end{tcolorbox}
 
 %-----------SUMMARY-----------
 \section{\texorpdfstring{\faIcon{user}\ }{User }Professional Summary}
@@ -170,11 +151,11 @@
  \begin{itemize}[leftmargin=0.15in, label={}]
     \small{\item{
      \textbf{\color{headerDark}Frontend:} \color{darkText}React.js, JavaScript (ES6+), HTML5, CSS3, TailwindCSS \\
-     \textbf{\color{headerDark}Backend:} \color{darkText}FastAPI, Python, Node.js, Express.js, REST APIs \\
-     \textbf{\color{headerDark}Databases:} \color{darkText}PostgreSQL, SQLite, MongoDB, ChromaDB (Vector DB)\\
-     \textbf{\color{headerDark}IoT \& Hardware:} \color{darkText}Raspberry Pi, Python GPIO, Computer Vision, Sensor Integration\\
-     \textbf{\color{headerDark}AI/ML:} \color{darkText}Langchain, Google Gemini AI, RAG Systems, PyTorch, NLP \\
-     \textbf{\color{headerDark}Tools:} \color{darkText}Git, GitHub, Vite, Linux, Docker, Chrome Extensions
+     \textbf{\color{headerDark}Backend:} \color{darkText}FastAPI, Python \\
+     \textbf{\color{headerDark}Databases:} \color{darkText}PostgreSQL, SQLite, ChromaDB (Vector DB)\\
+     \textbf{\color{headerDark}IoT \& Hardware:} \color{darkText}Raspberry Pi, Computer Vision, Sensor Integration\\
+     \textbf{\color{headerDark}AI/ML:} \color{darkText}Langchain, Google Gemini AI, RAG Systems, PyTorch \\
+     \textbf{\color{headerDark}Tools:} \color{darkText}Git, GitHub, Vite, Linux, Docker
     }}
  \end{itemize}
  \vspace{-8pt}
@@ -230,7 +211,7 @@
       \resumeProjectHeading
           {\textbf{Digital Skills 4 Students - AI/ML Course}}{Bangladesh Govt Initiative}
       \resumeProjectHeading
-          {\textbf{Member - Robosociety}}{JUST}
+          {\textbf{Member - Robosociety}}{      {Jashore University of Science and Technology} }
     \resumeSubHeadingListEnd
 
 \end{document}
